@@ -3,11 +3,14 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { getJobs } from '@/lib/actions/jobs';
 import { getUpcomingTasks } from '@/lib/actions/tasks';
+import { getAllDocuments } from '@/lib/actions/documents';
 import { KanbanBoard } from '@/components/jobs/KanbanBoard';
 
 export default async function DashboardPage() {
   const jobs = await getJobs();
   const upcomingTasks = await getUpcomingTasks(3);
+  const allDocuments = await getAllDocuments();
+  const recentDocuments = allDocuments.slice(0, 3);
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
@@ -82,9 +85,41 @@ export default async function DashboardPage() {
                 )}
               </div>
 
+              {/* Recent Documents */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900">📄 Siste dokumenter</h3>
+                  <Link href="/documents" className="text-xs text-blue-600 hover:text-blue-700">
+                    Se alle →
+                  </Link>
+                </div>
+                {recentDocuments.length === 0 ? (
+                  <p className="text-gray-500 text-sm">Ingen dokumenter ennå</p>
+                ) : (
+                  <div className="space-y-3">
+                    {recentDocuments.map((doc: any) => (
+                      <div key={doc._id} className="p-3 bg-gray-50 rounded-lg">
+                        <p className="font-medium text-gray-900 text-sm truncate">{doc.label}</p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {doc.type === 'CV' ? '📄 CV' : doc.type === 'COVER_LETTER' ? '✉️ Søknad' : '📎 Annet'}
+                        </p>
+                        <a
+                          href={doc.blobUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-blue-600 hover:text-blue-700 mt-2 inline-block"
+                        >
+                          Åpne →
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Quick Stats */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Statistikk</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 Statistikk</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Totalt søknader</span>
@@ -99,6 +134,16 @@ export default async function DashboardPage() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Kommende oppgaver</span>
                     <span className="font-semibold text-gray-900">{upcomingTasks.length}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Dokumenter</span>
+                    <span className="font-semibold text-gray-900">{allDocuments.length}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">CV-er</span>
+                    <span className="font-semibold text-gray-900">
+                      {allDocuments.filter((d: any) => d.type === 'CV').length}
+                    </span>
                   </div>
                 </div>
               </div>

@@ -38,13 +38,13 @@
 
 ## 📅 Uke 1 (fortsetter)
 
-### Dokumenthåndtering
-- [ ] Setup Vercel Blob
-- [ ] Upload komponent
-- [ ] Document actions (upload, delete)
-- [ ] Files tab i jobbdetalj
-- [ ] Filtype validering (PDF, DOCX, PNG, WEBP)
-- [ ] Størrelse limit (5-10 MB)
+### Dokumenthåndtering✅
+- [✅] Setup Vercel Blob
+- [✅] Upload komponent
+- [✅] Document actions (upload, delete)
+- [✅] Files tab i jobbdetalj
+- [✅] Filtype validering (PDF, DOCX, PNG, WEBP)
+- [✅] Størrelse limit (5-10 MB)
 
 ### Søk & Filtre
 - [ ] Søkefelt i /jobs
