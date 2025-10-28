@@ -34,11 +34,13 @@ export async function createContact(formData: unknown) {
     
     const Contact = getContactModel();
 
-    const contact = await Contact.create({
+    const contactData: any = {
       ...input,
       userId,
       jobId: input.jobId ? new Types.ObjectId(input.jobId) : undefined,
-    });
+    };
+
+    const contact = await Contact.create(contactData);
 
     if (input.jobId) {
       revalidatePath(`/jobs/${input.jobId}`);
