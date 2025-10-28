@@ -46,17 +46,17 @@
 - [✅] Filtype validering (PDF, DOCX, PNG, WEBP)
 - [✅] Størrelse limit (5-10 MB)
 
-### Søk & Filtre
-- [ ] Søkefelt i /jobs
-- [ ] Filter på status
-- [ ] Filter på tags
-- [ ] Filter på remote
-- [ ] Filter på location
+### Søk & Filtre ✅
+- [✅] Søkefelt i /jobs
+- [✅] Filter på status
+- [✅] Filter på tags
+- [✅] Filter på remote
+- [✅] Filter på location
 
-### CSV Eksport/Import
-- [ ] Eksporter jobber til CSV
-- [ ] Importer jobber fra CSV
-- [ ] Validering av import data
+### CSV Eksport/Import ✅
+- [✅] Eksporter jobber til CSV
+- [✅] Importer jobber fra CSV
+- [✅] Validering av import data
 
 ## 📅 Uke 2
 

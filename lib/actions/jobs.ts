@@ -178,3 +178,132 @@ export async function getJobById(jobId: string) {
     return null;
   }
 }
+
+export async function importJobsFromCSV(jobs: any[]) {
+  try {
+    const userId = await requireAuth();
+
+    await connectDB();
+    
+    const Job = getJobModel();
+    const Event = getEventModel();
+
+    const results = {
+      success: 0,
+      failed: 0,
+      errors: [] as string[]
+    };
+
+    for (let i = 0; i < jobs.length; i++) {
+      try {
+        const jobData = jobs[i];
+
+        // Convert CSV data to job format
+        const job = await Job.create({
+          userId,
+          title: jobData.title,
+          company: jobData.company,
+          location: jobData.location || undefined,
+          remote: jobData.remote?.toLowerCase() === 'yes' || jobData.remote?.toLowerCase() === 'ja',
+          salary: jobData.salary || undefined,
+          url: jobData.url || undefined,
+          description: jobData.description || undefined,
+          status: jobData.status?.toUpperCase() || 'WISHLIST',
+          tags: jobData.tags ? jobData.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : [],
+          appliedAt: jobData.appliedAt ? new Date(jobData.appliedAt) : undefined,
+        });
+
+        // Create initial event
+        await Event.create({
+          userId,
+          jobId: job._id,
+          type: EventType.STATUS_CHANGED,
+          payload: { to: job.status },
+        });
+
+        // Add note if provided
+        if (jobData.notes && jobData.notes.trim()) {
+          await Event.create({
+            userId,
+            jobId: job._id,
+            type: EventType.NOTE_ADDED,
+            payload: { content: jobData.notes.trim() },
+          });
+        }
+
+        results.success++;
+      } catch (error: any) {
+        results.failed++;
+        results.errors.push(`Rad ${i + 2}: ${error.message}`);
+      }
+    }
+
+    revalidatePath('/');
+    revalidatePath('/jobs');
+    revalidatePath('/dashboard');
+
+    return results;
+  } catch (error: any) {
+    console.error('Error importing jobs:', error);
+    throw new Error(error.message || 'Kunne ikke importere jobber');
+  }
+}
+
+export async function getJobWithDetails(jobId: string) {
+  try {
+    const userId = await requireAuth();
+
+    await connectDB();
+    
+    const Job = getJobModel();
+    const Event = getEventModel();
+
+    const job = await Job.findOne({ _id: jobId, userId }).lean();
+    if (!job) {
+      throw new Error('Jobb ikke funnet');
+    }
+
+    const events = await Event.find({ jobId, userId })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    // Get related data from other models
+    const mongoose = require('mongoose');
+    
+    let tasks = [];
+    let contacts = [];
+    let documents = [];
+
+    try {
+      const Task = mongoose.model('Task');
+      tasks = await Task.find({ jobId, userId }).lean();
+    } catch (e) {
+      // Model might not exist
+    }
+
+    try {
+      const Contact = mongoose.model('Contact');
+      contacts = await Contact.find({ jobId, userId }).lean();
+    } catch (e) {
+      // Model might not exist
+    }
+
+    try {
+      const Document = mongoose.model('Document');
+      documents = await Document.find({ jobId, userId }).lean();
+    } catch (e) {
+      // Model might not exist
+    }
+
+    return {
+      job: JSON.parse(JSON.stringify(job)),
+      events: JSON.parse(JSON.stringify(events)),
+      tasks: JSON.parse(JSON.stringify(tasks)),
+      contacts: JSON.parse(JSON.stringify(contacts)),
+      documents: JSON.parse(JSON.stringify(documents)),
+    };
+  } catch (error: any) {
+    console.error('Error getting job with details:', error);
+    throw new Error(error.message || 'Kunne ikke hente jobbdetaljer');
+  }
+}

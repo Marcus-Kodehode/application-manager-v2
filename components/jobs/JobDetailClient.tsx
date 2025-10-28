@@ -10,6 +10,7 @@ import { TasksTab } from '@/components/jobs/tabs/TasksTab';
 import { TimelineTab } from '@/components/jobs/tabs/TimelineTab';
 import { ContactsTab } from '@/components/jobs/tabs/ContactsTab';
 import { FilesTab } from '@/components/jobs/tabs/FilesTab';
+import { JobExport } from '@/components/jobs/JobExport';
 
 interface JobDetailClientProps {
     job: any;
@@ -227,28 +228,35 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
 
     return (
         <div>
-            <div className="mb-6 flex justify-between items-start">
-                <div>
-                    <Link href="/jobs" className="text-blue-600 hover:text-blue-700 text-sm">
-                        ← Tilbake til jobber
-                    </Link>
-                    <h1 className="text-3xl font-bold text-gray-900 mt-4">{job.title}</h1>
-                    <p className="text-xl text-gray-600 mt-1">{job.company}</p>
+            <div className="mb-6">
+                <div className="flex justify-between items-start mb-4">
+                    <div>
+                        <Link href="/jobs" className="text-blue-600 hover:text-blue-700 text-sm">
+                            ← Tilbake til jobber
+                        </Link>
+                        <h1 className="text-3xl font-bold text-gray-900 mt-4">{job.title}</h1>
+                        <p className="text-xl text-gray-600 mt-1">{job.company}</p>
+                    </div>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                        >
+                            Rediger
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            disabled={isDeleting}
+                            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                        >
+                            {isDeleting ? 'Sletter...' : 'Slett'}
+                        </button>
+                    </div>
                 </div>
-                <div className="flex gap-2">
-                    <button
-                        onClick={() => setIsEditing(true)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                    >
-                        Rediger
-                    </button>
-                    <button
-                        onClick={handleDelete}
-                        disabled={isDeleting}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
-                    >
-                        {isDeleting ? 'Sletter...' : 'Slett'}
-                    </button>
+                
+                {/* Export buttons */}
+                <div className="flex justify-end">
+                    <JobExport jobId={job._id} jobData={job} />
                 </div>
             </div>
 
