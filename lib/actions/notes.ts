@@ -60,7 +60,7 @@ export async function getNotesByJob(jobId: string) {
     .sort({ createdAt: -1 })
     .lean();
 
-  return notes.map(note => ({
+  return notes.map((note: any) => ({
     ...note,
     _id: note._id.toString(),
     jobId: note.jobId.toString(),

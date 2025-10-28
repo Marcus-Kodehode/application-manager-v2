@@ -7,7 +7,7 @@ import { contactCreateSchema } from '@/lib/validation';
 import { Types } from 'mongoose';
 import mongoose from 'mongoose';
 
-function getContactModel() {
+function getContactModel(): any {
   try {
     return mongoose.model('Contact');
   } catch {

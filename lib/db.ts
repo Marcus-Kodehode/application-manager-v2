@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error('Please define MONGODB_URI in .env or .env.local');
@@ -22,13 +22,13 @@ export async function connectDB() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
       console.log('✅ MongoDB connected successfully');
-      return mongoose;
+      return mongooseInstance;
     }).catch((error) => {
       console.error('❌ MongoDB connection error:', error);
       throw error;
-    });
+    }) as any;
   }
 
   try {

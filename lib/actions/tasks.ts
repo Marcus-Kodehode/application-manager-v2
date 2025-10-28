@@ -127,7 +127,7 @@ export async function getTasksByJob(jobId: string) {
     .sort({ done: 1, dueAt: 1 })
     .lean();
 
-  return tasks.map(task => ({
+  return tasks.map((task: any) => ({
     ...task,
     _id: task._id.toString(),
     jobId: task.jobId?.toString(),
@@ -148,7 +148,7 @@ export async function getUpcomingTasks(limit = 10) {
     .limit(limit)
     .lean();
 
-  return tasks.map(task => ({
+  return tasks.map((task: any) => ({
     ...task,
     _id: task._id.toString(),
     jobId: task.jobId?.toString(),
