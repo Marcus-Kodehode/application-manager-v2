@@ -9,12 +9,13 @@ import { NotesTab } from '@/components/jobs/tabs/NotesTab';
 import { TasksTab } from '@/components/jobs/tabs/TasksTab';
 import { TimelineTab } from '@/components/jobs/tabs/TimelineTab';
 import { ContactsTab } from '@/components/jobs/tabs/ContactsTab';
+import { FilesTab } from '@/components/jobs/tabs/FilesTab';
 
 interface JobDetailClientProps {
     job: any;
 }
 
-type TabType = 'details' | 'notes' | 'tasks' | 'contacts' | 'timeline';
+type TabType = 'details' | 'notes' | 'tasks' | 'files' | 'contacts' | 'timeline';
 
 export function JobDetailClient({ job }: JobDetailClientProps) {
     const router = useRouter();
@@ -73,6 +74,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
         { id: 'details' as TabType, label: 'Detaljer' },
         { id: 'notes' as TabType, label: 'Notater' },
         { id: 'tasks' as TabType, label: 'Oppgaver' },
+        { id: 'files' as TabType, label: 'Filer' },
         { id: 'contacts' as TabType, label: 'Kontakter' },
         { id: 'timeline' as TabType, label: 'Tidslinje' },
     ];
@@ -359,6 +361,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
 
             {activeTab === 'notes' && <NotesTab jobId={job._id} />}
             {activeTab === 'tasks' && <TasksTab jobId={job._id} />}
+            {activeTab === 'files' && <FilesTab jobId={job._id} />}
             {activeTab === 'contacts' && <ContactsTab jobId={job._id} />}
             {activeTab === 'timeline' && <TimelineTab jobId={job._id} />}
         </div>
