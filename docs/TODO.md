@@ -124,27 +124,37 @@
 - [ ] Test i prod
 - [ ] Custom domain (optional)
 
-## 🎨 Design Polish
+## 🎨 Design & Styling
 
-### Styling
+### Theme System ✅
+- [✅] Dark/Light mode toggle
+- [✅] CSS variabler for farger
+- [✅] ThemeProvider setup
+- [✅] Design system dokumentasjon
+
+### Komponent Styling (Følg DESIGN_SYSTEM.md)
+- [✅] Header
+- [✅] ThemeToggle
+- [✅] Footer
+- [✅] Landing page
+- [ ] Dashboard
+- [ ] Jobs page
+- [ ] Job detail page
+- [ ] Documents page
+- [ ] JobForm
+- [ ] KanbanBoard
+- [ ] JobsFilter
+- [ ] CSVManager
+- [ ] All tabs (Timeline, Notes, Tasks, Files, Contacts)
+
+### Polish
 - [ ] Konsistent spacing (8px grid)
-- [ ] Konsistent border radius
-- [ ] Konsistent shadows
-- [ ] Hover states
-- [ ] Active states
-- [ ] Disabled states
-
-### Animasjoner
-- [ ] Page transitions
-- [ ] Card hover effects
-- [ ] Button feedback
-- [ ] Loading spinners
-- [ ] Success/error toasts
-
-### Ikoner
-- [ ] Lucide React ikoner
-- [ ] Konsistent størrelse (18-20px)
-- [ ] Konsistent stroke width
+- [ ] Smooth transitions (150-300ms)
+- [ ] Hover states på alle buttons
+- [ ] Focus states for accessibility
+- [ ] Loading states
+- [ ] Empty states
+- [ ] Error states
 
 ## 🐛 Bugs & Issues
 

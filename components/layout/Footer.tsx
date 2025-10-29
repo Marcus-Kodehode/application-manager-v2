@@ -1,54 +1,127 @@
 import Link from 'next/link';
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-gray-200 bg-gray-50 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white font-bold text-sm">J</span>
+    <footer className="border-t border-border bg-card mt-auto shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm">
+                <span className="text-primary-foreground font-bold">J</span>
               </div>
-              <span className="font-semibold text-gray-900">Jobbsøk Assistent</span>
+              <span className="font-bold text-lg text-foreground">Jobbsøk Assistent</span>
             </div>
-            <p className="text-sm text-gray-600">
-              Din personlige verktøy for å holde oversikt over jobbsøknader og intervjuer.
+            <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
+              Din personlige assistent for å holde oversikt over jobbsøknader, intervjuer og karrieremuligheter. 
+              Enkel, effektiv og alltid oppdatert.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Lenker</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">
+              Navigasjon
+            </h3>
+            <ul className="space-y-3">
               <li>
-                <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">
-                  Oversikt
+                <Link 
+                  href="/dashboard" 
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">Oversikt</span>
                 </Link>
               </li>
               <li>
-                <Link href="/jobs" className="text-gray-600 hover:text-gray-900 transition-colors">
-                  Jobber
+                <Link 
+                  href="/jobs" 
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">Jobber</span>
                 </Link>
               </li>
               <li>
-                <Link href="/documents" className="text-gray-600 hover:text-gray-900 transition-colors">
-                  Dokumenter
+                <Link 
+                  href="/documents" 
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">Dokumenter</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Info */}
+          {/* Resources */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Info</h3>
-            <p className="text-sm text-gray-600">
-              Laget med ❤️ for jobbsøkere
+            <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">
+              Ressurser
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <a 
+                  href="https://github.com" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">GitHub</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">Dokumentasjon</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#" 
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center group"
+                >
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2">Support</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              © {currentYear} Jobbsøk Assistent. Laget med ❤️ for jobbsøkere.
             </p>
-            <p className="text-xs text-gray-500 mt-2">
-              © 2025 Jobbsøk Assistent
-            </p>
+            <div className="flex items-center gap-6">
+              <a 
+                href="#" 
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Personvern
+              </a>
+              <a 
+                href="#" 
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Vilkår
+              </a>
+              <a 
+                href="#" 
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Cookies
+              </a>
+            </div>
           </div>
         </div>
       </div>
