@@ -70,7 +70,14 @@ export function TasksTab({ jobId }: { jobId: string }) {
   };
 
   if (loading) {
-    return <div className="text-center py-8 text-gray-500">Laster oppgaver...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted">Laster oppgaver...</p>
+        </div>
+      </div>
+    );
   }
 
   const pendingTasks = tasks.filter(t => !t.done);
@@ -79,109 +86,130 @@ export function TasksTab({ jobId }: { jobId: string }) {
   return (
     <div className="space-y-6">
       {/* Add Task Form */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Legg til oppgave</h3>
+      <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+        <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+          ➕ Legg til oppgave
+        </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-2">
               Oppgave *
             </label>
             <input
               type="text"
               value={newTask.title}
               onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-              placeholder="F.eks. Send oppfølgingsmail"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="F.eks. Send oppfølgingsmail, Forbered til intervju"
+              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Frist (valgfritt)
+            <label className="block text-sm font-medium text-foreground mb-2">
+              📅 Frist (valgfritt)
             </label>
             <input
               type="date"
               value={newTask.dueAt}
               onChange={(e) => setNewTask({ ...newTask, dueAt: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end pt-2">
             <button
               type="submit"
               disabled={submitting || !newTask.title.trim()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
             >
-              {submitting ? 'Lagrer...' : 'Legg til oppgave'}
+              {submitting ? '⏳ Lagrer...' : '✅ Legg til oppgave'}
             </button>
           </div>
         </form>
       </div>
 
       {/* Pending Tasks */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Aktive oppgaver ({pendingTasks.length})
+      <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+        <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+          🎯 Aktive oppgaver ({pendingTasks.length})
         </h3>
         {pendingTasks.length === 0 ? (
-          <p className="text-gray-500 text-sm">Ingen aktive oppgaver</p>
+          <div className="text-center py-8">
+            <div className="text-5xl mb-3">✨</div>
+            <p className="text-muted">Ingen aktive oppgaver - du er à jour!</p>
+          </div>
         ) : (
           <div className="space-y-3">
-            {pendingTasks.map((task) => (
-              <div key={task._id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                <input
-                  type="checkbox"
-                  checked={task.done}
-                  onChange={() => handleToggle(task._id)}
-                  className="mt-1 h-4 w-4 text-blue-600 rounded"
-                />
-                <div className="flex-1">
-                  <p className="text-gray-900">{task.title}</p>
-                  {task.dueAt && (
-                    <p className="text-sm text-gray-500 mt-1">
-                      Frist: {new Date(task.dueAt).toLocaleDateString('nb-NO')}
-                    </p>
-                  )}
+            {pendingTasks.map((task) => {
+              const dueDate = task.dueAt ? new Date(task.dueAt) : null;
+              const isOverdue = dueDate && dueDate < new Date();
+              const isDueSoon = dueDate && !isOverdue && dueDate.getTime() - new Date().getTime() < 3 * 24 * 60 * 60 * 1000;
+              
+              return (
+                <div key={task._id} className={`flex items-start gap-3 p-4 bg-accent/50 rounded-lg transition-all hover:shadow-sm group ${isOverdue ? 'border-l-4 border-destructive' : isDueSoon ? 'border-l-4 border-yellow-500' : ''}`}>
+                  <input
+                    type="checkbox"
+                    checked={task.done}
+                    onChange={() => handleToggle(task._id)}
+                    className="mt-1 h-5 w-5 text-primary rounded focus:ring-2 focus:ring-primary cursor-pointer"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-foreground font-medium">{task.title}</p>
+                    {task.dueAt && (
+                      <p className={`text-sm mt-1 flex items-center gap-1 ${isOverdue ? 'text-destructive font-medium' : isDueSoon ? 'text-yellow-600 dark:text-yellow-500 font-medium' : 'text-muted'}`}>
+                        📅 Frist: {new Date(task.dueAt).toLocaleDateString('nb-NO', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                        {isOverdue && ' ⚠️ Forfalt'}
+                        {isDueSoon && ' ⏰ Snart'}
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => handleDelete(task._id)}
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-all px-3 py-1 rounded hover:bg-destructive/10"
+                  >
+                    🗑️
+                  </button>
                 </div>
-                <button
-                  onClick={() => handleDelete(task._id)}
-                  className="text-sm text-red-600 hover:text-red-700"
-                >
-                  Slett
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
 
       {/* Completed Tasks */}
       {completedTasks.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Fullførte oppgaver ({completedTasks.length})
+        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+          <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            ✅ Fullførte oppgaver ({completedTasks.length})
           </h3>
           <div className="space-y-3">
             {completedTasks.map((task) => (
-              <div key={task._id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg opacity-60">
+              <div key={task._id} className="flex items-start gap-3 p-4 bg-accent/30 rounded-lg opacity-70 hover:opacity-100 transition-all group">
                 <input
                   type="checkbox"
                   checked={task.done}
                   onChange={() => handleToggle(task._id)}
-                  className="mt-1 h-4 w-4 text-blue-600 rounded"
+                  className="mt-1 h-5 w-5 text-primary rounded focus:ring-2 focus:ring-primary cursor-pointer"
                 />
-                <div className="flex-1">
-                  <p className="text-gray-900 line-through">{task.title}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-foreground line-through">{task.title}</p>
                   {task.dueAt && (
-                    <p className="text-sm text-gray-500 mt-1">
-                      Frist: {new Date(task.dueAt).toLocaleDateString('nb-NO')}
+                    <p className="text-sm text-muted mt-1">
+                      📅 Frist: {new Date(task.dueAt).toLocaleDateString('nb-NO', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
                     </p>
                   )}
                 </div>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="text-sm text-red-600 hover:text-red-700"
+                  className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-all px-3 py-1 rounded hover:bg-destructive/10"
                 >
-                  Slett
+                  🗑️
                 </button>
               </div>
             ))}

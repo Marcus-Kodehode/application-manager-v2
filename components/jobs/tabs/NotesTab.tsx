@@ -56,29 +56,41 @@ export function NotesTab({ jobId }: { jobId: string }) {
   };
 
   if (loading) {
-    return <div className="text-center py-8 text-gray-500">Laster notater...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted">Laster notater...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Add Note Form */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Legg til notat</h3>
-        <form onSubmit={handleSubmit}>
+      <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+        <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+          ✍️ Legg til notat
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
             value={newNote}
             onChange={(e) => setNewNote(e.target.value)}
-            placeholder="Skriv ditt notat her..."
-            rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Skriv ditt notat her... F.eks. 'Hadde et godt intervju, de virket interesserte i min erfaring med React.'"
+            rows={5}
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted resize-none"
           />
-          <div className="mt-3 flex justify-end">
+          <div className="flex justify-between items-center">
+            <p className="text-sm text-muted">
+              💡 Tips: Notater hjelper deg å huske viktige detaljer fra samtaler og møter
+            </p>
             <button
               type="submit"
               disabled={submitting || !newNote.trim()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
             >
-              {submitting ? 'Lagrer...' : 'Legg til notat'}
+              {submitting ? '⏳ Lagrer...' : '💾 Lagre notat'}
             </button>
           </div>
         </form>
@@ -87,32 +99,42 @@ export function NotesTab({ jobId }: { jobId: string }) {
       {/* Notes List */}
       <div className="space-y-4">
         {notes.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
-            <p className="text-gray-500">Ingen notater ennå. Legg til ditt første notat ovenfor!</p>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
+            <div className="text-6xl mb-4">📝</div>
+            <p className="text-muted text-lg mb-2">Ingen notater ennå</p>
+            <p className="text-muted text-sm">Legg til ditt første notat ovenfor for å holde oversikt!</p>
           </div>
         ) : (
-          notes.map((note) => (
-            <div key={note._id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex justify-between items-start mb-3">
-                <p className="text-sm text-gray-500">
-                  {new Date(note.createdAt).toLocaleDateString('nb-NO', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </p>
-                <button
-                  onClick={() => handleDelete(note._id)}
-                  className="text-sm text-red-600 hover:text-red-700"
-                >
-                  Slett
-                </button>
+          <>
+            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              📚 Dine notater ({notes.length})
+            </h3>
+            {notes.map((note) => (
+              <div key={note._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-2 text-sm text-muted">
+                    <span>🕒</span>
+                    <time>
+                      {new Date(note.createdAt).toLocaleDateString('nb-NO', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </time>
+                  </div>
+                  <button
+                    onClick={() => handleDelete(note._id)}
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-all px-3 py-1 rounded hover:bg-destructive/10"
+                  >
+                    🗑️ Slett
+                  </button>
+                </div>
+                <p className="text-foreground whitespace-pre-wrap leading-relaxed">{note.content}</p>
               </div>
-              <p className="text-gray-900 whitespace-pre-wrap">{note.content}</p>
-            </div>
-          ))
+            ))}
+          </>
         )}
       </div>
     </div>

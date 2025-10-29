@@ -12,41 +12,60 @@ export default async function DashboardPage() {
   const allDocuments = await getAllDocuments();
   const recentDocuments = allDocuments.slice(0, 3);
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div className="mb-6 flex justify-between items-center">
+        {/* Page header */}
+        <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-1">Oversikt</h2>
-            <p className="text-gray-600">{jobs.length} aktive søknader</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2">Oversikt</h2>
+            <p className="text-muted-foreground flex items-center gap-2">
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                {jobs.length}
+              </span>
+              aktive søknader
+            </p>
           </div>
           <Link
             href="/jobs/new"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2"
           >
-            + Ny Jobb
+            <span className="text-xl">+</span>
+            Ny Jobb
           </Link>
         </div>
 
         {jobs.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-            <p className="text-gray-500 mb-4">Ingen jobber ennå</p>
-            <Link
-              href="/jobs/new"
-              className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Opprett din første jobb
-            </Link>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">📋</span>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Ingen jobber ennå</h3>
+              <p className="text-muted-foreground mb-6">
+                Kom i gang ved å legge til din første jobbsøknad
+              </p>
+              <Link
+                href="/jobs/new"
+                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium shadow-sm"
+              >
+                Opprett din første jobb
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Kanban Board - Left Side (2/3) */}
             <div className="lg:col-span-2">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Kanban</h3>
-                <Link href="/jobs" className="text-sm text-blue-600 hover:text-blue-700">
-                  Se alle →
+                <h3 className="text-xl font-bold text-foreground">Kanban Board</h3>
+                <Link 
+                  href="/jobs" 
+                  className="text-sm text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group"
+                >
+                  Se alle
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </div>
               <KanbanBoard jobs={jobs} />
@@ -55,16 +74,19 @@ export default async function DashboardPage() {
             {/* Sidebar - Right Side (1/3) */}
             <div className="space-y-6">
               {/* Upcoming Tasks */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">📅 Neste oppgaver</h3>
+              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
+                <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <span>📅</span>
+                  Neste oppgaver
+                </h3>
                 {upcomingTasks.length === 0 ? (
-                  <p className="text-gray-500 text-sm">Ingen kommende oppgaver</p>
+                  <p className="text-muted-foreground text-sm">Ingen kommende oppgaver</p>
                 ) : (
                   <div className="space-y-3">
                     {upcomingTasks.map((task: any) => (
-                      <div key={task._id} className="p-3 bg-gray-50 rounded-lg">
-                        <p className="font-medium text-gray-900 text-sm">{task.title}</p>
-                        <p className="text-xs text-gray-500 mt-1">
+                      <div key={task._id} className="p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors">
+                        <p className="font-semibold text-foreground text-sm">{task.title}</p>
+                        <p className="text-xs text-muted-foreground mt-1">
                           {new Date(task.dueAt).toLocaleDateString('nb-NO', {
                             weekday: 'short',
                             month: 'short',
@@ -74,9 +96,10 @@ export default async function DashboardPage() {
                         {task.jobId && (
                           <Link
                             href={`/jobs/${task.jobId}`}
-                            className="text-xs text-blue-600 hover:text-blue-700 mt-2 inline-block"
+                            className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group"
                           >
-                            Se jobb →
+                            Se jobb
+                            <span className="group-hover:translate-x-1 transition-transform">→</span>
                           </Link>
                         )}
                       </div>
@@ -86,30 +109,38 @@ export default async function DashboardPage() {
               </div>
 
               {/* Recent Documents */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">📄 Siste dokumenter</h3>
-                  <Link href="/documents" className="text-xs text-blue-600 hover:text-blue-700">
-                    Se alle →
+                  <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <span>📄</span>
+                    Siste dokumenter
+                  </h3>
+                  <Link 
+                    href="/documents" 
+                    className="text-xs text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group"
+                  >
+                    Se alle
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 </div>
                 {recentDocuments.length === 0 ? (
-                  <p className="text-gray-500 text-sm">Ingen dokumenter ennå</p>
+                  <p className="text-muted-foreground text-sm">Ingen dokumenter ennå</p>
                 ) : (
                   <div className="space-y-3">
                     {recentDocuments.map((doc: any) => (
-                      <div key={doc._id} className="p-3 bg-gray-50 rounded-lg">
-                        <p className="font-medium text-gray-900 text-sm truncate">{doc.label}</p>
-                        <p className="text-xs text-gray-500 mt-1">
+                      <div key={doc._id} className="p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors">
+                        <p className="font-semibold text-foreground text-sm truncate">{doc.label}</p>
+                        <p className="text-xs text-muted-foreground mt-1">
                           {doc.type === 'CV' ? '📄 CV' : doc.type === 'COVER_LETTER' ? '✉️ Søknad' : '📎 Annet'}
                         </p>
                         <a
                           href={doc.blobUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-blue-600 hover:text-blue-700 mt-2 inline-block"
+                          className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group"
                         >
-                          Åpne →
+                          Åpne
+                          <span className="group-hover:translate-x-1 transition-transform">→</span>
                         </a>
                       </div>
                     ))}
@@ -118,30 +149,33 @@ export default async function DashboardPage() {
               </div>
 
               {/* Quick Stats */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 Statistikk</h3>
+              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
+                <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <span>📊</span>
+                  Statistikk
+                </h3>
                 <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Totalt søknader</span>
-                    <span className="font-semibold text-gray-900">{jobs.length}</span>
+                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+                    <span className="text-muted-foreground">Totalt søknader</span>
+                    <span className="font-bold text-foreground text-lg">{jobs.length}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Aktive prosesser</span>
-                    <span className="font-semibold text-gray-900">
+                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+                    <span className="text-muted-foreground">Aktive prosesser</span>
+                    <span className="font-bold text-primary text-lg">
                       {jobs.filter(j => j.status === 'SCREENING' || j.status === 'INTERVIEW').length}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Kommende oppgaver</span>
-                    <span className="font-semibold text-gray-900">{upcomingTasks.length}</span>
+                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+                    <span className="text-muted-foreground">Kommende oppgaver</span>
+                    <span className="font-bold text-foreground text-lg">{upcomingTasks.length}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Dokumenter</span>
-                    <span className="font-semibold text-gray-900">{allDocuments.length}</span>
+                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+                    <span className="text-muted-foreground">Dokumenter</span>
+                    <span className="font-bold text-foreground text-lg">{allDocuments.length}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">CV-er</span>
-                    <span className="font-semibold text-gray-900">
+                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+                    <span className="text-muted-foreground">CV-er</span>
+                    <span className="font-bold text-foreground text-lg">
                       {allDocuments.filter((d: any) => d.type === 'CV').length}
                     </span>
                   </div>

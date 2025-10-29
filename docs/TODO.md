@@ -1,101 +1,55 @@
 # TODO - Jobbsøk Assistent v2
 
-## 🚀 Umiddelbare neste steg
+> **Merk**: For fullstendig oversikt over hva som er gjort, se [CHANGELOG.md](./CHANGELOG.md)
 
-### 1. Setup & Test (gjør dette først!) ✅
-- [✅] Kjør `npm install`
-- [✅] Opprett MongoDB Atlas cluster
-- [✅] Opprett Clerk app
-- [✅] Kopier `.env.local.example` til `.env.local`
-- [✅] Fyll inn MONGODB_URI og CLERK keys
-- [✅] Kjør `npm run dev`
-- [✅] Test: Opprett bruker og første jobb
+## 🚀 Neste Prioritet
 
-### 2. Jobbdetalj Side (høy prioritet) ✅
-- [✅] Opprett `/app/jobs/[id]/page.tsx`
-- [✅] Tabs komponent (Timeline, Notes, Tasks, Files, Contacts)
-- [✅] Timeline tab - vis Event historikk
-- [✅] Notes tab - vis og opprett notater
-- [✅] Tasks tab - vis og opprett oppgaver
-- [✅] Integrer med eksisterende actions
+### 1. Kanban Drag-and-Drop Forbedringer
+- [ ] Implementer faktisk drag-and-drop med @dnd-kit
+- [ ] Visuell feedback under dragging
+- [ ] Smooth animations ved drop
+- [ ] Undo funksjonalitet
+- [ ] Bulk move (flytt flere jobber samtidig)
 
-### 3. Kanban Drag-and-Drop✅
-- [✅] Installer @dnd-kit (allerede i package.json)
-- [✅] Opprett Kanban komponent med DnD
-- [✅] Integrer moveJobStatus action
-- [✅] Smooth animations
-- [✅] Mobile touch support
+### 2. Søk & Filtre Forbedringer
+- [ ] Avansert søk (søk i notater, oppgaver, kontakter)
+- [ ] Lagrede søk/filtre
+- [ ] Sortering (dato, alfabetisk, status)
+- [ ] Bulk actions (slett, endre status på flere)
 
-### 4. UI Forbedringer
-- [ ] Installer shadcn/ui komponenter:
-  - [ ] `npx shadcn@latest init`
-  - [ ] Button, Card, Dialog, Tabs, Badge, Input, Select
-- [ ] Erstatt basic HTML elements med shadcn
-- [ ] Konsistent styling
-- [ ] Loading states
-- [ ] Error states
-- [ ] Empty states
-
-## 📅 Uke 1 (fortsetter)
-
-### Dokumenthåndtering✅
-- [✅] Setup Vercel Blob
-- [✅] Upload komponent
-- [✅] Document actions (upload, delete)
-- [✅] Files tab i jobbdetalj
-- [✅] Filtype validering (PDF, DOCX, PNG, WEBP)
-- [✅] Størrelse limit (5-10 MB)
-
-### Søk & Filtre ✅
-- [✅] Søkefelt i /jobs
-- [✅] Filter på status
-- [✅] Filter på tags
-- [✅] Filter på remote
-- [✅] Filter på location
-
-### Eksport/Import ✅
-- [✅] Eksporter jobber til JSON (full data)
-- [✅] Eksporter enkeltjobb til JSON (full data)
-- [✅] Importer jobber fra CSV
-- [✅] Validering av import data
-
-## 📅 Uke 2
-
-### iCal Feed
+### 3. iCal Feed
 - [ ] `/api/ical/[jobId]/route.ts`
 - [ ] Generer .ics fil for intervjuer
 - [ ] Test med Google Calendar
 
-### Analytics & Personvern
+### 4. Analytics & Personvern
 - [ ] Cookie banner komponent
 - [ ] logEvent server action
 - [ ] Analytics dashboard i /settings/privacy
 - [ ] Samtykke-håndtering
 - [ ] "Slett alle data" funksjon
 
-### Sikkerhet
+### 5. Sikkerhet
 - [ ] Rate-limit middleware
 - [ ] CSP headers
 - [ ] Security headers (X-Frame-Options, etc.)
 - [ ] Input sanitization
 - [ ] MIME type validation
 
-### Settings Pages
+### 6. Settings Pages
 - [ ] `/app/settings/profile/page.tsx`
 - [ ] `/app/settings/account/page.tsx` (Clerk)
 - [ ] `/app/settings/privacy/page.tsx`
 - [ ] Locale switcher (nb/en)
 
-## 📅 Uke 3
-
-### i18n (next-intl)
+### 7. i18n (next-intl)
 - [ ] Setup next-intl
 - [ ] `messages/nb.json`
 - [ ] `messages/en.json`
 - [ ] Oversett alle UI tekster
 - [ ] Språk-switcher i header
 
-### Mobile Optimalisering
+### 8. Mobile Optimalisering
 - [ ] Responsive Kanban
 - [ ] Floating action button
 - [ ] Sheet/Dialog for mobile
@@ -137,9 +91,10 @@
 - [✅] ThemeToggle
 - [✅] Footer
 - [✅] Landing page
-- [ ] Dashboard
-- [ ] Jobs page
-- [ ] Job detail page
+- [✅] Dashboard
+- [✅] Jobs page
+- [✅] JobsFilter
+- [✅] Job detail page
 - [ ] Documents page
 - [ ] JobForm
 - [ ] KanbanBoard
@@ -194,12 +149,12 @@
 - [x] Bruker kan opprette konto
 - [x] Bruker kan opprette jobber
 - [x] Bruker kan se jobber i liste
-- [ ] Bruker kan se jobbdetaljer
-- [ ] Bruker kan flytte jobber mellom statuser (drag-drop)
-- [ ] Bruker kan legge til notater
-- [ ] Bruker kan legge til oppgaver
-- [ ] Bruker kan laste opp dokumenter
-- [ ] Bruker kan eksportere til CSV
+- [x] Bruker kan se jobbdetaljer
+- [x] Bruker kan flytte jobber mellom statuser (drag-drop)
+- [x] Bruker kan legge til notater
+- [x] Bruker kan legge til oppgaver
+- [x] Bruker kan laste opp dokumenter
+- [x] Bruker kan eksportere til CSV
 - [ ] Alt er sikkert (userId-filter, rate-limit)
 - [ ] Alt fungerer på Vercel
 

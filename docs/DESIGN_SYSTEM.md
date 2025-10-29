@@ -2,279 +2,464 @@
 
 ## 🎨 Fargepalett
 
-### Light Mode (Varm & Profesjonell)
+### CSS Variabler (HSL Format)
+
 ```css
---background: #fafaf9      /* Stone-50 - Varm off-white, ikke sterkt hvit */
---foreground: #1c1917      /* Stone-900 - Varm svart */
---card: #ffffff            /* Hvit for kort/cards */
---card-foreground: #1c1917 /* Tekst på cards */
---primary: #2563eb         /* Blue-600 - Dyp blå (IKKE AI-blå) */
---primary-foreground: #fff /* Hvit tekst på primary */
---secondary: #f5f5f4       /* Stone-100 - Subtil bakgrunn */
---accent: #0891b2          /* Cyan-600 - Accent farge */
---muted: #f5f5f4           /* Dempet bakgrunn */
---muted-foreground: #78716c /* Dempet tekst */
---border: #e7e5e4          /* Stone-200 - Subtile borders */
---success: #059669         /* Emerald-600 */
---warning: #d97706         /* Amber-600 */
---error: #dc2626           /* Red-600 */
+/* Light Mode */
+--background: 0 0% 100%;           /* Hvit bakgrunn */
+--foreground: 222.2 84% 4.9%;      /* Nesten svart tekst */
+--card: 0 0% 100%;                 /* Hvit kort */
+--card-foreground: 222.2 84% 4.9%; /* Nesten svart tekst på kort */
+--primary: 221.2 83.2% 53.3%;      /* Blå primærfarge */
+--primary-foreground: 210 40% 98%; /* Hvit tekst på primær */
+--secondary: 210 40% 96.1%;        /* Lys grå sekundær */
+--secondary-foreground: 222.2 47.4% 11.2%; /* Mørk tekst på sekundær */
+--muted: 210 40% 96.1%;            /* Dempet bakgrunn */
+--muted-foreground: 215.4 16.3% 46.9%; /* Dempet tekst */
+--accent: 210 40% 96.1%;           /* Accent bakgrunn */
+--accent-foreground: 222.2 47.4% 11.2%; /* Accent tekst */
+--destructive: 0 84.2% 60.2%;      /* Rød for sletting */
+--destructive-foreground: 210 40% 98%; /* Hvit tekst på rød */
+--border: 214.3 31.8% 91.4%;       /* Lys grå border */
+--input: 214.3 31.8% 91.4%;        /* Input border */
+--ring: 221.2 83.2% 53.3%;         /* Focus ring */
+
+/* Dark Mode */
+--background: 222.2 84% 4.9%;      /* Nesten svart bakgrunn */
+--foreground: 210 40% 98%;         /* Hvit tekst */
+--card: 222.2 84% 4.9%;            /* Mørk kort */
+--card-foreground: 210 40% 98%;    /* Hvit tekst på kort */
+--primary: 217.2 91.2% 59.8%;      /* Lysere blå */
+--primary-foreground: 222.2 47.4% 11.2%; /* Mørk tekst på primær */
+--secondary: 217.2 32.6% 17.5%;    /* Mørk grå sekundær */
+--secondary-foreground: 210 40% 98%; /* Hvit tekst på sekundær */
+--muted: 217.2 32.6% 17.5%;        /* Dempet mørk */
+--muted-foreground: 215 20.2% 65.1%; /* Dempet lys tekst */
+--accent: 217.2 32.6% 17.5%;       /* Accent mørk */
+--accent-foreground: 210 40% 98%;  /* Accent lys tekst */
+--destructive: 0 62.8% 30.6%;      /* Mørk rød */
+--destructive-foreground: 210 40% 98%; /* Hvit tekst på rød */
+--border: 217.2 32.6% 17.5%;       /* Mørk border */
+--input: 217.2 32.6% 17.5%;        /* Input border */
+--ring: 224.3 76.3% 48%;           /* Focus ring */
 ```
 
-### Dark Mode (Elegant & Moderne)
-```css
---background: #0c0a09      /* Stone-950 - Varm svart */
---foreground: #fafaf9      /* Stone-50 - Off-white */
---card: #1c1917            /* Stone-900 - Kort bakgrunn */
---card-foreground: #fafaf9 /* Tekst på cards */
---primary: #60a5fa         /* Blue-400 - Lysere blå */
---primary-foreground: #0c0a09 /* Mørk tekst på primary */
---secondary: #292524       /* Stone-800 */
---accent: #22d3ee          /* Cyan-400 */
---muted: #292524           /* Dempet bakgrunn */
---muted-foreground: #d6d3d1 /* Stone-300 - God kontrast! */
---border: #44403c          /* Stone-700 - Synlige borders */
---success: #10b981         /* Emerald-500 */
---warning: #f59e0b         /* Amber-500 */
---error: #ef4444           /* Red-500 */
-```
-
-**Kontrast-ratio:**
+**Kontrast-ratio (WCAG AA compliant):**
 - foreground på background: 19.8:1 ✅
 - muted-foreground på background: 11.2:1 ✅
 - primary på background: 8.5:1 ✅
 
-## 📐 Spacing & Layout
+---
+
+## 📐 Spacing & Typography
 
 ### Spacing Scale (8px grid)
-- xs: 0.5rem (8px)
-- sm: 1rem (16px)
-- md: 1.5rem (24px)
-- lg: 2rem (32px)
-- xl: 3rem (48px)
-- 2xl: 4rem (64px)
+```css
+gap-1: 0.25rem (4px)
+gap-2: 0.5rem (8px)
+gap-3: 0.75rem (12px)
+gap-4: 1rem (16px)
+gap-6: 1.5rem (24px)
+gap-8: 2rem (32px)
 
-### Border Radius
-- sm: 0.5rem (8px)
-- md: 0.75rem (12px)
-- lg: 1rem (16px)
-- full: 9999px
+p-2: 0.5rem (8px)
+p-3: 0.75rem (12px)
+p-4: 1rem (16px)
+p-6: 1.5rem (24px)
+p-8: 2rem (32px)
+```
 
-### Shadows
-- sm: 0 1px 2px 0 rgb(0 0 0 / 0.05)
-- md: 0 4px 6px -1px rgb(0 0 0 / 0.1)
-- lg: 0 10px 15px -3px rgb(0 0 0 / 0.1)
-
-## 🔤 Typography
-
-### Font Family
-- Primary: Inter (sans-serif)
-
-### Font Sizes
-- xs: 0.75rem (12px)
-- sm: 0.875rem (14px)
-- base: 1rem (16px)
-- lg: 1.125rem (18px)
-- xl: 1.25rem (20px)
-- 2xl: 1.5rem (24px)
-- 3xl: 1.875rem (30px)
-- 4xl: 2.25rem (36px)
+### Typography Scale
+```css
+text-xs: 0.75rem (12px)
+text-sm: 0.875rem (14px)
+text-base: 1rem (16px)
+text-lg: 1.125rem (18px)
+text-xl: 1.25rem (20px)
+text-2xl: 1.5rem (24px)
+text-3xl: 1.875rem (30px)
+text-4xl: 2.25rem (36px)
+```
 
 ### Font Weights
-- normal: 400
-- medium: 500
-- semibold: 600
-- bold: 700
-
-## 🎭 Komponenter
-
-### Buttons
-
-#### Primary Button
-```tsx
-className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium"
-```
-
-#### Secondary Button
-```tsx
-className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors font-medium"
-```
-
-#### Outline Button
-```tsx
-className="px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors font-medium"
-```
-
-#### Danger Button
-```tsx
-className="px-4 py-2 bg-error text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
-```
-
-### Cards
-```tsx
-className="bg-card text-card-foreground rounded-lg shadow-sm border border-border p-6"
-```
-
-### Inputs
-```tsx
-className="w-full px-3 py-2 bg-card border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-```
-
-### Badges/Tags
-```tsx
-// Status badge
-className="px-2 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary"
-
-// Success badge
-className="px-2 py-1 text-xs font-medium rounded-full bg-success/10 text-success"
-```
-
-## 🎬 Animasjoner
-
-### Transitions
-- Standard: 150ms cubic-bezier(0.4, 0, 0.2, 1)
-- Theme change: 300ms ease
-- Hover: 150ms ease
-
-### Keyframes
 ```css
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
+font-normal: 400
+font-medium: 500
+font-semibold: 600
+font-bold: 700
 ```
-
-## 📋 Komponent-liste for oppdatering
-
-### ✅ Ferdig
-- [x] Header
-- [x] ThemeToggle
-- [x] ThemeProvider
-
-### 🔄 Må oppdateres
-
-#### Pages
-- [ ] app/page.tsx (Landing)
-- [ ] app/dashboard/page.tsx
-- [ ] app/jobs/page.tsx
-- [ ] app/jobs/new/page.tsx
-- [ ] app/jobs/[id]/page.tsx
-- [ ] app/documents/page.tsx
-
-#### Components
-- [ ] components/layout/Footer.tsx
-- [ ] components/jobs/JobForm.tsx
-- [ ] components/jobs/KanbanBoard.tsx
-- [ ] components/jobs/JobsFilter.tsx
-- [ ] components/jobs/CSVManager.tsx
-- [ ] components/jobs/JobDetailClient.tsx
-- [ ] components/jobs/JobExport.tsx
-- [ ] components/jobs/tabs/TimelineTab.tsx
-- [ ] components/jobs/tabs/NotesTab.tsx
-- [ ] components/jobs/tabs/TasksTab.tsx
-- [ ] components/jobs/tabs/FilesTab.tsx
-- [ ] components/jobs/tabs/ContactsTab.tsx
-- [ ] components/documents/DocumentsClient.tsx
-
-## 🎯 Styling Guidelines
-
-### DO ✅
-- Bruk CSS-variabler (var(--primary), var(--background), osv.)
-- Bruk 8px spacing grid
-- Smooth transitions (150-300ms)
-- Konsistent border-radius (lg = 1rem)
-- Hover states på alle interaktive elementer
-- Focus states for accessibility
-
-### DON'T ❌
-- Hardkodede farger (unntatt i CSS-variabler)
-- Inkonsistent spacing
-- For raske animasjoner (<100ms)
-- For mange forskjellige border-radius verdier
-- Manglende hover/focus states
-
-## 🔄 Oppdateringsprosess
-
-For hver komponent:
-
-1. **Identifiser hardkodede farger**
-   - Søk etter: `bg-gray-`, `text-gray-`, `bg-blue-`, `text-blue-`, osv.
-
-2. **Erstatt med CSS-variabler**
-   - `bg-gray-50` → `bg-background`
-   - `bg-white` → `bg-card`
-   - `text-gray-900` → `text-foreground`
-   - `text-gray-600` → `text-muted-foreground`
-   - `bg-blue-600` → `bg-primary`
-   - `text-blue-600` → `text-primary`
-   - `border-gray-200` → `border-border`
-
-3. **Test i begge modes**
-   - Toggle dark mode
-   - Sjekk kontrast
-   - Verifiser hover states
-
-4. **Marker som ferdig**
-   - Oppdater denne listen
-
-## 🎨 Eksempel: Før og Etter
-
-### Før
-```tsx
-<div className="bg-white border border-gray-200 rounded-lg p-6">
-  <h2 className="text-2xl font-bold text-gray-900 mb-4">Tittel</h2>
-  <p className="text-gray-600">Beskrivelse</p>
-  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-    Klikk her
-  </button>
-</div>
-```
-
-### Etter
-```tsx
-<div className="bg-card border border-border rounded-lg p-6">
-  <h2 className="text-2xl font-bold text-foreground mb-4">Tittel</h2>
-  <p className="text-muted-foreground">Beskrivelse</p>
-  <button className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity">
-    Klikk her
-  </button>
-</div>
-```
-
-## 📱 Responsivitet
-
-### Breakpoints
-- sm: 640px
-- md: 768px
-- lg: 1024px
-- xl: 1280px
-- 2xl: 1536px
-
-### Mobile-first approach
-- Design for mobil først
-- Legg til kompleksitet for større skjermer
-- Test på alle breakpoints
-
-## ♿ Accessibility
-
-### Kontrast
-- Normal tekst: Minimum 4.5:1
-- Large tekst: Minimum 3:1
-- UI komponenter: Minimum 3:1
-
-### Focus States
-- Alltid synlig focus ring
-- `focus:ring-2 focus:ring-primary focus:ring-offset-2`
-
-### ARIA Labels
-- Bruk `aria-label` på ikoner uten tekst
-- `aria-describedby` for hjelpetekst
-- `role` attributter der nødvendig
 
 ---
 
-**Start her**: Velg en komponent fra listen og følg oppdateringsprosessen! 🚀
+## 🎯 Component Patterns
+
+### 1. Kort (Cards)
+
+```tsx
+// Standard kort
+<div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+  {/* Innhold */}
+</div>
+
+// Kort med hover effect
+<div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md">
+  {/* Innhold */}
+</div>
+
+// Kort med gruppe hover (for slett-knapp)
+<div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+  <button className="opacity-0 group-hover:opacity-100 transition-all">
+    🗑️ Slett
+  </button>
+</div>
+```
+
+### 2. Knapper
+
+```tsx
+// Primær knapp
+<button className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-all shadow-sm hover:shadow">
+  Lagre
+</button>
+
+// Sekundær knapp
+<button className="px-6 py-2.5 border border-border rounded-lg hover:bg-accent font-medium transition-all text-foreground">
+  Avbryt
+</button>
+
+// Destruktiv knapp
+<button className="px-6 py-2.5 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 font-medium transition-all shadow-sm hover:shadow">
+  Slett
+</button>
+
+// Disabled state
+<button 
+  disabled={isLoading}
+  className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all"
+>
+  {isLoading ? '⏳ Lagrer...' : '💾 Lagre'}
+</button>
+```
+
+### 3. Input Felter
+
+```tsx
+// Standard input
+<input
+  type="text"
+  className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+  placeholder="Skriv her..."
+/>
+
+// Textarea
+<textarea
+  rows={5}
+  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted resize-none"
+  placeholder="Skriv ditt notat her..."
+/>
+
+// Select
+<select className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground">
+  <option value="1">Valg 1</option>
+  <option value="2">Valg 2</option>
+</select>
+
+// Checkbox
+<input
+  type="checkbox"
+  className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+/>
+```
+
+### 4. Labels
+
+```tsx
+// Standard label
+<label className="block text-sm font-medium text-foreground mb-2">
+  Navn *
+</label>
+
+// Label med ikon
+<label className="block text-sm font-medium text-foreground mb-2">
+  📧 E-post
+</label>
+```
+
+### 5. Badges
+
+```tsx
+// Status badge
+<span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
+  Søkt
+</span>
+
+// Tag badge
+<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
+  React
+</span>
+```
+
+### 6. Loading States
+
+```tsx
+// Spinner
+<div className="flex items-center justify-center py-12">
+  <div className="text-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+    <p className="text-muted">Laster...</p>
+  </div>
+</div>
+
+// Inline loading
+<button disabled className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg">
+  ⏳ Lagrer...
+</button>
+```
+
+### 7. Empty States
+
+```tsx
+<div className="bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
+  <div className="text-6xl mb-4">📝</div>
+  <p className="text-muted text-lg mb-2">Ingen notater ennå</p>
+  <p className="text-muted text-sm">Legg til ditt første notat ovenfor!</p>
+</div>
+```
+
+### 8. Info Bokser
+
+```tsx
+// Info boks med ikon
+<div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+  <dt className="text-sm font-medium text-muted min-w-[100px]">📍 Sted</dt>
+  <dd className="flex-1 text-sm text-foreground font-medium">Oslo</dd>
+</div>
+```
+
+### 9. Tabs
+
+```tsx
+// Tab navigasjon
+<div className="border-b border-border mb-6">
+  <nav className="flex gap-4 md:gap-8 overflow-x-auto">
+    <button
+      className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-all ${
+        isActive
+          ? 'border-primary text-primary'
+          : 'border-transparent text-muted hover:text-foreground hover:border-border'
+      }`}
+    >
+      Detaljer
+    </button>
+  </nav>
+</div>
+```
+
+### 10. Timeline
+
+```tsx
+<div className="flex gap-4">
+  <div className="flex flex-col items-center">
+    <div className="w-12 h-12 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center text-xl flex-shrink-0">
+      🔄
+    </div>
+    <div className="w-0.5 flex-1 bg-border mt-3"></div>
+  </div>
+  <div className="flex-1 pb-6">
+    <div className="bg-accent/50 rounded-lg p-4 transition-all hover:bg-accent/70">
+      {/* Event innhold */}
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## 📱 Responsive Design
+
+### Breakpoints
+
+```css
+/* Mobile first approach */
+.element {
+  /* Mobile styles (default) */
+}
+
+@media (min-width: 768px) {
+  /* Tablet styles (md:) */
+}
+
+@media (min-width: 1024px) {
+  /* Desktop styles (lg:) */
+}
+```
+
+### Responsive Patterns
+
+```tsx
+// Grid som tilpasser seg
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {/* Innhold */}
+</div>
+
+// Flex som wrapper
+<div className="flex flex-col md:flex-row gap-4">
+  {/* Innhold */}
+</div>
+
+// Skjul på mobil
+<div className="hidden md:block">
+  {/* Vises kun på tablet og desktop */}
+</div>
+
+// Vis kun på mobil
+<div className="block md:hidden">
+  {/* Vises kun på mobil */}
+</div>
+```
+
+---
+
+## ♿ Accessibility
+
+### Focus States
+
+```tsx
+// Alltid inkluder focus states
+<button className="... focus:ring-2 focus:ring-primary focus:outline-none">
+  Klikk meg
+</button>
+
+<input className="... focus:ring-2 focus:ring-primary focus:border-transparent" />
+```
+
+### Semantic HTML
+
+```tsx
+// Bruk riktige HTML elementer
+<nav>
+  <ul>
+    <li><a href="/jobs">Jobber</a></li>
+  </ul>
+</nav>
+
+<main>
+  <article>
+    <h1>Tittel</h1>
+    <p>Innhold</p>
+  </article>
+</main>
+
+<footer>
+  <p>&copy; 2025</p>
+</footer>
+```
+
+### ARIA Labels
+
+```tsx
+// Når visuell tekst ikke er nok
+<button aria-label="Slett notat">
+  🗑️
+</button>
+
+<input
+  type="search"
+  aria-label="Søk i jobber"
+  placeholder="Søk..."
+/>
+```
+
+---
+
+## 🎭 Animasjoner
+
+### Transitions
+
+```tsx
+// Standard transition
+<div className="transition-all duration-200">
+  {/* Innhold */}
+</div>
+
+// Hover transition
+<div className="transition-all hover:shadow-md">
+  {/* Innhold */}
+</div>
+
+// Opacity transition
+<div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+  {/* Innhold */}
+</div>
+```
+
+### Keyframe Animations
+
+```css
+/* Spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+```
+
+---
+
+## 💡 Best Practices
+
+### 1. Konsistens
+- ✅ Bruk alltid CSS variabler for farger
+- ✅ Følg samme spacing pattern (p-4, p-6, gap-4, etc.)
+- ✅ Bruk samme border radius (rounded-lg, rounded-xl)
+
+### 2. Performance
+- ✅ Bruk `transition-all` sparsomt (kun når nødvendig)
+- ✅ Prefer `transition-colors` eller `transition-opacity`
+- ✅ Unngå å animere `width` eller `height`
+
+### 3. Accessibility
+- ✅ Alltid inkluder focus states
+- ✅ Bruk semantic HTML
+- ✅ Test med keyboard navigation
+- ✅ Sjekk kontrast med WCAG checker
+
+### 4. Responsivitet
+- ✅ Mobile-first approach
+- ✅ Test på ulike skjermstørrelser
+- ✅ Bruk `overflow-x-auto` for horisontale lister
+- ✅ Sørg for touch targets er minst 44x44px
+
+### 5. Dark Mode
+- ✅ Test alltid i både light og dark mode
+- ✅ Bruk CSS variabler konsekvent
+- ✅ Sjekk kontrast i begge modes
+- ✅ Unngå hardkodede farger
+
+---
+
+## 🎯 Sjekkliste for Nye Komponenter
+
+- [ ] Bruker CSS variabler for farger
+- [ ] Har hover states på interaktive elementer
+- [ ] Har focus states for accessibility
+- [ ] Har loading state
+- [ ] Har empty state (hvis relevant)
+- [ ] Er responsiv (mobile, tablet, desktop)
+- [ ] Fungerer i både light og dark mode
+- [ ] Har smooth transitions
+- [ ] Bruker semantic HTML
+- [ ] Har tydelig visuelt hierarki
+- [ ] Følger spacing pattern (p-4, p-6, gap-4)
+- [ ] Bruker konsistent border radius
+- [ ] Har emoji ikoner for bedre UX
+- [ ] Har disabled states der relevant
+- [ ] Er testet med keyboard navigation
+
+---
+
+**Følg denne guiden for konsistent og moderne styling på tvers av hele applikasjonen! 🎨**

@@ -88,49 +88,69 @@ En rask, trygg og personlig jobbsøk-assistent med Kanban-pipeline, detaljsider,
 
 ---
 
-### Jobb DetalUD
-de
-- [x] Vis jobbinforma
-- [x] Rediger jobb (inlineing)
+### Jobb Detalj
+- [x] Vis jobbinformasjon
+- [x] Rediger jobb (inline editing)
 - [x] Slett jobb (med bekreftelse)
 - [x] Tilbake til jobbliste
+- [x] Tab-navigasjon (Detaljer, Notater, Oppgaver, Filer, Kontakter, Tidslinje)
+- [x] **NotesTab** - Legg til og vis notater med moderne styling
+- [x] **TasksTab** - Opprett oppgaver med deadlines, marker som fullført
+- [x] **ContactsTab** - Legg til kontaktpersoner med e-post og telefon
+- [x] **FilesTab** - Last opp dokumenter (CV, søknad, etc.)
+- [x] **TimelineTab** - Vis historikk over alle hendelser
+- [x] Theme-aware styling på alle tabs
+- [x] Forbedret UX med ikoner, animasjoner og visuell feedback
+- [x] Responsivt design for mobil og desktop
+
+### Design System & Styling
+- [x] **Komplett theme system** - Dark/light mode med smooth transitions
+- [x] **CSS variabler** - Konsistent fargepalett på tvers av hele appen
+- [x] **Moderne komponenter** - Rounded corners, shadows, hover effects
+- [x] **Accessibility** - Proper contrast ratios, focus states
+- [x] **Loading states** - Spinner animasjoner
+- [x] **Empty states** - Vennlige meldinger med ikoner
+- [x] **Hover effects** - Smooth transitions og visuell feedback
+- [x] **Status indicators** - Fargekodede badges og alerts
+- [x] **Responsive design** - Mobile-first approach
+
+### CSV & Data Export
+- [x] **CSV Export** - Eksporter jobber til CSV
+- [x] **CSV Import** - Importer jobber fra CSV med validering
+- [x] **Job Export** - Eksporter enkeltjobb med alle detaljer
+- [x] **Error handling** - Validering og feilmeldinger
 
 ## 🚧 Pågående
 
 ### Neste prioritet
-ver**
-  - [ ] Legg til notater per obb
-  - [ ] Opprett oppgaver med deadlin
-  - [ ] Marker oppgav
-  
-nger**
-  -t
-ling
-  - [ ] Status-endring via dragstyBedre   - [ ] naliteksjod-drop fun [ ] Drag-an Forbedrianban ] **K- [
+- [✅] **Kanban Board forbedringer**
+  - [✅] Drag-and-drop funksjonalitet
+  - [✅] Status-endring via drag
+  - [✅] Bedre visuell feedback
 
 ---
 
 ### Uke 2: Kjernefunksjonalitet
 
-- [ ] **Jobbdetalj (tabs)**
+- [✅] **Jobbdetalj (tabs)**
   - [ ] Timeline tab (Event-historikk)
   - [ ] Notes tab (markdown-støtte)
   - [ ] Tasks tab (med deadlines)
   - [ ] Files tab (vedlegg via Vercel Blob)
   - [ ] Contacts tab (kontaktpersoner)
 
-- [ ] **Mine Dokumenter**
+- [✅] **Mine Dokumenter**
   - [ ] /documents - liste over CV/CL
   - [ ] Upload til Vercel Blob
   - [ ] DocumentGrid komponent
   - [ ] Server actions: uploadDocument, deleteDocument
 
-- [ ] **Søk & Filtre**
+- [✅] **Søk & Filtre**
   - [ ] Søk på tittel/firma/notes
   - [ ] Filter på status, tags, sted, remote
   - [ ] Tag-system
 
-- [ ] **CSV Eksport/Import**
+- [✅] **CSV Eksport/Import**
   - [ ] Eksporter jobber til CSV
   - [ ] Importer jobber fra CSV
 

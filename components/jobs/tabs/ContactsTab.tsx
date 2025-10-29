@@ -76,18 +76,27 @@ export function ContactsTab({ jobId }: { jobId: string }) {
   };
 
   if (loading) {
-    return <div className="text-center py-8 text-gray-500">Laster kontakter...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted">Laster kontakter...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Add Contact Form */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Legg til kontaktperson</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+      <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+        <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+          👤 Legg til kontaktperson
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-foreground mb-2">
                 Navn *
               </label>
               <input
@@ -96,11 +105,11 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                 onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
                 placeholder="F.eks. Ola Nordmann"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-foreground mb-2">
                 Tittel *
               </label>
               <input
@@ -109,14 +118,14 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                 onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
                 placeholder="F.eks. Rekrutteringsansvarlig"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              E-post
+            <label className="block text-sm font-medium text-foreground mb-2">
+              📧 E-post
             </label>
             <input
               type="email"
@@ -124,24 +133,24 @@ export function ContactsTab({ jobId }: { jobId: string }) {
               onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
               placeholder="ola@firma.no"
               disabled={newContact.noEmail}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted disabled:opacity-50 disabled:cursor-not-allowed"
             />
-            <div className="mt-2 flex items-center">
+            <div className="mt-3 flex items-center gap-2 p-3 bg-accent/50 rounded-lg">
               <input
                 type="checkbox"
                 checked={newContact.noEmail}
                 onChange={(e) => setNewContact({ ...newContact, noEmail: e.target.checked, email: '' })}
-                className="h-4 w-4 text-blue-600 rounded"
+                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
               />
-              <label className="ml-2 text-sm text-gray-600">
+              <label className="text-sm text-muted">
                 Ikke oppgitt i utlysningen
               </label>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Telefon
+            <label className="block text-sm font-medium text-foreground mb-2">
+              📞 Telefon
             </label>
             <input
               type="tel"
@@ -149,16 +158,16 @@ export function ContactsTab({ jobId }: { jobId: string }) {
               onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
               placeholder="+47 123 45 678"
               disabled={newContact.noPhone}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted disabled:opacity-50 disabled:cursor-not-allowed"
             />
-            <div className="mt-2 flex items-center">
+            <div className="mt-3 flex items-center gap-2 p-3 bg-accent/50 rounded-lg">
               <input
                 type="checkbox"
                 checked={newContact.noPhone}
                 onChange={(e) => setNewContact({ ...newContact, noPhone: e.target.checked, phone: '' })}
-                className="h-4 w-4 text-blue-600 rounded"
+                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
               />
-              <label className="ml-2 text-sm text-gray-600">
+              <label className="text-sm text-muted">
                 Ikke oppgitt i utlysningen
               </label>
             </div>
@@ -168,9 +177,9 @@ export function ContactsTab({ jobId }: { jobId: string }) {
             <button
               type="submit"
               disabled={submitting || !newContact.name.trim() || !newContact.role.trim()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
             >
-              {submitting ? 'Lagrer...' : 'Legg til kontakt'}
+              {submitting ? '⏳ Lagrer...' : '💾 Legg til kontakt'}
             </button>
           </div>
         </form>
@@ -179,46 +188,74 @@ export function ContactsTab({ jobId }: { jobId: string }) {
       {/* Contacts List */}
       <div className="space-y-4">
         {contacts.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
-            <p className="text-gray-500">Ingen kontakter ennå. Legg til din første kontakt ovenfor!</p>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
+            <div className="text-6xl mb-4">👥</div>
+            <p className="text-muted text-lg mb-2">Ingen kontakter ennå</p>
+            <p className="text-muted text-sm">Legg til kontaktpersoner for å holde oversikt over hvem du snakker med!</p>
           </div>
         ) : (
-          contacts.map((contact) => (
-            <div key={contact._id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h4 className="text-lg font-semibold text-gray-900">{contact.name}</h4>
-                  <p className="text-sm text-gray-600 mt-1">{contact.role}</p>
-                  <div className="mt-3 space-y-1">
-                    {contact.email ? (
-                      <p className="text-sm text-gray-700">
-                        📧 <a href={`mailto:${contact.email}`} className="text-blue-600 hover:text-blue-700">
-                          {contact.email}
-                        </a>
-                      </p>
-                    ) : (
-                      <p className="text-sm text-gray-500">📧 Ikke oppgitt</p>
-                    )}
-                    {contact.phone ? (
-                      <p className="text-sm text-gray-700">
-                        📞 <a href={`tel:${contact.phone}`} className="text-blue-600 hover:text-blue-700">
-                          {contact.phone}
-                        </a>
-                      </p>
-                    ) : (
-                      <p className="text-sm text-gray-500">📞 Ikke oppgitt</p>
-                    )}
+          <>
+            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              👥 Kontaktpersoner ({contacts.length})
+            </h3>
+            {contacts.map((contact) => (
+              <div key={contact._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl flex-shrink-0">
+                        👤
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-lg font-semibold text-foreground">{contact.name}</h4>
+                        <p className="text-sm text-muted mt-0.5">{contact.role}</p>
+                      </div>
+                    </div>
+                    <div className="ml-15 space-y-2">
+                      {contact.email ? (
+                        <div className="flex items-center gap-2 p-2 bg-accent/50 rounded-lg">
+                          <span className="text-sm">📧</span>
+                          <a 
+                            href={`mailto:${contact.email}`} 
+                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                          >
+                            {contact.email}
+                          </a>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 p-2 bg-accent/30 rounded-lg">
+                          <span className="text-sm">📧</span>
+                          <span className="text-sm text-muted">Ikke oppgitt</span>
+                        </div>
+                      )}
+                      {contact.phone ? (
+                        <div className="flex items-center gap-2 p-2 bg-accent/50 rounded-lg">
+                          <span className="text-sm">📞</span>
+                          <a 
+                            href={`tel:${contact.phone}`} 
+                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                          >
+                            {contact.phone}
+                          </a>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 p-2 bg-accent/30 rounded-lg">
+                          <span className="text-sm">📞</span>
+                          <span className="text-sm text-muted">Ikke oppgitt</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  <button
+                    onClick={() => handleDelete(contact._id)}
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-all px-3 py-1 rounded hover:bg-destructive/10"
+                  >
+                    🗑️ Slett
+                  </button>
                 </div>
-                <button
-                  onClick={() => handleDelete(contact._id)}
-                  className="text-sm text-red-600 hover:text-red-700"
-                >
-                  Slett
-                </button>
               </div>
-            </div>
-          ))
+            ))}
+          </>
         )}
       </div>
     </div>

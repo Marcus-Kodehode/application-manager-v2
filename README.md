@@ -62,21 +62,27 @@ npm run dev
 ## 📋 Funksjoner
 
 ### ✅ Implementert
-- Autentisering med Clerk
-- Opprett og administrer jobbsøknader
-- Kanban-visning med statuser (Søkt, Screening, Intervju, Tilbud, Avvist, På vent)
-- Server Actions for all CRUD
-- Streng userId-isolasjon
+- ✅ Autentisering med Clerk
+- ✅ Opprett og administrer jobbsøknader
+- ✅ Kanban-visning med statuser
+- ✅ **Job Detail Page** med tabs (Detaljer, Notater, Oppgaver, Filer, Kontakter, Tidslinje)
+- ✅ **Theme System** - Dark/Light mode
+- ✅ **CSV Export/Import** - Full data portabilitet
+- ✅ **Dokumenthåndtering** - Last opp CV, søknader, etc.
+- ✅ **Task Management** - Med smart deadline-visning
+- ✅ **Contact Management** - Hold oversikt over kontaktpersoner
+- ✅ **Event Timeline** - Full historikk over alle endringer
+- ✅ Server Actions for all CRUD
+- ✅ Streng userId-isolasjon
 
 ### 🚧 Under utvikling
-- Jobbdetalj med tabs (Timeline, Notes, Tasks, Files, Contacts)
-- Drag-and-drop i Kanban
-- Dokumenthåndtering
-- CSV eksport/import
-- iCal feed
-- Analytics & personvern
+- [ ] Drag-and-drop i Kanban
+- [ ] iCal feed for intervjuer
+- [ ] Analytics & personvern
+- [ ] Settings pages
+- [ ] i18n (norsk/engelsk)
 
-Se [progression.md](./progression.md) for full oversikt.
+Se [docs/progression.md](./docs/progression.md) for full oversikt.
 
 ## 🔒 Sikkerhet
 
@@ -85,14 +91,24 @@ Se [progression.md](./progression.md) for full oversikt.
 - Zod validerer all input
 - Rate-limiting kommer i neste fase
 
+## 📚 Dokumentasjon
+
+- 🚀 **[SETUP.md](./docs/SETUP.md)** - Installasjonsveiledning (START HER!)
+- 📁 **[PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md)** - Filstruktur forklart
+- 🎨 **[DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)** - Styling guide og komponenter
+- 📝 **[CHANGELOG.md](./docs/CHANGELOG.md)** - Alle endringer og forbedringer
+- ✅ **[TODO.md](./docs/TODO.md)** - Detaljert oppgaveliste
+- 📊 **[progression.md](./docs/progression.md)** - Prosjekt fremgang
+- 🗄️ **[MONGOOSE_NOTES.md](./docs/MONGOOSE_NOTES.md)** - Hvorfor Mongoose vs Prisma
+
 ## 📝 Neste steg
 
 1. **Installer dependencies**: `npm install`
-2. **Setup .env.local** med MongoDB og Clerk keys
+2. **Setup .env.local** med MongoDB og Clerk keys (se [SETUP.md](./docs/SETUP.md))
 3. **Start dev server**: `npm run dev`
 4. **Opprett første jobb** via UI
 
-Se [progression.md](./progression.md) for detaljert arbeidsplan.
+Se [docs/TODO.md](./docs/TODO.md) for detaljert arbeidsplan.
 
 ## 🆘 Problemer?
 

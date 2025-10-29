@@ -9,33 +9,46 @@ export default async function JobsPage() {
   const jobs = await getJobs();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Mine Jobber</h1>
-          <div className="flex gap-3">
-            <Link
-              href="/jobs/new"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              + Ny Jobb
-            </Link>
+        {/* Page header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Mine Jobber</h1>
+            <p className="text-muted-foreground flex items-center gap-2">
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                {jobs.length}
+              </span>
+              {jobs.length === 1 ? 'søknad' : 'søknader'} totalt
+            </p>
           </div>
+          <Link
+            href="/jobs/new"
+            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2"
+          >
+            <span className="text-xl">+</span>
+            Ny Jobb
+          </Link>
         </div>
 
         {jobs.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-            <p className="text-gray-500 mb-4">Ingen jobber ennå</p>
-            <div className="space-y-3">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center mb-8">
+            <div className="max-w-md mx-auto">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">💼</span>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Ingen jobber ennå</h3>
+              <p className="text-muted-foreground mb-6">
+                Kom i gang ved å legge til din første jobbsøknad, eller importer fra CSV nedenfor
+              </p>
               <Link
                 href="/jobs/new"
-                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium shadow-sm"
               >
                 Opprett din første jobb
               </Link>
-              <p className="text-sm text-gray-500">eller importer fra CSV nedenfor</p>
             </div>
           </div>
         ) : (
@@ -43,7 +56,7 @@ export default async function JobsPage() {
         )}
 
         {/* Export/Import - Bottom of page */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
+        <div className="mt-8 pt-8 border-t border-border">
           <CSVManager jobs={jobs} />
         </div>
       </main>

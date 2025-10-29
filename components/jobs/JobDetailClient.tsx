@@ -84,16 +84,16 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
         return (
             <div>
                 <div className="mb-6">
-                    <Link href="/jobs" className="text-blue-600 hover:text-blue-700 text-sm">
+                    <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors">
                         ← Tilbake til jobber
                     </Link>
-                    <h1 className="text-3xl font-bold text-gray-900 mt-4">Rediger Jobb</h1>
+                    <h1 className="text-3xl font-bold text-foreground mt-4">Rediger Jobb</h1>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                    <form onSubmit={handleUpdate} className="space-y-4">
+                <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+                    <form onSubmit={handleUpdate} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-2">
                                 Stillingstittel *
                             </label>
                             <input
@@ -101,12 +101,12 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-2">
                                 Firma *
                             </label>
                             <input
@@ -114,31 +114,32 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.company}
                                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                                 required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-foreground mb-2">
                                     Sted
                                 </label>
                                 <input
                                     type="text"
                                     value={formData.location}
                                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                    placeholder="F.eks. Oslo"
+                                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-foreground mb-2">
                                     Status
                                 </label>
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
                                 >
                                     {Object.entries(statusLabels).map(([value, label]) => (
                                         <option key={value} value={value}>{label}</option>
@@ -147,75 +148,79 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                             </div>
                         </div>
 
-                        <div className="flex items-center">
+                        <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border border-border">
                             <input
                                 type="checkbox"
                                 checked={formData.remote}
                                 onChange={(e) => setFormData({ ...formData, remote: e.target.checked })}
-                                className="h-4 w-4 text-blue-600"
+                                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
                             />
-                            <label className="ml-2 text-sm text-gray-700">Fjernarbeid</label>
+                            <label className="text-sm font-medium text-foreground">Fjernarbeid mulig</label>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Lenke
+                            <label className="block text-sm font-medium text-foreground mb-2">
+                                Lenke til stillingsannonse
                             </label>
                             <input
                                 type="url"
                                 value={formData.url}
                                 onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                placeholder="https://..."
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-2">
                                 Kilde
                             </label>
                             <input
                                 type="text"
                                 value={formData.source}
                                 onChange={(e) => setFormData({ ...formData, source: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                placeholder="F.eks. Finn.no, LinkedIn"
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-2">
                                 Lønn / Forventning
                             </label>
                             <input
                                 type="text"
                                 value={formData.salaryNote}
                                 onChange={(e) => setFormData({ ...formData, salaryNote: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                placeholder="F.eks. 600 000 - 750 000 kr"
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-2">
                                 Tags (kommaseparert)
                             </label>
                             <input
                                 type="text"
                                 value={formData.tags}
                                 onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                placeholder="F.eks. React, TypeScript, Senior"
+                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div className="flex gap-3 pt-4">
                             <button
                                 type="submit"
-                                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-medium transition-all shadow-sm hover:shadow"
                             >
                                 Lagre endringer
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsEditing(false)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                                className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-all text-foreground"
                             >
                                 Avbryt
                             </button>
@@ -228,28 +233,28 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
 
     return (
         <div>
-            <div className="mb-6">
-                <div className="flex justify-between items-start mb-4">
-                    <div>
-                        <Link href="/jobs" className="text-blue-600 hover:text-blue-700 text-sm">
+            <div className="mb-8">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                    <div className="flex-1">
+                        <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors inline-flex items-center gap-1">
                             ← Tilbake til jobber
                         </Link>
-                        <h1 className="text-3xl font-bold text-gray-900 mt-4">{job.title}</h1>
-                        <p className="text-xl text-gray-600 mt-1">{job.company}</p>
+                        <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">{job.title}</h1>
+                        <p className="text-xl text-muted mt-2">{job.company}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                            className="px-5 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-all shadow-sm hover:shadow"
                         >
-                            Rediger
+                            ✏️ Rediger
                         </button>
                         <button
                             onClick={handleDelete}
                             disabled={isDeleting}
-                            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                            className="px-5 py-2.5 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
                         >
-                            {isDeleting ? 'Sletter...' : 'Slett'}
+                            {isDeleting ? '⏳ Sletter...' : '🗑️ Slett'}
                         </button>
                     </div>
                 </div>
@@ -261,15 +266,15 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
             </div>
 
             {/* Tabs */}
-            <div className="border-b border-gray-200 mb-6">
-                <nav className="flex gap-8">
+            <div className="border-b border-border mb-6">
+                <nav className="flex gap-4 md:gap-8 overflow-x-auto">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
-                                ? 'border-blue-600 text-blue-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-all ${activeTab === tab.id
+                                ? 'border-primary text-primary'
+                                : 'border-transparent text-muted hover:text-foreground hover:border-border'
                                 }`}
                         >
                             {tab.label}
@@ -282,48 +287,52 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
             {activeTab === 'details' && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h2 className="text-lg font-semibold text-gray-900 mb-4">Informasjon</h2>
-                            <dl className="space-y-3">
-                                <div>
-                                    <dt className="text-sm font-medium text-gray-500">Status</dt>
-                                    <dd className="mt-1">
-                                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+                            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                                📋 Informasjon
+                            </h2>
+                            <dl className="space-y-5">
+                                <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                    <dt className="text-sm font-medium text-muted min-w-[100px]">Status</dt>
+                                    <dd className="flex-1">
+                                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
                                             {statusLabels[job.status]}
                                         </span>
                                     </dd>
                                 </div>
                                 {job.location && (
-                                    <div>
-                                        <dt className="text-sm font-medium text-gray-500">Sted</dt>
-                                        <dd className="mt-1 text-sm text-gray-900">{job.location}</dd>
+                                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                        <dt className="text-sm font-medium text-muted min-w-[100px]">📍 Sted</dt>
+                                        <dd className="flex-1 text-sm text-foreground font-medium">{job.location}</dd>
                                     </div>
                                 )}
-                                <div>
-                                    <dt className="text-sm font-medium text-gray-500">Fjernarbeid</dt>
-                                    <dd className="mt-1 text-sm text-gray-900">{job.remote ? 'Ja' : 'Nei'}</dd>
+                                <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                    <dt className="text-sm font-medium text-muted min-w-[100px]">🏠 Fjernarbeid</dt>
+                                    <dd className="flex-1 text-sm text-foreground font-medium">
+                                        {job.remote ? '✅ Ja' : '❌ Nei'}
+                                    </dd>
                                 </div>
                                 {job.source && (
-                                    <div>
-                                        <dt className="text-sm font-medium text-gray-500">Kilde</dt>
-                                        <dd className="mt-1 text-sm text-gray-900">{job.source}</dd>
+                                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                        <dt className="text-sm font-medium text-muted min-w-[100px]">🔗 Kilde</dt>
+                                        <dd className="flex-1 text-sm text-foreground font-medium">{job.source}</dd>
                                     </div>
                                 )}
                                 {job.salaryNote && (
-                                    <div>
-                                        <dt className="text-sm font-medium text-gray-500">Lønn</dt>
-                                        <dd className="mt-1 text-sm text-gray-900">{job.salaryNote}</dd>
+                                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                        <dt className="text-sm font-medium text-muted min-w-[100px]">💰 Lønn</dt>
+                                        <dd className="flex-1 text-sm text-foreground font-medium">{job.salaryNote}</dd>
                                     </div>
                                 )}
                                 {job.url && (
-                                    <div>
-                                        <dt className="text-sm font-medium text-gray-500">Lenke</dt>
-                                        <dd className="mt-1">
+                                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                        <dt className="text-sm font-medium text-muted min-w-[100px]">🌐 Lenke</dt>
+                                        <dd className="flex-1">
                                             <a
                                                 href={job.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-sm text-blue-600 hover:text-blue-700"
+                                                className="text-sm text-primary hover:text-primary/80 font-medium inline-flex items-center gap-1 transition-colors"
                                             >
                                                 Åpne stillingsannonse →
                                             </a>
@@ -331,13 +340,13 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                     </div>
                                 )}
                                 {job.tags && job.tags.length > 0 && (
-                                    <div>
-                                        <dt className="text-sm font-medium text-gray-500">Tags</dt>
-                                        <dd className="mt-1 flex flex-wrap gap-2">
+                                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                                        <dt className="text-sm font-medium text-muted min-w-[100px]">🏷️ Tags</dt>
+                                        <dd className="flex-1 flex flex-wrap gap-2">
                                             {job.tags.map((tag: string, i: number) => (
                                                 <span
                                                     key={i}
-                                                    className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800"
+                                                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border"
                                                 >
                                                     {tag}
                                                 </span>
@@ -350,16 +359,30 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                     </div>
 
                     <div>
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h2 className="text-lg font-semibold text-gray-900 mb-4">Tidslinje</h2>
-                            <div className="space-y-3 text-sm">
-                                <div>
-                                    <p className="text-gray-500">Opprettet</p>
-                                    <p className="text-gray-900">{new Date(job.createdAt).toLocaleDateString('nb-NO')}</p>
+                        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
+                            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                                ⏰ Tidslinje
+                            </h2>
+                            <div className="space-y-4">
+                                <div className="p-4 bg-accent/50 rounded-lg">
+                                    <p className="text-sm font-medium text-muted mb-1">Opprettet</p>
+                                    <p className="text-foreground font-semibold">
+                                        {new Date(job.createdAt).toLocaleDateString('nb-NO', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })}
+                                    </p>
                                 </div>
-                                <div>
-                                    <p className="text-gray-500">Sist oppdatert</p>
-                                    <p className="text-gray-900">{new Date(job.updatedAt).toLocaleDateString('nb-NO')}</p>
+                                <div className="p-4 bg-accent/50 rounded-lg">
+                                    <p className="text-sm font-medium text-muted mb-1">Sist oppdatert</p>
+                                    <p className="text-foreground font-semibold">
+                                        {new Date(job.updatedAt).toLocaleDateString('nb-NO', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        })}
+                                    </p>
                                 </div>
                             </div>
                         </div>
