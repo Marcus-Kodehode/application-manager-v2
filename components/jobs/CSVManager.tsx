@@ -2,61 +2,36 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { jobsToCSV, parseCSV, validateJobCSVRow } from '@/lib/utils/csv';
-import { importJobsFromCSV } from '@/lib/actions/jobs';
+import { parseCSV, validateJobCSVRow, downloadFile } from '@/lib/utils/csv';
+import { importJobsFromCSV, getAllJobsWithDetails } from '@/lib/actions/jobs';
 
 export function CSVManager({ jobs }: { jobs: any[] }) {
   const router = useRouter();
   const [importing, setImporting] = useState(false);
+  const [exporting, setExporting] = useState(false);
   const [importResult, setImportResult] = useState<any>(null);
 
-  const handleExport = (format: 'csv' | 'json') => {
-    if (format === 'csv') {
-      const csv = jobsToCSV(jobs);
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      // Get all jobs with full details
+      const allJobsData = await getAllJobsWithDetails();
       
-      link.setAttribute('href', url);
-      link.setAttribute('download', `jobber_${new Date().toISOString().split('T')[0]}.csv`);
-      link.style.visibility = 'hidden';
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      // JSON export with basic job data
       const exportData = {
-        jobs: jobs.map(job => ({
-          title: job.title,
-          company: job.company,
-          location: job.location,
-          remote: job.remote,
-          salary: job.salary,
-          url: job.url,
-          description: job.description,
-          status: job.status,
-          tags: job.tags,
-          appliedAt: job.appliedAt,
-          source: job.source,
-          salaryNote: job.salaryNote,
-        })),
+        jobs: allJobsData,
         exportedAt: new Date().toISOString(),
-        count: jobs.length,
+        count: allJobsData.length,
+        version: '1.0',
       };
       
       const json = JSON.stringify(exportData, null, 2);
-      const blob = new Blob([json], { type: 'application/json;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
+      const filename = `jobber_full_${new Date().toISOString().split('T')[0]}.json`;
       
-      link.setAttribute('href', url);
-      link.setAttribute('download', `jobber_${new Date().toISOString().split('T')[0]}.json`);
-      link.style.visibility = 'hidden';
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      downloadFile(json, filename, 'application/json;charset=utf-8;');
+    } catch (error: any) {
+      alert(error.message || 'Kunne ikke eksportere jobber');
+    } finally {
+      setExporting(false);
     }
   };
 
@@ -109,56 +84,50 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 CSV Import/Export</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-gray-900">Backup & Import</h3>
+        <span className="text-xs text-gray-500">Valgfritt</span>
+      </div>
       
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Export */}
         <div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => handleExport('csv')}
-              disabled={jobs.length === 0}
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              📄 CSV ({jobs.length})
-            </button>
-            <button
-              onClick={() => handleExport('json')}
-              disabled={jobs.length === 0}
-              className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              📦 JSON ({jobs.length})
-            </button>
-          </div>
+          <button
+            onClick={handleExport}
+            disabled={jobs.length === 0 || exporting}
+            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+          >
+            {exporting ? '⏳ Eksporterer...' : `📦 Last ned backup (${jobs.length})`}
+          </button>
           <p className="text-xs text-gray-500 mt-2">
-            Eksporter alle jobber til CSV (enkel) eller JSON (strukturert)
+            Sikkerhetskopi av alle jobber med full historikk
           </p>
         </div>
 
         {/* Import */}
         <div>
           <label className="block">
-            <span className="sr-only">Velg CSV-fil</span>
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleImport}
-              disabled={importing}
-              className="block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100
-                disabled:opacity-50 disabled:cursor-not-allowed"
-            />
+            <div className="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 transition-colors cursor-pointer text-center">
+              <input
+                type="file"
+                accept=".csv"
+                onChange={handleImport}
+                disabled={importing}
+                className="hidden"
+              />
+              <span className="text-sm text-gray-700">
+                {importing ? '⏳ Importerer...' : '📄 Importer fra CSV'}
+              </span>
+            </div>
           </label>
           <p className="text-xs text-gray-500 mt-2">
-            ⬆️ Importer jobber fra CSV-fil
+            Legg til flere jobber fra en fil
           </p>
         </div>
+      </div>
 
-        {/* Import Result */}
+      {/* Import Result */}
+      <div className="mt-4">
         {importing && (
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-blue-900 text-sm">Importerer jobber...</p>
@@ -203,34 +172,102 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
           </div>
         )}
 
-        {/* CSV Format Help */}
+      {/* Format Help */}
+      <div className="mt-4">
         <details className="text-sm">
-          <summary className="cursor-pointer text-gray-700 hover:text-gray-900 font-medium">
-            📋 CSV Format
+          <summary className="cursor-pointer text-gray-600 hover:text-gray-900">
+            ℹ️ Hva er dette?
           </summary>
-          <div className="mt-2 p-3 bg-gray-50 rounded text-xs text-gray-600 space-y-2">
-            <p><strong>Påkrevde kolonner:</strong></p>
-            <ul className="ml-4 space-y-1">
-              <li>• title (tekst)</li>
-              <li>• company (tekst)</li>
-            </ul>
-            <p><strong>Valgfrie kolonner:</strong></p>
-            <ul className="ml-4 space-y-1">
-              <li>• location (tekst)</li>
-              <li>• remote (Yes/No)</li>
-              <li>• salary (tekst)</li>
-              <li>• url (tekst)</li>
-              <li>• description (tekst)</li>
-              <li>• status (WISHLIST, APPLIED, SCREENING, INTERVIEW, OFFER, REJECTED, ACCEPTED, WITHDRAWN)</li>
-              <li>• tags (kommaseparert, f.eks. "React, TypeScript")</li>
-              <li>• appliedAt (YYYY-MM-DD)</li>
-              <li>• notes (tekst)</li>
-            </ul>
-            <p className="pt-2">
-              <strong>Tips:</strong> Eksporter først for å se riktig format!
-            </p>
+          <div className="mt-2 p-3 bg-gray-50 rounded text-xs text-gray-600 space-y-3">
+            <div>
+              <p className="font-semibold text-gray-900 mb-1">📦 Last ned backup</p>
+              <p>Lager en sikkerhetskopi av alle jobbene dine med:</p>
+              <ul className="ml-4 mt-1 space-y-1">
+                <li>• All jobbinformasjon</li>
+                <li>• Historikk og notater</li>
+                <li>• Oppgaver og kontakter</li>
+                <li>• Dokumentlenker</li>
+              </ul>
+              <p className="mt-2 text-gray-500">Trygt å ta backup regelmessig!</p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-gray-900 mb-1">📄 Importer fra CSV</p>
+              <p>Legg til mange jobber samtidig fra en Excel/CSV-fil.</p>
+              <p className="mt-1"><strong>Må ha:</strong> title, company</p>
+              <p><strong>Kan ha:</strong> location, remote, salary, url, description, status, tags, appliedAt, notes</p>
+              <p className="mt-2 text-gray-500">
+                Nyttig hvis du har en liste med jobber i Excel.
+              </p>
+            </div>
           </div>
         </details>
+
+        {/* Excel Template Guide */}
+        <details className="text-sm mt-3">
+          <summary className="cursor-pointer text-gray-600 hover:text-gray-900">
+            📊 Hvordan lage Excel-arket?
+          </summary>
+          <div className="mt-2 p-3 bg-blue-50 rounded text-xs space-y-3">
+            <div>
+              <p className="font-semibold text-gray-900 mb-2">Slik skal Excel-arket se ut:</p>
+              
+              {/* Visual table example */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs border-collapse bg-white rounded">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">title</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">company</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">location</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">remote</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-300 px-2 py-1">Frontend Developer</td>
+                      <td className="border border-gray-300 px-2 py-1">Acme AS</td>
+                      <td className="border border-gray-300 px-2 py-1">Oslo</td>
+                      <td className="border border-gray-300 px-2 py-1">Yes</td>
+                      <td className="border border-gray-300 px-2 py-1">APPLIED</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300 px-2 py-1">Backend Developer</td>
+                      <td className="border border-gray-300 px-2 py-1">Tech Corp</td>
+                      <td className="border border-gray-300 px-2 py-1">Bergen</td>
+                      <td className="border border-gray-300 px-2 py-1">No</td>
+                      <td className="border border-gray-300 px-2 py-1">WISHLIST</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-3 space-y-2">
+                <p className="font-semibold text-gray-900">Viktige tips:</p>
+                <ul className="ml-4 space-y-1 text-gray-700">
+                  <li>• <strong>Første rad</strong> må være kolonnenavn (title, company, osv.)</li>
+                  <li>• <strong>title</strong> og <strong>company</strong> er påkrevd</li>
+                  <li>• <strong>remote:</strong> Skriv "Yes" eller "No"</li>
+                  <li>• <strong>status:</strong> WISHLIST, APPLIED, SCREENING, INTERVIEW, OFFER, REJECTED, ACCEPTED, WITHDRAWN</li>
+                  <li>• <strong>appliedAt:</strong> Datoformat YYYY-MM-DD (f.eks. 2025-01-15)</li>
+                  <li>• <strong>tags:</strong> Skill med komma (f.eks. "React, TypeScript")</li>
+                </ul>
+              </div>
+
+              <div className="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded">
+                <p className="font-semibold text-yellow-900">💡 Slik lagrer du fra Excel:</p>
+                <ol className="ml-4 mt-1 space-y-1 text-yellow-800">
+                  <li>1. Klikk "Fil" → "Lagre som"</li>
+                  <li>2. Velg "CSV (kommaseparert)" som filtype</li>
+                  <li>3. Lagre filen</li>
+                  <li>4. Last opp filen her</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </details>
+        </div>
       </div>
     </div>
   );

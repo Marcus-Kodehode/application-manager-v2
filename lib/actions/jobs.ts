@@ -307,3 +307,67 @@ export async function getJobWithDetails(jobId: string) {
     throw new Error(error.message || 'Kunne ikke hente jobbdetaljer');
   }
 }
+
+export async function getAllJobsWithDetails() {
+  try {
+    const userId = await requireAuth();
+
+    await connectDB();
+    
+    const Job = getJobModel();
+    const Event = getEventModel();
+
+    const jobs = await Job.find({ userId }).lean();
+    
+    const mongoose = require('mongoose');
+    
+    // Get all related data for all jobs
+    const jobsWithDetails = await Promise.all(
+      jobs.map(async (job) => {
+        const jobId = job._id.toString();
+        
+        const events = await Event.find({ jobId: job._id, userId })
+          .sort({ createdAt: -1 })
+          .lean();
+
+        let tasks = [];
+        let contacts = [];
+        let documents = [];
+
+        try {
+          const Task = mongoose.model('Task');
+          tasks = await Task.find({ jobId: job._id, userId }).lean();
+        } catch (e) {
+          // Model might not exist
+        }
+
+        try {
+          const Contact = mongoose.model('Contact');
+          contacts = await Contact.find({ jobId: job._id, userId }).lean();
+        } catch (e) {
+          // Model might not exist
+        }
+
+        try {
+          const Document = mongoose.model('Document');
+          documents = await Document.find({ jobId: job._id, userId }).lean();
+        } catch (e) {
+          // Model might not exist
+        }
+
+        return {
+          job: JSON.parse(JSON.stringify(job)),
+          events: JSON.parse(JSON.stringify(events)),
+          tasks: JSON.parse(JSON.stringify(tasks)),
+          contacts: JSON.parse(JSON.stringify(contacts)),
+          documents: JSON.parse(JSON.stringify(documents)),
+        };
+      })
+    );
+
+    return jobsWithDetails;
+  } catch (error: any) {
+    console.error('Error getting all jobs with details:', error);
+    throw new Error(error.message || 'Kunne ikke hente jobber');
+  }
+}

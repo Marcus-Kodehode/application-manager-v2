@@ -53,8 +53,9 @@
 - [✅] Filter på remote
 - [✅] Filter på location
 
-### CSV Eksport/Import ✅
-- [✅] Eksporter jobber til CSV
+### Eksport/Import ✅
+- [✅] Eksporter jobber til JSON (full data)
+- [✅] Eksporter enkeltjobb til JSON (full data)
 - [✅] Importer jobber fra CSV
 - [✅] Validering av import data
 
