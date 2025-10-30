@@ -2,6 +2,31 @@
 
 > **Merk**: For fullstendig oversikt over hva som er gjort, se [CHANGELOG.md](./CHANGELOG.md)
 
+## ✅ Nylig Fullført
+
+### Job Form - Moderne Design & Nye Felter ✅
+- [✅] Søknadsdato felt (appliedAt)
+- [✅] Søknadsfrist felt (deadline)
+- [✅] "Lønn ikke oppgitt" checkbox (salaryNotProvided)
+- [✅] Kilde dropdown med forhåndsdefinerte valg
+- [✅] Seksjonsinndeling (6 seksjoner med emoji)
+- [✅] Tips og veiledning under felter
+- [✅] Moderne styling med theme-aware farger
+- [✅] Forbedret page header med undertekst
+- [✅] Større input felter (bedre touch targets)
+- [✅] Placeholders med eksempler
+
+### Documents Page - Moderne Design ✅
+- [✅] Stats cards for oversikt (CV, Søknad, Annet)
+- [✅] Søk i dokumenter (navn og filnavn)
+- [✅] Filter på dokumenttype
+- [✅] Grid layout (responsivt 1-3 kolonner)
+- [✅] Moderne kort-design med hover effects
+- [✅] Empty states med vennlige meldinger
+- [✅] Theme-aware styling
+- [✅] Loading states med spinner
+- [✅] Forbedret upload form
+
 ## 🚀 Neste Prioritet
 
 ### 1. Kanban Drag-and-Drop Forbedringer
@@ -95,9 +120,9 @@
 - [✅] Jobs page
 - [✅] JobsFilter
 - [✅] Job detail page
-- [ ] Documents page
-- [ ] JobForm
-- [ ] KanbanBoard
+- [✅] Documents page
+- [✅] JobForm
+- [✅] KanbanBoard
 - [ ] JobsFilter
 - [ ] CSVManager
 - [ ] All tabs (Timeline, Notes, Tasks, Files, Contacts)

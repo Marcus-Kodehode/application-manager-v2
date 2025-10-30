@@ -28,9 +28,11 @@ export interface IJob {
   source?: string;
   status: JobStatus;
   salaryNote?: string;
+  salaryNotProvided?: boolean;
   tags: string[];
   url?: string;
   appliedAt?: Date;
+  deadline?: Date;
   nextActionAt?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -60,9 +62,11 @@ const jobSchema = new mongoose.Schema<IJob>(
       index: true 
     },
     salaryNote: String,
+    salaryNotProvided: { type: Boolean, default: false },
     tags: { type: [String], default: [] },
     url: String,
     appliedAt: Date,
+    deadline: Date,
     nextActionAt: Date,
   },
   { timestamps: true }

@@ -55,9 +55,9 @@ export default async function DashboardPage() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Kanban Board - Left Side (2/3) */}
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column - Kanban Board (8/12 = 2/3) */}
+            <div className="lg:col-span-8">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-foreground">Kanban Board</h3>
                 <Link 
@@ -68,11 +68,11 @@ export default async function DashboardPage() {
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </div>
-              <KanbanBoard jobs={jobs} />
+              <KanbanBoard jobs={jobs} showStats={false} />
             </div>
 
-            {/* Sidebar - Right Side (1/3) */}
-            <div className="space-y-6">
+            {/* Right Column - Tasks, Documents & Stats (4/12 = 1/3) */}
+            <div className="lg:col-span-4 space-y-6">
               {/* Upcoming Tasks */}
               <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
                 <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">

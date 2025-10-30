@@ -21,7 +21,9 @@ export const jobCreateSchema = z.object({
     message: 'Ugyldig URL',
   }),
   salaryNote: z.string().optional(),
+  salaryNotProvided: z.boolean().default(false),
   appliedAt: z.coerce.date().optional(),
+  deadline: z.coerce.date().optional(),
   nextActionAt: z.coerce.date().optional(),
 });
 
