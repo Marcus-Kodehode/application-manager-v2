@@ -21,7 +21,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">J</span>
             </div>
@@ -67,7 +67,7 @@ export function Header() {
               <UserButton afterSignOutUrl="/" />
             </div>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <ThemeToggle />
               <Link
                 href="/sign-in"
@@ -77,7 +77,7 @@ export function Header() {
               </Link>
               <Link
                 href="/sign-up"
-                className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
+                className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-colors duration-200"
               >
                 Kom i gang
               </Link>
@@ -87,7 +87,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isSignedIn && (
-          <nav className="md:hidden flex gap-4 pb-3 overflow-x-auto">
+          <nav className="md:hidden flex gap-4 pb-4 overflow-x-auto">
             <Link
               href="/dashboard"
               className={`text-sm font-medium whitespace-nowrap transition-colors ${

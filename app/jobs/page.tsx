@@ -26,7 +26,7 @@ export default async function JobsPage() {
           </div>
           <Link
             href="/jobs/new"
-            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2"
+            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2"
           >
             <span className="text-xl">+</span>
             Ny Jobb
@@ -45,7 +45,7 @@ export default async function JobsPage() {
               </p>
               <Link
                 href="/jobs/new"
-                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium shadow-sm"
+                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm"
               >
                 Opprett din første jobb
               </Link>

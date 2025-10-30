@@ -25,13 +25,13 @@ export default async function LandingPage() {
             <ThemeToggle />
             <Link
               href="/sign-in"
-              className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors font-medium"
+              className="px-4 py-2 text-muted-foreground hover:text-foreground transition-colors duration-150 font-medium"
             >
               Logg inn
             </Link>
             <Link
               href="/sign-up"
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium shadow-sm"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm"
             >
               Kom i gang
             </Link>
@@ -74,14 +74,14 @@ export default async function LandingPage() {
             <div className="flex gap-4 justify-center flex-wrap mb-12">
               <Link
                 href="/sign-up"
-                className="group px-8 py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                className="group px-8 py-4 bg-primary text-primary-foreground text-lg font-semibold rounded-lg hover:opacity-90 transition-colors duration-200 shadow-lg hover:shadow-xl hover:scale-105"
               >
                 Start gratis nå
                 <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
               <Link
                 href="#features"
-                className="px-8 py-4 border-2 border-border text-foreground text-lg font-medium rounded-lg hover:bg-secondary transition-colors"
+                className="px-8 py-4 border-2 border-border text-foreground text-lg font-medium rounded-lg hover:bg-secondary transition-colors duration-200"
               >
                 Se hvordan det fungerer
               </Link>
@@ -220,14 +220,14 @@ export default async function LandingPage() {
                 <div className="flex gap-4 justify-center flex-wrap">
                   <Link
                     href="/sign-up"
-                    className="group px-8 py-4 bg-white text-[#2563eb] text-lg font-bold rounded-xl hover:scale-105 transition-all shadow-xl hover:shadow-2xl"
+                    className="group px-8 py-4 bg-white text-[#2563eb] text-lg font-bold rounded-xl hover:scale-105 transition-colors duration-200 shadow-xl hover:shadow-2xl"
                   >
                     Start gratis nå
                     <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                   <Link
                     href="/sign-in"
-                    className="px-8 py-4 border-2 border-white/30 text-white text-lg font-semibold rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm"
+                    className="px-8 py-4 border-2 border-white/30 text-white text-lg font-semibold rounded-xl hover:bg-white/10 transition-colors duration-200 backdrop-blur-sm"
                   >
                     Logg inn
                   </Link>

@@ -142,7 +142,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors duration-200"
               title="Tøm søk"
             >
               ✕
@@ -165,20 +165,20 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-sm text-destructive hover:text-destructive/80 transition-colors font-medium px-3 py-1 rounded-lg hover:bg-destructive/10"
+              className="text-sm text-destructive hover:text-destructive/80 transition-colors duration-200 font-medium px-3 py-1 rounded-lg hover:bg-destructive/10"
             >
               ✕ Nullstill alle
             </button>
           )}
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
           {/* Status Filter */}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
               📊 Status
               {statusFilter.length > 0 && (
-                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
                   {statusFilter.length}
                 </span>
               )}
@@ -188,7 +188,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                 <button
                   key={option.value}
                   onClick={() => toggleStatus(option.value)}
-                  className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                  className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                     statusFilter.includes(option.value)
                       ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                       : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -208,7 +208,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setRemoteFilter('all')}
-                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                   remoteFilter === 'all'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -218,7 +218,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               </button>
               <button
                 onClick={() => setRemoteFilter('remote')}
-                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                   remoteFilter === 'remote'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -228,7 +228,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               </button>
               <button
                 onClick={() => setRemoteFilter('onsite')}
-                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                   remoteFilter === 'onsite'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -245,7 +245,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                 📍 Sted
                 {locationFilter.length > 0 && (
-                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
                     {locationFilter.length}
                   </span>
                 )}
@@ -255,7 +255,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                   <button
                     key={location}
                     onClick={() => toggleLocation(location)}
-                    className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                       locationFilter.includes(location)
                         ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                         : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -274,7 +274,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                 🏷️ Tags
                 {selectedTags.length > 0 && (
-                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
                     {selectedTags.length}
                   </span>
                 )}
@@ -284,7 +284,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                   <button
                     key={tag}
                     onClick={() => toggleTag(tag)}
-                    className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
+                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
                       selectedTags.includes(tag)
                         ? 'bg-secondary text-secondary-foreground border-secondary shadow-sm scale-105'
                         : 'bg-background text-foreground border-border hover:border-secondary hover:bg-accent'
@@ -308,12 +308,12 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           </p>
           {hasActiveFilters && (
             <div className="flex items-center gap-2">
-              <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-bold">
+              <span className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-full font-bold">
                 ✓ Filtrert
               </span>
               <button
                 onClick={clearFilters}
-                className="text-xs text-muted hover:text-foreground transition-colors"
+                className="text-xs text-muted hover:text-foreground transition-colors duration-200"
                 title="Nullstill filtre"
               >
                 ✕
@@ -331,7 +331,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               <p className="text-muted mb-6">Ingen jobber matcher filtrene dine. Prøv å justere søket eller fjern noen filtre.</p>
               <button
                 onClick={clearFilters}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all font-medium shadow-sm hover:shadow"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow"
               >
                 🔄 Nullstill alle filtre
               </button>

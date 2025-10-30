@@ -91,7 +91,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                 </div>
 
                 <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
-                    <form onSubmit={handleUpdate} className="space-y-5">
+                    <form onSubmit={handleUpdate} className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-foreground mb-2">
                                 Stillingstittel *
@@ -101,7 +101,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 required
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
@@ -114,7 +114,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.company}
                                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                                 required
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
@@ -128,7 +128,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                     value={formData.location}
                                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                                     placeholder="F.eks. Oslo"
-                                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                                 />
                             </div>
 
@@ -139,7 +139,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+                                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
                                 >
                                     {Object.entries(statusLabels).map(([value, label]) => (
                                         <option key={value} value={value}>{label}</option>
@@ -167,7 +167,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.url}
                                 onChange={(e) => setFormData({ ...formData, url: e.target.value })}
                                 placeholder="https://..."
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
@@ -180,7 +180,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.source}
                                 onChange={(e) => setFormData({ ...formData, source: e.target.value })}
                                 placeholder="F.eks. Finn.no, LinkedIn"
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
@@ -193,7 +193,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.salaryNote}
                                 onChange={(e) => setFormData({ ...formData, salaryNote: e.target.value })}
                                 placeholder="F.eks. 600 000 - 750 000 kr"
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
@@ -206,21 +206,21 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 value={formData.tags}
                                 onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
                                 placeholder="F.eks. React, TypeScript, Senior"
-                                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
                             />
                         </div>
 
                         <div className="flex gap-3 pt-4">
                             <button
                                 type="submit"
-                                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-medium transition-all shadow-sm hover:shadow"
+                                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow"
                             >
                                 Lagre endringer
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsEditing(false)}
-                                className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-all text-foreground"
+                                className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground"
                             >
                                 Avbryt
                             </button>
@@ -245,14 +245,14 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                     <div className="flex gap-2 flex-wrap">
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="px-5 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-all shadow-sm hover:shadow"
+                            className="px-5 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow"
                         >
                             ✏️ Rediger
                         </button>
                         <button
                             onClick={handleDelete}
                             disabled={isDeleting}
-                            className="px-5 py-2.5 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
+                            className="px-5 py-3 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
                         >
                             {isDeleting ? '⏳ Sletter...' : '🗑️ Slett'}
                         </button>
@@ -272,7 +272,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-all ${activeTab === tab.id
+                            className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ${activeTab === tab.id
                                 ? 'border-primary text-primary'
                                 : 'border-transparent text-muted hover:text-foreground hover:border-border'
                                 }`}
@@ -291,11 +291,11 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                             <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
                                 📋 Informasjon
                             </h2>
-                            <dl className="space-y-5">
+                            <dl className="space-y-6">
                                 <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
                                     <dt className="text-sm font-medium text-muted min-w-[100px]">Status</dt>
                                     <dd className="flex-1">
-                                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
+                                        <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
                                             {statusLabels[job.status]}
                                         </span>
                                     </dd>

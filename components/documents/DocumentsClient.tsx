@@ -111,7 +111,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-2xl">
               📄
@@ -125,7 +125,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
           </div>
         </div>
         
-        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-2xl">
               ✉️
@@ -139,7 +139,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
           </div>
         </div>
         
-        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-2xl">
               📎
@@ -159,7 +159,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
         <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
           📤 Last opp nytt dokument
         </h3>
-        <form onSubmit={handleUpload} className="space-y-5">
+        <form onSubmit={handleUpload} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
               📎 Velg fil (PDF, DOCX, PNG, JPEG, WEBP - maks 10MB)
@@ -168,7 +168,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
               type="file"
               accept=".pdf,.docx,.png,.jpg,.jpeg,.webp"
               required
-              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 file:cursor-pointer"
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 file:cursor-pointer"
             />
             <p className="text-xs text-muted mt-2">💡 Tips: Gi filen et beskrivende navn for enkel gjenfinning senere</p>
           </div>
@@ -183,7 +183,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                 value={uploadForm.label}
                 onChange={(e) => setUploadForm({ ...uploadForm, label: e.target.value })}
                 placeholder="F.eks. CV 2025, Søknad Utvikler"
-                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
               />
             </div>
 
@@ -194,7 +194,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
               <select
                 value={uploadForm.type}
                 onChange={(e) => setUploadForm({ ...uploadForm, type: e.target.value })}
-                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
               >
                 <option value="CV">📄 CV</option>
                 <option value="COVER_LETTER">✉️ Søknad</option>
@@ -207,7 +207,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
             <button
               type="submit"
               disabled={uploading}
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
             >
               {uploading ? '⏳ Laster opp...' : '📤 Last opp dokument'}
             </button>
@@ -228,7 +228,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Søk etter navn eller filnavn..."
-                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
               />
             </div>
             
@@ -239,7 +239,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
               >
                 <option value="ALL">Alle typer</option>
                 <option value="CV">📄 CV</option>
@@ -256,7 +256,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
               </p>
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-sm text-primary hover:text-primary/80 font-medium"
+                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors duration-200"
               >
                 Nullstill søk
               </button>
@@ -297,7 +297,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                 </div>
               ) : (
                 filteredDocuments.map((doc) => (
-                <div key={doc._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+                <div key={doc._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md group">
                   <div className="flex flex-col h-full">
                     {/* Icon and Type Badge */}
                     <div className="flex items-start justify-between mb-4">
@@ -344,7 +344,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                       </a>
                       <button
                         onClick={() => handleDelete(doc._id)}
-                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-all"
+                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200"
                       >
                         🗑️
                       </button>

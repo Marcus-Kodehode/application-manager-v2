@@ -32,7 +32,7 @@ export function JobExport({ jobId, jobData }: { jobId: string; jobData: any }) {
     <button
       onClick={handleExport}
       disabled={exporting}
-      className="px-3 py-2 text-sm text-blue-600 hover:text-blue-700 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors disabled:opacity-50 flex items-center gap-2"
+      className="px-3 py-2 text-sm text-blue-600 hover:text-blue-700 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-200 disabled:opacity-50 flex items-center gap-2"
       title="Eksporter full jobb med alle detaljer (events, tasks, contacts, documents)"
     >
       {exporting ? '⏳ Eksporterer...' : '📦 Eksporter jobb'}

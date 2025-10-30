@@ -177,7 +177,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
             <button
               type="submit"
               disabled={submitting || !newContact.name.trim() || !newContact.role.trim()}
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
             >
               {submitting ? '⏳ Lagrer...' : '💾 Legg til kontakt'}
             </button>
@@ -199,7 +199,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
               👥 Kontaktpersoner ({contacts.length})
             </h3>
             {contacts.map((contact) => (
-              <div key={contact._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+              <div key={contact._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md group">
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start gap-3 mb-3">
@@ -248,7 +248,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                   </div>
                   <button
                     onClick={() => handleDelete(contact._id)}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-all px-3 py-1 rounded hover:bg-destructive/10"
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10"
                   >
                     🗑️ Slett
                   </button>

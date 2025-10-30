@@ -68,7 +68,7 @@ export function JobForm() {
             id="title"
             name="title"
             required
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
             placeholder="F.eks. Senior Frontend Developer, Systemutvikler"
           />
         </div>
@@ -82,7 +82,7 @@ export function JobForm() {
             id="company"
             name="company"
             required
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
             placeholder="F.eks. Acme AS, Konsulentselskap Norge"
           />
         </div>
@@ -103,7 +103,7 @@ export function JobForm() {
               type="text"
               id="location"
               name="location"
-              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
               placeholder="F.eks. Oslo, Bergen, Trondheim"
             />
           </div>
@@ -115,7 +115,7 @@ export function JobForm() {
             <select
               id="status"
               name="status"
-              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
             >
               <option value={JobStatus.APPLIED}>✅ Søkt</option>
               <option value={JobStatus.SCREENING}>🔍 Screening</option>
@@ -154,7 +154,7 @@ export function JobForm() {
             type="url"
             id="url"
             name="url"
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
             placeholder="https://www.finn.no/job/..."
           />
           <p className="text-xs text-muted mt-2">💡 Tips: Lim inn lenken til stillingsannonsen for enkel tilgang senere</p>
@@ -167,7 +167,7 @@ export function JobForm() {
           <select
             id="source"
             name="source"
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
           >
             <option value="">Velg kilde...</option>
             <option value="Finn.no">Finn.no</option>
@@ -198,7 +198,7 @@ export function JobForm() {
               type="date"
               id="appliedAt"
               name="appliedAt"
-              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
             />
             <p className="text-xs text-muted mt-1">Når sendte du søknaden?</p>
           </div>
@@ -211,7 +211,7 @@ export function JobForm() {
               type="date"
               id="deadline"
               name="deadline"
-              className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
             />
             <p className="text-xs text-muted mt-1">Når er fristen for å søke?</p>
           </div>
@@ -233,7 +233,7 @@ export function JobForm() {
             id="salaryNote"
             name="salaryNote"
             disabled={salaryNotProvided}
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="F.eks. 700 000 - 800 000 kr, Etter avtale"
           />
         </div>
@@ -267,7 +267,7 @@ export function JobForm() {
             type="text"
             id="tags"
             name="tags"
-            className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
             placeholder="F.eks. React, TypeScript, Remote, Senior"
           />
           <p className="text-xs text-muted mt-2">💡 Tips: Bruk tags for å enkelt finne og filtrere jobber senere</p>
@@ -279,14 +279,14 @@ export function JobForm() {
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
+          className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
         >
           {loading ? '⏳ Lagrer...' : '✅ Opprett Jobb'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-all text-foreground"
+          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground"
         >
           Avbryt
         </button>

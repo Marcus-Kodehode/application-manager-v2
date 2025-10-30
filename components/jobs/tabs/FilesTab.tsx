@@ -155,7 +155,7 @@ export function FilesTab({ jobId }: { jobId: string }) {
             <button
               type="submit"
               disabled={uploading}
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all shadow-sm hover:shadow"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
             >
               {uploading ? '⏳ Laster opp...' : '📤 Last opp'}
             </button>
@@ -177,7 +177,7 @@ export function FilesTab({ jobId }: { jobId: string }) {
               📁 Dine dokumenter ({documents.length})
             </h3>
             {documents.map((doc) => (
-              <div key={doc._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all hover:shadow-md group">
+              <div key={doc._id} className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 hover:shadow-md group">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-4 flex-1 min-w-0">
                     <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center text-3xl flex-shrink-0">
@@ -208,7 +208,7 @@ export function FilesTab({ jobId }: { jobId: string }) {
                     </a>
                     <button
                       onClick={() => handleDelete(doc._id)}
-                      className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-all opacity-0 group-hover:opacity-100"
+                      className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 opacity-0 group-hover:opacity-100"
                     >
                       🗑️
                     </button>

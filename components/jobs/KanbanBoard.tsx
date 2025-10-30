@@ -177,7 +177,7 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
 
       {/* Combined Stats Panel - Right Side */}
       {showStats && <div className="lg:col-span-3">
-        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors space-y-6">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-all duration-200 space-y-6">
           {/* Statistics */}
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
@@ -238,14 +238,14 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
             <div className="space-y-2">
               <Link
                 href="/jobs/new"
-                className="block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all text-center font-medium text-sm shadow-sm hover:shadow"
+                className="block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 text-center font-medium text-sm shadow-sm hover:shadow"
               >
                 ➕ Ny søknad
               </Link>
 
               <Link
                 href="/documents"
-                className="block w-full px-4 py-2.5 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-all text-center font-medium text-sm border border-border"
+                className="block w-full px-4 py-2.5 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors duration-200 text-center font-medium text-sm border border-border"
               >
                 📁 Dokumenter
               </Link>
@@ -298,8 +298,8 @@ function KanbanColumn({
         {jobs.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-5xl mb-3 opacity-30">{emoji}</div>
-            <p className="text-sm text-muted font-medium">Ingen jobber</p>
-            <p className="text-xs text-muted mt-1">Dra en jobb hit</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Ingen jobber</p>
+            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Dra en jobb hit</p>
           </div>
         ) : (
           jobs.map((job) => <DraggableJobCard key={job._id} job={job} />)
@@ -326,7 +326,7 @@ function DraggableJobCard({ job }: { job: Job }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="bg-card rounded-lg hover:shadow-md transition-all border border-border group"
+      className="bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-700 group"
       suppressHydrationWarning
     >
       <div className="flex items-start gap-2 p-3">
@@ -334,7 +334,7 @@ function DraggableJobCard({ job }: { job: Job }) {
         <button
           {...listeners}
           {...attributes}
-          className="mt-0.5 cursor-grab active:cursor-grabbing text-muted hover:text-foreground transition-colors flex-shrink-0 p-1 hover:bg-accent rounded"
+          className="mt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200 flex-shrink-0 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
           title="Dra for å flytte"
           suppressHydrationWarning
         >
