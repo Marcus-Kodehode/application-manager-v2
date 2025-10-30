@@ -21,7 +21,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200">
+          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">J</span>
             </div>
@@ -34,7 +34,7 @@ export function Header() {
               <nav className="hidden md:flex gap-6">
                 <Link
                   href="/dashboard"
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                     isActive('/dashboard')
                       ? 'text-primary'
                       : 'text-muted-foreground hover:text-foreground'
@@ -44,7 +44,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="/jobs"
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                     isActive('/jobs')
                       ? 'text-primary'
                       : 'text-muted-foreground hover:text-foreground'
@@ -54,7 +54,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="/documents"
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                     isActive('/documents')
                       ? 'text-primary'
                       : 'text-muted-foreground hover:text-foreground'
@@ -71,13 +71,13 @@ export function Header() {
               <ThemeToggle />
               <Link
                 href="/sign-in"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1"
               >
                 Logg inn
               </Link>
               <Link
                 href="/sign-up"
-                className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-colors duration-200"
+                className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:opacity-90 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 Kom i gang
               </Link>
@@ -90,7 +90,7 @@ export function Header() {
           <nav className="md:hidden flex gap-4 pb-4 overflow-x-auto">
             <Link
               href="/dashboard"
-              className={`text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                 isActive('/dashboard')
                   ? 'text-primary'
                   : 'text-muted-foreground hover:text-foreground'
@@ -100,7 +100,7 @@ export function Header() {
             </Link>
             <Link
               href="/jobs"
-              className={`text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                 isActive('/jobs')
                   ? 'text-primary'
                   : 'text-muted-foreground hover:text-foreground'
@@ -110,7 +110,7 @@ export function Header() {
             </Link>
             <Link
               href="/documents"
-              className={`text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
                 isActive('/documents')
                   ? 'text-primary'
                   : 'text-muted-foreground hover:text-foreground'

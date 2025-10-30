@@ -29,7 +29,7 @@ export default async function DashboardPage() {
           </div>
           <Link
             href="/jobs/new"
-            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2"
+            className="group px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 shadow-sm hover:shadow-md font-medium inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             <span className="text-xl">+</span>
             Ny Jobb
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
               </p>
               <Link
                 href="/jobs/new"
-                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm"
+                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 Opprett din første jobb
               </Link>
@@ -62,7 +62,7 @@ export default async function DashboardPage() {
                 <h3 className="text-xl font-bold text-foreground">Kanban Board</h3>
                 <Link 
                   href="/jobs" 
-                  className="text-sm text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group"
+                  className="text-sm text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   Se alle
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -122,7 +122,7 @@ export default async function DashboardPage() {
                           {task.jobId && (
                             <Link
                               href={`/jobs/${task.jobId}`}
-                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium"
+                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                             >
                               Se jobb
                               <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -144,7 +144,7 @@ export default async function DashboardPage() {
                   </h3>
                   <Link 
                     href="/documents" 
-                    className="text-xs text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group"
+                    className="text-xs text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center gap-1 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                   >
                     Se alle
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -180,7 +180,7 @@ export default async function DashboardPage() {
                               href={doc.blobUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium"
+                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                             >
                               <span>👁️</span>
                               Åpne

@@ -88,7 +88,7 @@ export function NotesTab({ jobId }: { jobId: string }) {
             <button
               type="submit"
               disabled={submitting || !newNote.trim()}
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               {submitting ? '⏳ Lagrer...' : '💾 Lagre notat'}
             </button>
@@ -126,7 +126,7 @@ export function NotesTab({ jobId }: { jobId: string }) {
                   </div>
                   <button
                     onClick={() => handleDelete(note._id)}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10"
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100"
                   >
                     🗑️ Slett
                   </button>

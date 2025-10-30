@@ -142,7 +142,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors duration-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
               title="Tøm søk"
             >
               ✕
@@ -165,7 +165,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-sm text-destructive hover:text-destructive/80 transition-colors duration-200 font-medium px-3 py-1 rounded-lg hover:bg-destructive/10"
+              className="text-sm text-destructive hover:text-destructive/80 transition-colors duration-200 font-medium px-3 py-1 rounded-lg hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
             >
               ✕ Nullstill alle
             </button>
@@ -188,7 +188,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                 <button
                   key={option.value}
                   onClick={() => toggleStatus(option.value)}
-                  className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                  className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     statusFilter.includes(option.value)
                       ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                       : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -208,7 +208,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setRemoteFilter('all')}
-                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                   remoteFilter === 'all'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -218,7 +218,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               </button>
               <button
                 onClick={() => setRemoteFilter('remote')}
-                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                   remoteFilter === 'remote'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -228,7 +228,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               </button>
               <button
                 onClick={() => setRemoteFilter('onsite')}
-                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                   remoteFilter === 'onsite'
                     ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                     : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -255,7 +255,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                   <button
                     key={location}
                     onClick={() => toggleLocation(location)}
-                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       locationFilter.includes(location)
                         ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
                         : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
@@ -284,7 +284,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
                   <button
                     key={tag}
                     onClick={() => toggleTag(tag)}
-                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium ${
+                    className={`px-3 py-2 text-sm rounded-lg border transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       selectedTags.includes(tag)
                         ? 'bg-secondary text-secondary-foreground border-secondary shadow-sm scale-105'
                         : 'bg-background text-foreground border-border hover:border-secondary hover:bg-accent'
@@ -313,7 +313,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               </span>
               <button
                 onClick={clearFilters}
-                className="text-xs text-muted hover:text-foreground transition-colors duration-200"
+                className="text-xs text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
                 title="Nullstill filtre"
               >
                 ✕
@@ -331,7 +331,7 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               <p className="text-muted mb-6">Ingen jobber matcher filtrene dine. Prøv å justere søket eller fjern noen filtre.</p>
               <button
                 onClick={clearFilters}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 🔄 Nullstill alle filtre
               </button>

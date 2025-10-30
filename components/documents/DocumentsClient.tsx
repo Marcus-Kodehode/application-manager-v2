@@ -207,7 +207,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
             <button
               type="submit"
               disabled={uploading}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               {uploading ? '⏳ Laster opp...' : '📤 Last opp dokument'}
             </button>
@@ -256,7 +256,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
               </p>
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors duration-200"
+                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
               >
                 Nullstill søk
               </button>
@@ -317,7 +317,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                       {doc.jobId && (
                         <Link 
                           href={`/jobs/${doc.jobId}`}
-                          className="text-xs text-primary hover:text-primary/80 font-medium inline-flex items-center gap-1 transition-colors mb-2"
+                          className="text-xs text-primary hover:text-primary/80 font-medium inline-flex items-center gap-1 transition-colors mb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                         >
                           🔗 Koblet til jobb →
                         </Link>
@@ -338,13 +338,13 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                         href={doc.blobUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 px-4 py-2 text-sm text-primary hover:text-primary/80 border border-primary rounded-lg hover:bg-primary/10 font-medium transition-all text-center"
+                        className="flex-1 px-4 py-2 text-sm text-primary hover:text-primary/80 border border-primary rounded-lg hover:bg-primary/10 font-medium transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                       >
                         👁️ Åpne
                       </a>
                       <button
                         onClick={() => handleDelete(doc._id)}
-                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200"
+                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
                       >
                         🗑️
                       </button>

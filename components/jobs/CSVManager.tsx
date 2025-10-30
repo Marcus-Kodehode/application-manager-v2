@@ -101,7 +101,7 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
           <button
             onClick={handleExport}
             disabled={jobs.length === 0 || exporting}
-            className="w-full px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-sm font-medium shadow-sm hover:shadow"
+            className="w-full px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-sm font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             {exporting ? '⏳ Eksporterer...' : `📦 Last ned backup (${jobs.length} jobber)`}
           </button>
@@ -210,7 +210,7 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
         <div className="border border-border rounded-lg overflow-hidden transition-colors">
           <button
             onClick={() => toggleTab('what')}
-            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left"
+            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <span className="text-sm font-medium text-foreground flex items-center gap-2">
               ℹ️ Hva er dette?
@@ -250,7 +250,7 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
         <div className="border border-border rounded-lg overflow-hidden transition-colors">
           <button
             onClick={() => toggleTab('excel')}
-            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left"
+            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <span className="text-sm font-medium text-foreground flex items-center gap-2">
               📊 Hvordan lage Excel-arket?
@@ -310,7 +310,7 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
         <div className="border border-border rounded-lg overflow-hidden transition-colors">
           <button
             onClick={() => toggleTab('format')}
-            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left"
+            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <span className="text-sm font-medium text-foreground flex items-center gap-2">
               📋 Kolonneformat og regler
@@ -340,7 +340,7 @@ export function CSVManager({ jobs }: { jobs: any[] }) {
         <div className="border border-border rounded-lg overflow-hidden transition-colors">
           <button
             onClick={() => toggleTab('tips')}
-            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left"
+            className="w-full px-4 py-3 bg-accent/30 hover:bg-accent/50 transition-colors duration-200 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <span className="text-sm font-medium text-foreground flex items-center gap-2">
               💡 Tips og triks

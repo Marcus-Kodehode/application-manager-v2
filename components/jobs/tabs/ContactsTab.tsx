@@ -140,7 +140,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                 type="checkbox"
                 checked={newContact.noEmail}
                 onChange={(e) => setNewContact({ ...newContact, noEmail: e.target.checked, email: '' })}
-                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2"
               />
               <label className="text-sm text-muted">
                 Ikke oppgitt i utlysningen
@@ -165,7 +165,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                 type="checkbox"
                 checked={newContact.noPhone}
                 onChange={(e) => setNewContact({ ...newContact, noPhone: e.target.checked, phone: '' })}
-                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2"
               />
               <label className="text-sm text-muted">
                 Ikke oppgitt i utlysningen
@@ -177,7 +177,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
             <button
               type="submit"
               disabled={submitting || !newContact.name.trim() || !newContact.role.trim()}
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               {submitting ? '⏳ Lagrer...' : '💾 Legg til kontakt'}
             </button>
@@ -217,7 +217,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                           <span className="text-sm">📧</span>
                           <a 
                             href={`mailto:${contact.email}`} 
-                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                           >
                             {contact.email}
                           </a>
@@ -233,7 +233,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                           <span className="text-sm">📞</span>
                           <a 
                             href={`tel:${contact.phone}`} 
-                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                            className="text-sm text-primary hover:text-primary/80 font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                           >
                             {contact.phone}
                           </a>
@@ -248,7 +248,7 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                   </div>
                   <button
                     onClick={() => handleDelete(contact._id)}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10"
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100"
                   >
                     🗑️ Slett
                   </button>

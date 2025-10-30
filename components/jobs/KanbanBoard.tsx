@@ -238,14 +238,14 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
             <div className="space-y-2">
               <Link
                 href="/jobs/new"
-                className="block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 text-center font-medium text-sm shadow-sm hover:shadow"
+                className="block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 text-center font-medium text-sm shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 ➕ Ny søknad
               </Link>
 
               <Link
                 href="/documents"
-                className="block w-full px-4 py-2.5 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors duration-200 text-center font-medium text-sm border border-border"
+                className="block w-full px-4 py-2.5 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors duration-200 text-center font-medium text-sm border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 📁 Dokumenter
               </Link>
@@ -334,7 +334,7 @@ function DraggableJobCard({ job }: { job: Job }) {
         <button
           {...listeners}
           {...attributes}
-          className="mt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200 flex-shrink-0 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+          className="mt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200 flex-shrink-0 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           title="Dra for å flytte"
           suppressHydrationWarning
         >
@@ -346,7 +346,7 @@ function DraggableJobCard({ job }: { job: Job }) {
         {/* Job Content - Clickable */}
         <Link
           href={`/jobs/${job._id}`}
-          className="flex-1 min-w-0 group/link"
+          className="flex-1 min-w-0 group/link focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
         >
           <h3 className="font-semibold text-gray-900 dark:text-gray-100 group-hover/link:text-primary truncate transition-colors text-sm">
             {job.title}

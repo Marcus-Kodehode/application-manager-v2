@@ -30,7 +30,7 @@ export function Footer() {
               <li>
                 <Link 
                   href="/dashboard" 
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">Oversikt</span>
@@ -39,7 +39,7 @@ export function Footer() {
               <li>
                 <Link 
                   href="/jobs" 
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">Jobber</span>
@@ -48,7 +48,7 @@ export function Footer() {
               <li>
                 <Link 
                   href="/documents" 
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">Dokumenter</span>
@@ -68,7 +68,7 @@ export function Footer() {
                   href="https://github.com/Marcus-Kodehode" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">GitHub</span>
@@ -77,7 +77,7 @@ export function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">Dokumentasjon</span>
@@ -86,7 +86,7 @@ export function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 inline-flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
                 >
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                   <span className="ml-2">Support</span>
@@ -105,19 +105,19 @@ export function Footer() {
             <div className="flex items-center gap-6">
               <a 
                 href="#" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
               >
                 Personvern
               </a>
               <a 
                 href="#" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
               >
                 Vilkår
               </a>
               <a 
                 href="#" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1"
               >
                 Cookies
               </a>

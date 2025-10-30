@@ -84,7 +84,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
         return (
             <div>
                 <div className="mb-6">
-                    <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors">
+                    <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
                         ← Tilbake til jobber
                     </Link>
                     <h1 className="text-3xl font-bold text-foreground mt-4">Rediger Jobb</h1>
@@ -153,7 +153,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                 type="checkbox"
                                 checked={formData.remote}
                                 onChange={(e) => setFormData({ ...formData, remote: e.target.checked })}
-                                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+                                className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2"
                             />
                             <label className="text-sm font-medium text-foreground">Fjernarbeid mulig</label>
                         </div>
@@ -213,14 +213,14 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                         <div className="flex gap-3 pt-4">
                             <button
                                 type="submit"
-                                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow"
+                                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                             >
                                 Lagre endringer
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setIsEditing(false)}
-                                className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground"
+                                className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                             >
                                 Avbryt
                             </button>
@@ -236,7 +236,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
             <div className="mb-8">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
                     <div className="flex-1">
-                        <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors inline-flex items-center gap-1">
+                        <Link href="/jobs" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors inline-flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
                             ← Tilbake til jobber
                         </Link>
                         <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">{job.title}</h1>
@@ -245,14 +245,14 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                     <div className="flex gap-2 flex-wrap">
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="px-5 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow"
+                            className="px-5 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         >
                             ✏️ Rediger
                         </button>
                         <button
                             onClick={handleDelete}
                             disabled={isDeleting}
-                            className="px-5 py-3 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
+                            className="px-5 py-3 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
                         >
                             {isDeleting ? '⏳ Sletter...' : '🗑️ Slett'}
                         </button>
@@ -272,7 +272,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 ${activeTab === tab.id
+                            className={`py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-t ${activeTab === tab.id
                                 ? 'border-primary text-primary'
                                 : 'border-transparent text-muted hover:text-foreground hover:border-border'
                                 }`}
@@ -332,7 +332,7 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                                                 href={job.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-sm text-primary hover:text-primary/80 font-medium inline-flex items-center gap-1 transition-colors"
+                                                className="text-sm text-primary hover:text-primary/80 font-medium inline-flex items-center gap-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
                                             >
                                                 Åpne stillingsannonse →
                                             </a>

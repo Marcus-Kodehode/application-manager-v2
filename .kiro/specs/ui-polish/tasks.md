@@ -178,23 +178,36 @@ Dette er en systematisk plan for å polere hele applikasjonen. Vi går gjennom h
     - Test smooth transition
     - _Requirements: 3.3_
 
-- [ ] 6. Legg til focus states for accessibility
-  - [ ] 6.1 Add focus rings til alle buttons
+- [x] 6. Legg til focus states for accessibility
+
+
+
+
+
+
+  - [x] 6.1 Add focus rings til alle buttons
+
     - Legg til `focus-visible:ring-2 focus-visible:ring-primary`
     - Test keyboard navigation
     - _Requirements: 4.1, 4.3_
   
-  - [ ] 6.2 Add focus states til alle input felter
+
+  - [x] 6.2 Add focus states til alle input felter
+
     - Legg til `focus:border-primary focus:ring-2`
     - Test keyboard navigation
     - _Requirements: 4.1, 4.4_
   
-  - [ ] 6.3 Add focus states til alle lenker
+
+  - [x] 6.3 Add focus states til alle lenker
+
     - Legg til focus ring
     - Test keyboard navigation
     - _Requirements: 4.1_
   
-  - [ ] 6.4 Verify focus order er logisk
+
+  - [x] 6.4 Verify focus order er logisk
+
     - Test tab-order på alle sider
     - Fix eventuelle problemer
     - _Requirements: 4.2_

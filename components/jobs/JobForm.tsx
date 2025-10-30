@@ -132,7 +132,7 @@ export function JobForm() {
             type="checkbox"
             id="remote"
             name="remote"
-            className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+            className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2"
           />
           <label htmlFor="remote" className="text-sm font-medium text-foreground">
             🏠 Fjernarbeid mulig
@@ -244,7 +244,7 @@ export function JobForm() {
             id="salaryNotProvided"
             checked={salaryNotProvided}
             onChange={(e) => setSalaryNotProvided(e.target.checked)}
-            className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary"
+            className="h-4 w-4 text-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2"
           />
           <label htmlFor="salaryNotProvided" className="text-sm font-medium text-foreground">
             Lønn ikke oppgitt i annonsen
@@ -279,14 +279,14 @@ export function JobForm() {
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow"
+          className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           {loading ? '⏳ Lagrer...' : '✅ Opprett Jobb'}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground"
+          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           Avbryt
         </button>
