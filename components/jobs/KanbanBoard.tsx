@@ -42,42 +42,42 @@ const statusColors: Record<string, { bg: string; border: string; text: string; b
   [JobStatus.APPLIED]: {
     bg: 'bg-blue-100/80 dark:bg-blue-950/30',
     border: 'border-blue-300 dark:border-blue-800',
-    text: 'text-blue-900 dark:text-blue-300',
+    text: 'text-blue-800 dark:text-blue-200',
     badge: 'bg-blue-200 dark:bg-blue-900/60 text-blue-900 dark:text-blue-200 border border-blue-300 dark:border-blue-700',
     hover: 'hover:bg-blue-200/80 dark:hover:bg-blue-900/40',
   },
   [JobStatus.SCREENING]: {
     bg: 'bg-amber-100/80 dark:bg-amber-950/30',
     border: 'border-amber-300 dark:border-amber-800',
-    text: 'text-amber-900 dark:text-amber-300',
+    text: 'text-amber-800 dark:text-amber-200',
     badge: 'bg-amber-200 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-700',
     hover: 'hover:bg-amber-200/80 dark:hover:bg-amber-900/40',
   },
   [JobStatus.INTERVIEW]: {
     bg: 'bg-purple-100/80 dark:bg-purple-950/30',
     border: 'border-purple-300 dark:border-purple-800',
-    text: 'text-purple-900 dark:text-purple-300',
+    text: 'text-purple-800 dark:text-purple-200',
     badge: 'bg-purple-200 dark:bg-purple-900/60 text-purple-900 dark:text-purple-200 border border-purple-300 dark:border-purple-700',
     hover: 'hover:bg-purple-200/80 dark:hover:bg-purple-900/40',
   },
   [JobStatus.OFFER]: {
     bg: 'bg-emerald-100/80 dark:bg-emerald-950/30',
     border: 'border-emerald-300 dark:border-emerald-800',
-    text: 'text-emerald-900 dark:text-emerald-300',
+    text: 'text-emerald-800 dark:text-emerald-200',
     badge: 'bg-emerald-200 dark:bg-emerald-900/60 text-emerald-900 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700',
     hover: 'hover:bg-emerald-200/80 dark:hover:bg-emerald-900/40',
   },
   [JobStatus.REJECTED]: {
     bg: 'bg-rose-100/80 dark:bg-rose-950/30',
     border: 'border-rose-300 dark:border-rose-800',
-    text: 'text-rose-900 dark:text-rose-300',
+    text: 'text-rose-800 dark:text-rose-200',
     badge: 'bg-rose-200 dark:bg-rose-900/60 text-rose-900 dark:text-rose-200 border border-rose-300 dark:border-rose-700',
     hover: 'hover:bg-rose-200/80 dark:hover:bg-rose-900/40',
   },
   [JobStatus.ON_HOLD]: {
     bg: 'bg-slate-100/80 dark:bg-slate-950/30',
     border: 'border-slate-300 dark:border-slate-800',
-    text: 'text-slate-900 dark:text-slate-300',
+    text: 'text-slate-800 dark:text-slate-200',
     badge: 'bg-slate-200 dark:bg-slate-900/60 text-slate-900 dark:text-slate-200 border border-slate-300 dark:border-slate-700',
     hover: 'hover:bg-slate-200/80 dark:hover:bg-slate-900/40',
   },
@@ -128,11 +128,11 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
 
   // Calculate statistics
   const totalJobs = jobs.length;
-  const activeJobs = jobs.filter(j => 
+  const activeJobs = jobs.filter(j =>
     j.status !== JobStatus.REJECTED && j.status !== JobStatus.ON_HOLD
   ).length;
-  const successRate = totalJobs > 0 
-    ? Math.round((jobsByStatus[JobStatus.OFFER].length / totalJobs) * 100) 
+  const successRate = totalJobs > 0
+    ? Math.round((jobsByStatus[JobStatus.OFFER].length / totalJobs) * 100)
     : 0;
 
   return (
@@ -183,18 +183,18 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               📊 Statistikk
             </h3>
-            
+
             <div className="grid grid-cols-1 gap-3">
               <div className="p-3 bg-accent/50 rounded-lg">
                 <p className="text-xs text-muted mb-1">Totalt søknader</p>
                 <p className="text-2xl font-bold text-foreground">{totalJobs}</p>
               </div>
-              
+
               <div className="p-3 bg-accent/50 rounded-lg">
                 <p className="text-xs text-muted mb-1">Aktive søknader</p>
                 <p className="text-2xl font-bold text-primary">{activeJobs}</p>
               </div>
-              
+
               <div className="p-3 bg-accent/50 rounded-lg">
                 <p className="text-xs text-muted mb-1">Tilbudsrate</p>
                 <p className="text-2xl font-bold text-green-600 dark:text-green-400">{successRate}%</p>
@@ -210,7 +210,7 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               📈 Oversikt
             </h3>
-            
+
             <div className="space-y-2">
               {Object.entries(jobsByStatus).map(([status, statusJobs]) => (
                 <div key={status} className="flex items-center justify-between py-1">
@@ -234,7 +234,7 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
             <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               ⚡ Hurtigvalg
             </h3>
-            
+
             <div className="space-y-2">
               <Link
                 href="/jobs/new"
@@ -242,7 +242,7 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
               >
                 ➕ Ny søknad
               </Link>
-              
+
               <Link
                 href="/documents"
                 className="block w-full px-4 py-2.5 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-all text-center font-medium text-sm border border-border"
@@ -257,29 +257,28 @@ export function KanbanBoard({ jobs, showStats = true }: KanbanBoardProps) {
   );
 }
 
-function KanbanColumn({ 
-  status, 
-  label, 
+function KanbanColumn({
+  status,
+  label,
   emoji,
-  jobs, 
-  colors 
-}: { 
-  status: string; 
-  label: string; 
+  jobs,
+  colors
+}: {
+  status: string;
+  label: string;
   emoji: string;
-  jobs: Job[]; 
+  jobs: Job[];
   colors: { bg: string; border: string; text: string; badge: string; hover: string };
 }) {
   const { useDroppable } = require('@dnd-kit/core');
-  
+
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: status });
 
   return (
     <div
       ref={setDroppableRef}
-      className={`rounded-xl border-2 p-4 min-h-[600px] transition-all ${colors.bg} ${colors.border} ${
-        isOver ? 'ring-2 ring-primary shadow-lg scale-[1.01]' : ''
-      }`}
+      className={`rounded-xl border-2 p-4 min-h-[600px] transition-all ${colors.bg} ${colors.border} ${isOver ? 'ring-2 ring-primary shadow-lg scale-[1.01]' : ''
+        }`}
     >
       {/* Column Header */}
       <div className="flex items-center justify-between mb-4 pb-3 border-b-2 border-current/20">
@@ -318,9 +317,9 @@ function DraggableJobCard({ job }: { job: Job }) {
 
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        opacity: isDragging ? 0.5 : 1,
-      }
+      transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      opacity: isDragging ? 0.5 : 1,
+    }
     : undefined;
 
   return (
@@ -343,20 +342,20 @@ function DraggableJobCard({ job }: { job: Job }) {
             <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z"></path>
           </svg>
         </button>
-        
+
         {/* Job Content - Clickable */}
-        <Link 
-          href={`/jobs/${job._id}`} 
+        <Link
+          href={`/jobs/${job._id}`}
           className="flex-1 min-w-0 group/link"
         >
-          <h3 className="font-semibold text-foreground group-hover/link:text-primary truncate transition-colors text-sm">
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 group-hover/link:text-primary truncate transition-colors text-sm">
             {job.title}
           </h3>
-          <p className="text-xs text-muted truncate mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 truncate mt-1">
             {job.company}
           </p>
           {job.location && (
-            <p className="text-xs text-muted mt-0.5 truncate">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 truncate">
               📍 {job.location}
             </p>
           )}
