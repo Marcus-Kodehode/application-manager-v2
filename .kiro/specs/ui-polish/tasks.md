@@ -455,28 +455,43 @@ Dette er en systematisk plan for å polere hele applikasjonen. Vi går gjennom h
     - Mål: Score > 95
     - _Requirements: 4.1_
 
-- [ ] 13. Final polish og testing
-  - [ ] 13.1 Cross-browser testing
+- [x] 13. Final polish og testing
+
+
+
+
+
+  - [x] 13.1 Cross-browser testing
+
+
     - Test i Chrome, Firefox, Safari, Edge
     - Fix eventuelle browser-spesifikke issues
     - _Requirements: 2.1, 3.1, 4.1_
   
-  - [ ] 13.2 Mobile testing
+  - [x] 13.2 Mobile testing
+
+
     - Test på mobile devices
     - Fix eventuelle mobile-spesifikke issues
     - _Requirements: 2.1, 3.1, 4.1_
   
-  - [ ] 13.3 Performance testing
+  - [x] 13.3 Performance testing
+
+
     - Sjekk at transitions ikke påvirker performance
     - Optimaliser hvis nødvendig
     - _Requirements: 2.1_
   
-  - [ ] 13.4 User acceptance testing
+  - [x] 13.4 User acceptance testing
+
+
     - Få feedback fra brukere
     - Fix eventuelle issues
     - _Requirements: 10.5_
   
-  - [ ] 13.5 Final review
+  - [x] 13.5 Final review
+
+
     - Gå gjennom alle requirements
     - Verifiser at alt er implementert
     - Oppdater dokumentasjon
