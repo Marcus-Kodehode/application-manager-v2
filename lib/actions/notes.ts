@@ -40,7 +40,7 @@ export async function deleteNote(noteId: string) {
   const note = await Note.findOneAndDelete({ _id: noteId, userId });
 
   if (!note) {
-    throw new Error('Note not found');
+    throw new Error('Notat ikke funnet');
   }
 
   revalidatePath(`/jobs/${note.jobId.toString()}`);

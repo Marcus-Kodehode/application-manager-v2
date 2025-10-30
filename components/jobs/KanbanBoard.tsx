@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, closestCorners } from '@dnd-kit/core';
 import { moveJobStatus } from '@/lib/actions/jobs';
 import { JobStatus } from '@/lib/models';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 interface Job {
   _id: string;
@@ -331,17 +332,19 @@ function DraggableJobCard({ job }: { job: Job }) {
     >
       <div className="flex items-start gap-2 p-3">
         {/* Drag Handle */}
-        <button
-          {...listeners}
-          {...attributes}
-          className="mt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200 flex-shrink-0 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          title="Dra for å flytte"
-          suppressHydrationWarning
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z"></path>
-          </svg>
-        </button>
+        <Tooltip content="Dra for å flytte jobb til annen status">
+          <button
+            {...listeners}
+            {...attributes}
+            className="mt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200 flex-shrink-0 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            aria-label="Dra for å flytte jobb"
+            suppressHydrationWarning
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z"></path>
+            </svg>
+          </button>
+        </Tooltip>
 
         {/* Job Content - Clickable */}
         <Link

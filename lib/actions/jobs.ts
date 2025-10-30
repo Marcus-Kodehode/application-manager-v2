@@ -34,7 +34,7 @@ export async function createJob(formData: unknown) {
     return { success: true, jobId: job._id.toString() };
   } catch (error: any) {
     console.error('Error creating job:', error);
-    throw new Error(error.message || 'Failed to create job');
+    throw new Error(error.message || 'Kunne ikke opprette jobb');
   }
 }
 
@@ -53,7 +53,7 @@ export async function updateJob(jobId: string, formData: unknown) {
   );
 
   if (!job) {
-    throw new Error('Job not found');
+    throw new Error('Jobb ikke funnet');
   }
 
   revalidatePath('/');
@@ -73,7 +73,7 @@ export async function deleteJob(jobId: string) {
   const job = await Job.findOneAndDelete({ _id: jobId, userId });
 
   if (!job) {
-    throw new Error('Job not found');
+    throw new Error('Jobb ikke funnet');
   }
 
   revalidatePath('/');
@@ -93,7 +93,7 @@ export async function moveJobStatus(jobId: string, newStatus: string) {
   const job = await Job.findOne({ _id: jobId, userId });
 
   if (!job) {
-    throw new Error('Job not found');
+    throw new Error('Jobb ikke funnet');
   }
 
   const oldStatus = job.status;

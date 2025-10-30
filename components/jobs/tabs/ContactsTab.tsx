@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createContact, deleteContact, getContactsByJob } from '@/lib/actions/contacts';
 import { Spinner } from '@/components/ui/Spinner';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function ContactsTab({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -254,14 +255,17 @@ export function ContactsTab({ jobId }: { jobId: string }) {
                       )}
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleDelete(contact._id)}
-                    disabled={deletingId === contact._id}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
-                  >
-                    {deletingId === contact._id && <Spinner size="sm" />}
-                    {deletingId === contact._id ? 'Sletter...' : '🗑️ Slett'}
-                  </button>
+                  <Tooltip content="Slett denne kontakten permanent">
+                    <button
+                      onClick={() => handleDelete(contact._id)}
+                      disabled={deletingId === contact._id}
+                      className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
+                      aria-label="Slett kontakt"
+                    >
+                      {deletingId === contact._id && <Spinner size="sm" />}
+                      {deletingId === contact._id ? 'Sletter...' : '🗑️ Slett'}
+                    </button>
+                  </Tooltip>
                 </div>
               </div>
             ))}

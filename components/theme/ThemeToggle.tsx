@@ -2,6 +2,7 @@
 
 import { useTheme } from './ThemeProvider';
 import { useEffect, useState } from 'react';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -24,11 +25,12 @@ function ThemeToggleInner() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="relative w-14 h-7 rounded-full bg-stone-200 dark:bg-stone-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-stone-950"
-      aria-label="Toggle theme"
-    >
+    <Tooltip content={theme === 'dark' ? 'Bytt til lyst tema' : 'Bytt til mørkt tema'}>
+      <button
+        onClick={toggleTheme}
+        className="relative w-14 h-7 rounded-full bg-stone-200 dark:bg-stone-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-stone-950"
+        aria-label={theme === 'dark' ? 'Bytt til lyst tema' : 'Bytt til mørkt tema'}
+      >
       {/* Track */}
       <div className="absolute inset-0 rounded-full" />
       
@@ -64,6 +66,7 @@ function ThemeToggleInner() {
           <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
         </svg>
       </div>
-    </button>
+      </button>
+    </Tooltip>
   );
 }

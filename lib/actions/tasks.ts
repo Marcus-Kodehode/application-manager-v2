@@ -51,7 +51,7 @@ export async function updateTask(taskId: string, formData: unknown) {
   );
 
   if (!task) {
-    throw new Error('Task not found');
+    throw new Error('Oppgave ikke funnet');
   }
 
   revalidatePath('/');
@@ -71,7 +71,7 @@ export async function toggleTask(taskId: string) {
   const task = await Task.findOne({ _id: taskId, userId });
 
   if (!task) {
-    throw new Error('Task not found');
+    throw new Error('Oppgave ikke funnet');
   }
 
   task.done = !task.done;
@@ -103,7 +103,7 @@ export async function deleteTask(taskId: string) {
   const task = await Task.findOneAndDelete({ _id: taskId, userId });
 
   if (!task) {
-    throw new Error('Task not found');
+    throw new Error('Oppgave ikke funnet');
   }
 
   revalidatePath('/');

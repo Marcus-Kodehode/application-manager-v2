@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { LoadingButton } from '@/components/ui/LoadingButton';
 import { Spinner } from '@/components/ui/Spinner';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 interface Document {
   _id: string;
@@ -24,6 +25,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
   const [documents, setDocuments] = useState<Document[]>(initialDocuments);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('ALL');
   const [uploadForm, setUploadForm] = useState({
@@ -31,6 +33,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
     type: 'OTHER',
   });
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<{ id: string; message: string } | null>(null);
 
   // Filter and search documents
   const filteredDocuments = documents.filter(doc => {
@@ -58,11 +61,12 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
     const fileInput = formElement.querySelector('input[type="file"]') as HTMLInputElement;
     
     if (!fileInput.files || fileInput.files.length === 0) {
-      alert('Velg en fil');
+      setUploadError('Velg en fil');
       return;
     }
 
     setUploading(true);
+    setUploadError('');
     try {
       const formData = new FormData();
       formData.append('file', fileInput.files[0]);
@@ -76,7 +80,8 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
       await loadDocuments();
       router.refresh();
     } catch (error: any) {
-      alert(error.message || 'Kunne ikke laste opp fil');
+      const errorMessage = error.message || 'Kunne ikke laste opp fil';
+      setUploadError(errorMessage);
     } finally {
       setUploading(false);
     }
@@ -86,12 +91,14 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
     if (!confirm('Er du sikker på at du vil slette dette dokumentet?')) return;
 
     setDeletingId(documentId);
+    setDeleteError(null);
     try {
       await deleteDocument(documentId);
       await loadDocuments();
       router.refresh();
     } catch (error: any) {
-      alert(error.message || 'Kunne ikke slette dokument');
+      const errorMessage = error.message || 'Kunne ikke slette dokument';
+      setDeleteError({ id: documentId, message: errorMessage });
     } finally {
       setDeletingId(null);
     }
@@ -166,6 +173,40 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
         <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
           📤 Last opp nytt dokument
         </h3>
+        
+        {uploadError && (
+          <div className="mb-6 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">❌</span>
+              <div className="flex-1">
+                <h4 className="font-semibold text-red-900 dark:text-red-200 mb-1">
+                  Opplasting feilet
+                </h4>
+                <p className="text-sm text-red-700 dark:text-red-300 mb-2">
+                  {uploadError}
+                </p>
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  💡 Tips: {
+                    uploadError.includes('stor') 
+                      ? 'Prøv å komprimere filen eller velg en mindre fil (maks 10MB).'
+                      : uploadError.includes('filtype') || uploadError.includes('Ugyldig')
+                      ? 'Kun PDF, DOCX, PNG, JPEG og WEBP filer er tillatt.'
+                      : uploadError.includes('fil')
+                      ? 'Velg en gyldig fil og prøv igjen.'
+                      : 'Sjekk internettforbindelsen din og prøv igjen.'
+                  }
+                </p>
+                <button
+                  onClick={() => setUploadError('')}
+                  className="mt-3 text-sm text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-2 py-1"
+                >
+                  Lukk
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <form onSubmit={handleUpload} className="space-y-6">
           <fieldset disabled={uploading} className="space-y-6">
             <div>
@@ -345,24 +386,57 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                       </p>
                     </div>
 
+                    {/* Error Message */}
+                    {deleteError && deleteError.id === doc._id && (
+                      <div className="mb-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">⚠️</span>
+                          <div className="flex-1">
+                            <p className="text-sm text-red-700 dark:text-red-300 mb-2">
+                              {deleteError.message}
+                            </p>
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => handleDelete(doc._id)}
+                                className="text-xs text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-2 py-1"
+                              >
+                                🔄 Prøv igjen
+                              </button>
+                              <button
+                                onClick={() => setDeleteError(null)}
+                                className="text-xs text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-2 py-1"
+                              >
+                                Lukk
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Actions */}
                     <div className="flex gap-2 pt-4 border-t border-border">
-                      <a
-                        href={doc.blobUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 px-4 py-2 text-sm text-primary hover:text-primary/80 border border-primary rounded-lg hover:bg-primary/10 font-medium transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                      >
-                        👁️ Åpne
-                      </a>
-                      <button
-                        onClick={() => handleDelete(doc._id)}
-                        disabled={deletingId === doc._id}
-                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
-                      >
-                        {deletingId === doc._id && <Spinner size="sm" />}
-                        {deletingId === doc._id ? '...' : '🗑️'}
-                      </button>
+                      <Tooltip content="Åpne dokument i ny fane">
+                        <a
+                          href={doc.blobUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 px-4 py-2 text-sm text-primary hover:text-primary/80 border border-primary rounded-lg hover:bg-primary/10 font-medium transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        >
+                          👁️ Åpne
+                        </a>
+                      </Tooltip>
+                      <Tooltip content="Slett dokument permanent">
+                        <button
+                          onClick={() => handleDelete(doc._id)}
+                          disabled={deletingId === doc._id}
+                          className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
+                          aria-label="Slett dokument"
+                        >
+                          {deletingId === doc._id && <Spinner size="sm" />}
+                          {deletingId === doc._id ? '...' : '🗑️'}
+                        </button>
+                      </Tooltip>
                     </div>
                   </div>
                 </div>

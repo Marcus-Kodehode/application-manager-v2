@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createNote, deleteNote, getNotesByJob } from '@/lib/actions/notes';
 import { Spinner } from '@/components/ui/Spinner';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function NotesTab({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -132,14 +133,17 @@ export function NotesTab({ jobId }: { jobId: string }) {
                       })}
                     </time>
                   </div>
-                  <button
-                    onClick={() => handleDelete(note._id)}
-                    disabled={deletingId === note._id}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
-                  >
-                    {deletingId === note._id && <Spinner size="sm" />}
-                    {deletingId === note._id ? 'Sletter...' : '🗑️ Slett'}
-                  </button>
+                  <Tooltip content="Slett dette notatet permanent">
+                    <button
+                      onClick={() => handleDelete(note._id)}
+                      disabled={deletingId === note._id}
+                      className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
+                      aria-label="Slett notat"
+                    >
+                      {deletingId === note._id && <Spinner size="sm" />}
+                      {deletingId === note._id ? 'Sletter...' : '🗑️ Slett'}
+                    </button>
+                  </Tooltip>
                 </div>
                 <p className="text-foreground whitespace-pre-wrap leading-relaxed">{note.content}</p>
               </div>

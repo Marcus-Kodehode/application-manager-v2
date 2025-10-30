@@ -49,7 +49,7 @@ export async function createContact(formData: unknown) {
     return { success: true, contactId: contact._id.toString() };
   } catch (error: any) {
     console.error('Error creating contact:', error);
-    throw new Error(error.message || 'Failed to create contact');
+    throw new Error(error.message || 'Kunne ikke opprette kontakt');
   }
 }
 
@@ -64,7 +64,7 @@ export async function deleteContact(contactId: string) {
     const contact = await Contact.findOneAndDelete({ _id: contactId, userId });
 
     if (!contact) {
-      throw new Error('Contact not found');
+      throw new Error('Kontakt ikke funnet');
     }
 
     if (contact.jobId) {
@@ -74,7 +74,7 @@ export async function deleteContact(contactId: string) {
     return { success: true };
   } catch (error: any) {
     console.error('Error deleting contact:', error);
-    throw new Error(error.message || 'Failed to delete contact');
+    throw new Error(error.message || 'Kunne ikke slette kontakt');
   }
 }
 

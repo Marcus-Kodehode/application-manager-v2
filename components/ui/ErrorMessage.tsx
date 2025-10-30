@@ -18,9 +18,9 @@ export function ErrorMessage({
 }: ErrorMessageProps) {
   if (variant === 'inline') {
     return (
-      <div className={cn('mt-1 text-sm text-red-600 dark:text-red-400', className)}>
+      <div className={cn('mt-1 text-sm text-red-600 dark:text-red-400', className)} role="alert">
         <span className="inline-flex items-center gap-1">
-          <span role="img" aria-label="warning">
+          <span aria-hidden="true">
             ⚠️
           </span>
           {message}
@@ -36,9 +36,10 @@ export function ErrorMessage({
         className
       )}
       role="alert"
+      aria-live="assertive"
     >
       <div className="flex items-start gap-3">
-        <span className="text-2xl" role="img" aria-label="error">
+        <span className="text-2xl" aria-hidden="true">
           ❌
         </span>
         <div className="flex-1">

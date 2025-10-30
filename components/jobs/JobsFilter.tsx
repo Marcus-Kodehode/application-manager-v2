@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { KanbanBoard } from './KanbanBoard';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 interface Job {
   _id: string;
@@ -141,20 +142,22 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
             className="w-full pl-4 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-foreground placeholder:text-muted transition-all"
           />
           {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-              title="Tøm søk"
-            >
-              ✕
-            </button>
+            <Tooltip content="Tøm søkefeltet">
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                aria-label="Tøm søk"
+              >
+                ✕
+              </button>
+            </Tooltip>
           )}
         </div>
       </div>
 
       {/* Filters */}
       <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-foreground text-lg flex items-center gap-2">
             🎯 Filtre
             {hasActiveFilters && (
@@ -172,6 +175,10 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
             </button>
           )}
         </div>
+        
+        <p className="text-sm text-muted mb-6">
+          💡 Tips: Filtre kombineres - velg flere for å snevre inn søket ditt
+        </p>
 
         <div className="space-y-6">
           {/* Status Filter */}
@@ -312,13 +319,15 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
               <span className="text-xs bg-primary/10 text-primary px-3 py-2 rounded-full font-bold">
                 ✓ Filtrert
               </span>
-              <button
-                onClick={clearFilters}
-                className="text-xs text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                title="Nullstill filtre"
-              >
-                ✕
-              </button>
+              <Tooltip content="Nullstill alle filtre">
+                <button
+                  onClick={clearFilters}
+                  className="text-xs text-muted hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                  aria-label="Nullstill filtre"
+                >
+                  ✕
+                </button>
+              </Tooltip>
             </div>
           )}
         </div>

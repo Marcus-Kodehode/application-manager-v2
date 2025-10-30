@@ -286,111 +286,170 @@ Dette er en systematisk plan for å polere hele applikasjonen. Vi går gjennom h
     - Foreslå å endre søk/filter
     - _Requirements: 6.1, 6.2, 6.3_
 
-- [ ] 9. Implementer error states
-  - [ ] 9.1 Add validation errors til JobForm
+- [x] 9. Implementer error states
+
+
+
+
+
+  - [x] 9.1 Add validation errors til JobForm
+
+
     - Vis inline errors under felter
     - Rød border på feil-felter
     - _Requirements: 7.1, 7.2, 7.3, 7.4_
   
-  - [ ] 9.2 Add error handling til document upload
+
+  - [x] 9.2 Add error handling til document upload
+
     - Vis error banner ved feil
     - Foreslå løsning
     - _Requirements: 7.1, 7.2, 7.3_
   
-  - [ ] 9.3 Add error handling til delete operations
+
+  - [x] 9.3 Add error handling til delete operations
+
     - Vis error message ved feil
     - Foreslå retry
     - _Requirements: 7.1, 7.2, 7.3_
   
-  - [ ] 9.4 Add error page for 404
+
+  - [x] 9.4 Add error page for 404
+
     - Lag vennlig 404 side
     - Legg til navigasjon tilbake
     - _Requirements: 7.1, 7.2, 7.3_
   
-  - [ ] 9.5 Add error boundary for crashes
+
+  - [x] 9.5 Add error boundary for crashes
+
     - Implementer React Error Boundary
     - Vis vennlig feilmelding
     - _Requirements: 7.1, 7.2, 7.3, 7.5_
 
-- [ ] 10. Unngå AI design-feil
-  - [ ] 10.1 Audit gradients
+- [x] 10. Unngå AI design-feil
+
+
+
+  - [x] 10.1 Audit gradients
+
+
     - Sjekk at gradients er subtile
     - Fjern overdrevne gradients
     - _Requirements: 8.1, 9.2_
   
-  - [ ] 10.2 Audit spacing verdier
+
+  - [x] 10.2 Audit spacing verdier
+
     - Sjekk at alle verdier følger 8px grid
     - Fix tilfeldige verdier
     - _Requirements: 8.2, 1.1_
   
-  - [ ] 10.3 Audit farger
+
+  - [x] 10.3 Audit farger
+
     - Sjekk at farger er konsistente
     - Følg design system
     - _Requirements: 8.3, 9.3_
   
-  - [ ] 10.4 Audit animasjoner
+
+
+  - [x] 10.4 Audit animasjoner
     - Sjekk at animasjoner er subtile
     - Fjern overdrevne effects
     - _Requirements: 8.4, 9.4_
+
   
-  - [ ] 10.5 Audit typografi
+
+  - [x] 10.5 Audit typografi
     - Sjekk at font sizes er konsistente
     - Sjekk at line heights er gode
     - _Requirements: 8.5, 9.5_
+
   
-  - [ ] 10.6 Audit ikoner
+  - [x] 10.6 Audit ikoner
+
     - Sjekk at emoji ikoner er konsistente
     - Sjekk at størrelser er konsistente
     - _Requirements: 8.6_
   
-  - [ ] 10.7 Audit shadows
+
+  - [x] 10.7 Audit shadows
+
+
     - Sjekk at shadows er subtile
     - Sjekk at shadows er konsistente
     - _Requirements: 8.7, 9.2_
 
-- [ ] 11. Brukervennlighet for alle
-  - [ ] 11.1 Audit button labels
+- [x] 11. Brukervennlighet for alle
+
+
+
+
+
+  - [x] 11.1 Audit button labels
+
+
     - Sjekk at alle buttons har tydelige labels
     - Legg til ikoner der det gir mening
     - _Requirements: 10.1_
   
-  - [ ] 11.2 Add tooltips til ikoner
+
+  - [x] 11.2 Add tooltips til ikoner
+
     - Legg til tooltips på ikon-buttons
     - Sørg for at de er forståelige
     - _Requirements: 10.2_
   
-  - [ ] 11.3 Audit feilmeldinger
+
+  - [x] 11.3 Audit feilmeldinger
+
     - Sjekk at alle feilmeldinger er på norsk
     - Sjekk at de er forståelige
     - _Requirements: 10.3_
   
-  - [ ] 11.4 Add hjelpetekst der nødvendig
+
+  - [x] 11.4 Add hjelpetekst der nødvendig
+
     - Legg til tips under komplekse felter
     - Legg til info-ikoner med forklaringer
     - _Requirements: 10.4_
   
-  - [ ] 11.5 Test med ikke-tekniske brukere
+  - [x] 11.5 Test med ikke-tekniske brukere
+
     - Få feedback fra ikke-tekniske brukere
     - Fix eventuelle forvirrende elementer
     - _Requirements: 10.5_
 
-- [ ] 12. Accessibility audit
-  - [ ] 12.1 Test keyboard navigation
+- [x] 12. Accessibility audit
+
+
+
+
+  - [x] 12.1 Test keyboard navigation
+
     - Test tab-order på alle sider
     - Test at alle funksjoner er tilgjengelige
     - _Requirements: 4.1, 4.2_
   
-  - [ ] 12.2 Test screen reader
+
+
+  - [x] 12.2 Test screen reader
     - Test med NVDA eller JAWS
     - Legg til ARIA labels der nødvendig
     - _Requirements: 4.1_
+
   
-  - [ ] 12.3 Test kontrast
+
+  - [x] 12.3 Test kontrast
     - Bruk contrast checker
     - Fix eventuelle kontrast-problemer
     - _Requirements: 4.1_
+
+
+
   
-  - [ ] 12.4 Run Lighthouse audit
+  - [x] 12.4 Run Lighthouse audit
     - Kjør Lighthouse accessibility test
     - Fix eventuelle issues
     - Mål: Score > 95

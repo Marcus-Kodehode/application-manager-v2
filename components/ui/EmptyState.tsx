@@ -17,10 +17,10 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <div className={cn('text-center py-12', className)}>
+    <div className={cn('text-center py-12', className)} role="status" aria-live="polite">
       {/* Icon circle */}
       <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-        <span className="text-3xl" role="img" aria-label="icon">
+        <span className="text-3xl" aria-hidden="true">
           {emoji}
         </span>
       </div>

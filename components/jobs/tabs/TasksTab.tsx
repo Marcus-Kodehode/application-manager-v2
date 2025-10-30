@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createTask, toggleTask, deleteTask, getTasksByJob } from '@/lib/actions/tasks';
 import { Spinner } from '@/components/ui/Spinner';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export function TasksTab({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -173,14 +174,17 @@ export function TasksTab({ jobId }: { jobId: string }) {
                       </p>
                     )}
                   </div>
-                  <button
-                    onClick={() => handleDelete(task._id)}
-                    disabled={deletingId === task._id}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
-                  >
-                    {deletingId === task._id && <Spinner size="sm" />}
-                    {deletingId === task._id ? '...' : '🗑️'}
-                  </button>
+                  <Tooltip content="Slett denne oppgaven permanent">
+                    <button
+                      onClick={() => handleDelete(task._id)}
+                      disabled={deletingId === task._id}
+                      className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
+                      aria-label="Slett oppgave"
+                    >
+                      {deletingId === task._id && <Spinner size="sm" />}
+                      {deletingId === task._id ? '...' : '🗑️'}
+                    </button>
+                  </Tooltip>
                 </div>
               );
             })}
@@ -215,14 +219,17 @@ export function TasksTab({ jobId }: { jobId: string }) {
                     </p>
                   )}
                 </div>
-                <button
-                  onClick={() => handleDelete(task._id)}
-                  disabled={deletingId === task._id}
-                  className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
-                >
-                  {deletingId === task._id && <Spinner size="sm" />}
-                  {deletingId === task._id ? '...' : '🗑️'}
-                </button>
+                <Tooltip content="Slett denne oppgaven permanent">
+                  <button
+                    onClick={() => handleDelete(task._id)}
+                    disabled={deletingId === task._id}
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
+                    aria-label="Slett oppgave"
+                  >
+                    {deletingId === task._id && <Spinner size="sm" />}
+                    {deletingId === task._id ? '...' : '🗑️'}
+                  </button>
+                </Tooltip>
               </div>
             ))}
           </div>

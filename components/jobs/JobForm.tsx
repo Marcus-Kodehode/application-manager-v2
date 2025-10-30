@@ -10,12 +10,14 @@ export function JobForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [salaryNotProvided, setSalaryNotProvided] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setFieldErrors({});
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -39,7 +41,24 @@ export function JobForm() {
         router.push('/jobs');
       }
     } catch (err: any) {
-      setError(err.message || 'Noe gikk galt');
+      const errorMessage = err.message || 'Noe gikk galt';
+      
+      // Check if it's a validation error with field-specific errors
+      if (errorMessage.includes('validation') || errorMessage.includes('required')) {
+        // Parse validation errors if available
+        const errors: Record<string, string> = {};
+        
+        if (errorMessage.includes('title')) {
+          errors.title = 'Stillingstittel er påkrevd';
+        }
+        if (errorMessage.includes('company')) {
+          errors.company = 'Firma er påkrevd';
+        }
+        
+        setFieldErrors(errors);
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -70,9 +89,21 @@ export function JobForm() {
             id="title"
             name="title"
             required
-            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className={`w-full px-4 py-3 bg-background border rounded-lg focus:ring-2 focus:border-transparent transition-all text-foreground placeholder:text-muted ${
+              fieldErrors.title 
+                ? 'border-red-500 focus:ring-red-500' 
+                : 'border-border focus:ring-primary'
+            }`}
             placeholder="F.eks. Senior Frontend Developer, Systemutvikler"
           />
+          {fieldErrors.title && (
+            <div className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <span className="inline-flex items-center gap-1">
+                <span>⚠️</span>
+                {fieldErrors.title}
+              </span>
+            </div>
+          )}
         </div>
 
         <div>
@@ -84,9 +115,21 @@ export function JobForm() {
             id="company"
             name="company"
             required
-            className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+            className={`w-full px-4 py-3 bg-background border rounded-lg focus:ring-2 focus:border-transparent transition-all text-foreground placeholder:text-muted ${
+              fieldErrors.company 
+                ? 'border-red-500 focus:ring-red-500' 
+                : 'border-border focus:ring-primary'
+            }`}
             placeholder="F.eks. Acme AS, Konsulentselskap Norge"
           />
+          {fieldErrors.company && (
+            <div className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <span className="inline-flex items-center gap-1">
+                <span>⚠️</span>
+                {fieldErrors.company}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
