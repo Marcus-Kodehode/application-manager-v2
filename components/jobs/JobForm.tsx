@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createJob } from '@/lib/actions/jobs';
 import { JobStatus } from '@/lib/models';
+import { LoadingButton } from '@/components/ui/LoadingButton';
 
 export function JobForm() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export function JobForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <fieldset disabled={loading} className="space-y-6">
       {error && (
         <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg flex items-start gap-2">
           <span className="text-lg">⚠️</span>
@@ -276,21 +278,23 @@ export function JobForm() {
 
       {/* Submit Buttons */}
       <div className="flex gap-3 pt-6 border-t border-border">
-        <button
+        <LoadingButton
           type="submit"
-          disabled={loading}
-          className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          loading={loading}
+          className="flex-1 shadow-sm hover:shadow"
         >
-          {loading ? '⏳ Lagrer...' : '✅ Opprett Jobb'}
-        </button>
+          {loading ? 'Lagrer...' : '✅ Opprett Jobb'}
+        </LoadingButton>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          disabled={loading}
+          className="px-6 py-3 border border-border rounded-lg hover:bg-accent font-medium transition-colors duration-200 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Avbryt
         </button>
       </div>
+      </fieldset>
     </form>
   );
 }

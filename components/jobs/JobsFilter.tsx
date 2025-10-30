@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { KanbanBoard } from './KanbanBoard';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 interface Job {
   _id: string;
@@ -322,20 +323,20 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           )}
         </div>
         {filteredJobs.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center transition-colors">
-            <div className="max-w-md mx-auto">
-              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-5xl">🔍</span>
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Ingen resultater</h3>
-              <p className="text-muted mb-6">Ingen jobber matcher filtrene dine. Prøv å justere søket eller fjern noen filtre.</p>
-              <button
-                onClick={clearFilters}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                🔄 Nullstill alle filtre
-              </button>
-            </div>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16 transition-colors">
+            <EmptyState
+              emoji="🔍"
+              heading="Ingen resultater"
+              description="Ingen jobber matcher søket eller filtrene dine. Prøv å justere søket eller fjern noen filtre for å se flere resultater."
+              action={
+                <button
+                  onClick={clearFilters}
+                  className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  🔄 Nullstill alle filtre
+                </button>
+              }
+            />
           </div>
         ) : (
           <KanbanBoard jobs={filteredJobs} />

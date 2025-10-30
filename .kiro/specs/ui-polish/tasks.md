@@ -212,49 +212,76 @@ Dette er en systematisk plan for å polere hele applikasjonen. Vi går gjennom h
     - Fix eventuelle problemer
     - _Requirements: 4.2_
 
-- [ ] 7. Implementer loading states
-  - [ ] 7.1 Add loading state til JobForm submit
+- [x] 7. Implementer loading states
+
+
+
+
+
+
+  - [x] 7.1 Add loading state til JobForm submit
+
     - Bruk LoadingButton component
     - Disable form under submit
     - _Requirements: 5.1, 5.2_
   
-  - [ ] 7.2 Add loading state til document upload
+
+  - [x] 7.2 Add loading state til document upload
+
     - Vis spinner under upload
     - Disable upload button
     - _Requirements: 5.1, 5.2_
   
-  - [ ] 7.3 Add loading state til data fetching
+
+  - [x] 7.3 Add loading state til data fetching
+
     - Vis spinner eller skeleton screen
     - Test på slow connections
     - _Requirements: 5.1, 5.3_
   
-  - [ ] 7.4 Add loading state til delete operations
+
+  - [x] 7.4 Add loading state til delete operations
+
     - Vis spinner i delete button
     - Disable button under operation
     - _Requirements: 5.1, 5.2_
 
-- [ ] 8. Forbedre empty states
-  - [ ] 8.1 Improve empty state i Dashboard
+- [x] 8. Forbedre empty states
+
+
+
+
+
+  - [x] 8.1 Improve empty state i Dashboard
+    - Bruk EmptyState component
+    - Legg til vennlig melding og CTA
+    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
+
+  
+
+  - [x] 8.2 Improve empty state i Jobs list
     - Bruk EmptyState component
     - Legg til vennlig melding og CTA
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
   
-  - [ ] 8.2 Improve empty state i Jobs list
+
+  - [x] 8.3 Improve empty state i Documents page
+
     - Bruk EmptyState component
     - Legg til vennlig melding og CTA
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
   
-  - [ ] 8.3 Improve empty state i Documents page
-    - Bruk EmptyState component
-    - Legg til vennlig melding og CTA
-    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
-  
-  - [ ] 8.4 Improve empty state i alle tabs (Notes, Tasks, etc.)
+
+
+  - [x] 8.4 Improve empty state i alle tabs (Notes, Tasks, etc.)
     - Bruk EmptyState component
     - Legg til vennlige meldinger
     - _Requirements: 6.1, 6.2, 6.3, 6.5_
   
-  - [ ] 8.5 Add empty state for search results
+
+  - [x] 8.5 Add empty state for search results
+
+
     - Vis "Ingen resultater" melding
     - Foreslå å endre søk/filter
     - _Requirements: 6.1, 6.2, 6.3_

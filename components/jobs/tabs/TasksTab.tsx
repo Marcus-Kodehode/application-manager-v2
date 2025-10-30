@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createTask, toggleTask, deleteTask, getTasksByJob } from '@/lib/actions/tasks';
+import { Spinner } from '@/components/ui/Spinner';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export function TasksTab({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -10,6 +12,7 @@ export function TasksTab({ jobId }: { jobId: string }) {
   const [loading, setLoading] = useState(true);
   const [newTask, setNewTask] = useState({ title: '', dueAt: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     loadTasks();
@@ -60,12 +63,15 @@ export function TasksTab({ jobId }: { jobId: string }) {
   const handleDelete = async (taskId: string) => {
     if (!confirm('Er du sikker på at du vil slette denne oppgaven?')) return;
 
+    setDeletingId(taskId);
     try {
       await deleteTask(taskId);
       await loadTasks();
       router.refresh();
     } catch (error: any) {
       alert(error.message || 'Kunne ikke slette oppgave');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -73,7 +79,7 @@ export function TasksTab({ jobId }: { jobId: string }) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <Spinner size="lg" className="mx-auto mb-4" />
           <p className="text-muted">Laster oppgaver...</p>
         </div>
       </div>
@@ -132,10 +138,12 @@ export function TasksTab({ jobId }: { jobId: string }) {
           🎯 Aktive oppgaver ({pendingTasks.length})
         </h3>
         {pendingTasks.length === 0 ? (
-          <div className="text-center py-8">
-            <div className="text-5xl mb-3">✨</div>
-            <p className="text-muted">Ingen aktive oppgaver - du er à jour!</p>
-          </div>
+          <EmptyState
+            emoji="✨"
+            heading="Ingen aktive oppgaver"
+            description="Du er helt à jour! Legg til nye oppgaver ovenfor når du har noe å gjøre."
+            className="py-8"
+          />
         ) : (
           <div className="space-y-3">
             {pendingTasks.map((task) => {
@@ -167,9 +175,11 @@ export function TasksTab({ jobId }: { jobId: string }) {
                   </div>
                   <button
                     onClick={() => handleDelete(task._id)}
-                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100"
+                    disabled={deletingId === task._id}
+                    className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
                   >
-                    🗑️
+                    {deletingId === task._id && <Spinner size="sm" />}
+                    {deletingId === task._id ? '...' : '🗑️'}
                   </button>
                 </div>
               );
@@ -207,9 +217,11 @@ export function TasksTab({ jobId }: { jobId: string }) {
                 </div>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100"
+                  disabled={deletingId === task._id}
+                  className="text-sm text-destructive hover:text-destructive/80 font-medium opacity-0 group-hover:opacity-100 transition-colors duration-200 px-3 py-1 rounded hover:bg-destructive/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
                 >
-                  🗑️
+                  {deletingId === task._id && <Spinner size="sm" />}
+                  {deletingId === task._id ? '...' : '🗑️'}
                 </button>
               </div>
             ))}

@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { uploadDocument, deleteDocument, getDocumentsByJob } from '@/lib/actions/documents';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { Spinner } from '@/components/ui/Spinner';
 
 export function FilesTab({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -93,7 +95,7 @@ export function FilesTab({ jobId }: { jobId: string }) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <Spinner size="lg" className="mx-auto mb-4" />
           <p className="text-muted">Laster dokumenter...</p>
         </div>
       </div>
@@ -166,10 +168,12 @@ export function FilesTab({ jobId }: { jobId: string }) {
       {/* Documents List */}
       <div className="space-y-4">
         {documents.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
-            <div className="text-6xl mb-4">📁</div>
-            <p className="text-muted text-lg mb-2">Ingen dokumenter ennå</p>
-            <p className="text-muted text-sm">Last opp CV, søknad eller andre relevante dokumenter!</p>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-12 transition-colors">
+            <EmptyState
+              emoji="📁"
+              heading="Ingen dokumenter ennå"
+              description="Last opp CV, søknad eller andre relevante dokumenter ovenfor for å knytte dem til denne jobben."
+            />
           </div>
         ) : (
           <>

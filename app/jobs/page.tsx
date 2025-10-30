@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { JobsFilter } from '@/components/jobs/JobsFilter';
 import { CSVManager } from '@/components/jobs/CSVManager';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export default async function JobsPage() {
   const jobs = await getJobs();
@@ -34,22 +35,20 @@ export default async function JobsPage() {
         </div>
 
         {jobs.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center mb-8">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">💼</span>
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">Ingen jobber ennå</h3>
-              <p className="text-muted-foreground mb-6">
-                Kom i gang ved å legge til din første jobbsøknad, eller importer fra CSV nedenfor
-              </p>
-              <Link
-                href="/jobs/new"
-                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                Opprett din første jobb
-              </Link>
-            </div>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16 mb-8">
+            <EmptyState
+              emoji="💼"
+              heading="Ingen jobber ennå"
+              description="Kom i gang ved å legge til din første jobbsøknad, eller importer flere jobber fra CSV nedenfor"
+              action={
+                <Link
+                  href="/jobs/new"
+                  className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  Opprett din første jobb
+                </Link>
+              }
+            />
           </div>
         ) : (
           <JobsFilter jobs={jobs} />

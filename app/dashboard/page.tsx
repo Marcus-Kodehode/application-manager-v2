@@ -5,6 +5,7 @@ import { getJobs } from '@/lib/actions/jobs';
 import { getUpcomingTasks } from '@/lib/actions/tasks';
 import { getAllDocuments } from '@/lib/actions/documents';
 import { KanbanBoard } from '@/components/jobs/KanbanBoard';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export default async function DashboardPage() {
   const jobs = await getJobs();
@@ -37,22 +38,20 @@ export default async function DashboardPage() {
         </div>
 
         {jobs.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">📋</span>
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">Ingen jobber ennå</h3>
-              <p className="text-muted-foreground mb-6">
-                Kom i gang ved å legge til din første jobbsøknad
-              </p>
-              <Link
-                href="/jobs/new"
-                className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200 font-medium shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                Opprett din første jobb
-              </Link>
-            </div>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16">
+            <EmptyState
+              emoji="📋"
+              heading="Ingen jobber ennå"
+              description="Kom i gang ved å legge til din første jobbsøknad og hold oversikt over søknadsprosessen din"
+              action={
+                <Link
+                  href="/jobs/new"
+                  className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  Opprett din første jobb
+                </Link>
+              }
+            />
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

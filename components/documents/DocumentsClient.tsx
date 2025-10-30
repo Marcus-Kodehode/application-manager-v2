@@ -1,9 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { uploadDocument, deleteDocument, getAllDocuments } from '@/lib/actions/documents';
 import Link from 'next/link';
+import { LoadingButton } from '@/components/ui/LoadingButton';
+import { Spinner } from '@/components/ui/Spinner';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 interface Document {
   _id: string;
@@ -27,6 +30,7 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
     label: '',
     type: 'OTHER',
   });
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   // Filter and search documents
   const filteredDocuments = documents.filter(doc => {
@@ -81,12 +85,15 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
   const handleDelete = async (documentId: string) => {
     if (!confirm('Er du sikker på at du vil slette dette dokumentet?')) return;
 
+    setDeletingId(documentId);
     try {
       await deleteDocument(documentId);
       await loadDocuments();
       router.refresh();
     } catch (error: any) {
       alert(error.message || 'Kunne ikke slette dokument');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -160,58 +167,60 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
           📤 Last opp nytt dokument
         </h3>
         <form onSubmit={handleUpload} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              📎 Velg fil (PDF, DOCX, PNG, JPEG, WEBP - maks 10MB)
-            </label>
-            <input
-              type="file"
-              accept=".pdf,.docx,.png,.jpg,.jpeg,.webp"
-              required
-              className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 file:cursor-pointer"
-            />
-            <p className="text-xs text-muted mt-2">💡 Tips: Gi filen et beskrivende navn for enkel gjenfinning senere</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <fieldset disabled={uploading} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Navn (valgfritt)
+                📎 Velg fil (PDF, DOCX, PNG, JPEG, WEBP - maks 10MB)
               </label>
               <input
-                type="text"
-                value={uploadForm.label}
-                onChange={(e) => setUploadForm({ ...uploadForm, label: e.target.value })}
-                placeholder="F.eks. CV 2025, Søknad Utvikler"
-                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                type="file"
+                accept=".pdf,.docx,.png,.jpg,.jpeg,.webp"
+                required
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 file:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               />
+              <p className="text-xs text-muted mt-2">💡 Tips: Gi filen et beskrivende navn for enkel gjenfinning senere</p>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Type
-              </label>
-              <select
-                value={uploadForm.type}
-                onChange={(e) => setUploadForm({ ...uploadForm, type: e.target.value })}
-                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Navn (valgfritt)
+                </label>
+                <input
+                  type="text"
+                  value={uploadForm.label}
+                  onChange={(e) => setUploadForm({ ...uploadForm, label: e.target.value })}
+                  placeholder="F.eks. CV 2025, Søknad Utvikler"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground placeholder:text-muted"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Type
+                </label>
+                <select
+                  value={uploadForm.type}
+                  onChange={(e) => setUploadForm({ ...uploadForm, type: e.target.value })}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
+                >
+                  <option value="CV">📄 CV</option>
+                  <option value="COVER_LETTER">✉️ Søknad</option>
+                  <option value="OTHER">📎 Annet</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="flex justify-end pt-2">
+              <LoadingButton
+                type="submit"
+                loading={uploading}
+                className="shadow-sm hover:shadow"
               >
-                <option value="CV">📄 CV</option>
-                <option value="COVER_LETTER">✉️ Søknad</option>
-                <option value="OTHER">📎 Annet</option>
-              </select>
+                {uploading ? 'Laster opp...' : '📤 Last opp dokument'}
+              </LoadingButton>
             </div>
-          </div>
-
-          <div className="flex justify-end pt-2">
-            <button
-              type="submit"
-              disabled={uploading}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            >
-              {uploading ? '⏳ Laster opp...' : '📤 Last opp dokument'}
-            </button>
-          </div>
+          </fieldset>
         </form>
       </div>
 
@@ -270,15 +279,17 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
         {loading ? (
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <Spinner size="lg" className="mx-auto mb-4" />
               <p className="text-muted">Laster dokumenter...</p>
             </div>
           </div>
         ) : documents.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
-            <div className="text-6xl mb-4">📁</div>
-            <p className="text-muted text-lg mb-2">Ingen dokumenter ennå</p>
-            <p className="text-muted text-sm">Last opp ditt første dokument ovenfor for å komme i gang!</p>
+          <div className="bg-card rounded-xl shadow-sm border border-border p-12 transition-colors">
+            <EmptyState
+              emoji="📁"
+              heading="Ingen dokumenter ennå"
+              description="Last opp ditt første dokument ovenfor for å komme i gang. Du kan laste opp CV-er, søknader og andre relevante filer."
+            />
           </div>
         ) : (
           <>
@@ -290,10 +301,12 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredDocuments.length === 0 ? (
-                <div className="col-span-full bg-card rounded-xl shadow-sm border border-border p-12 text-center transition-colors">
-                  <div className="text-6xl mb-4">🔍</div>
-                  <p className="text-muted text-lg mb-2">Ingen dokumenter funnet</p>
-                  <p className="text-muted text-sm">Prøv et annet søk eller filter</p>
+                <div className="col-span-full bg-card rounded-xl shadow-sm border border-border p-12 transition-colors">
+                  <EmptyState
+                    emoji="🔍"
+                    heading="Ingen dokumenter funnet"
+                    description="Ingen dokumenter matcher søket eller filteret ditt. Prøv å justere søket eller fjern filteret."
+                  />
                 </div>
               ) : (
                 filteredDocuments.map((doc) => (
@@ -344,9 +357,11 @@ export function DocumentsClient({ initialDocuments }: { initialDocuments: Docume
                       </a>
                       <button
                         onClick={() => handleDelete(doc._id)}
-                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
+                        disabled={deletingId === doc._id}
+                        className="px-4 py-2 text-sm text-destructive hover:text-destructive/80 border border-destructive rounded-lg hover:bg-destructive/10 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-1"
                       >
-                        🗑️
+                        {deletingId === doc._id && <Spinner size="sm" />}
+                        {deletingId === doc._id ? '...' : '🗑️'}
                       </button>
                     </div>
                   </div>

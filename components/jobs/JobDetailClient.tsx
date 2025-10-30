@@ -11,6 +11,7 @@ import { TimelineTab } from '@/components/jobs/tabs/TimelineTab';
 import { ContactsTab } from '@/components/jobs/tabs/ContactsTab';
 import { FilesTab } from '@/components/jobs/tabs/FilesTab';
 import { JobExport } from '@/components/jobs/JobExport';
+import { LoadingButton } from '@/components/ui/LoadingButton';
 
 interface JobDetailClientProps {
     job: any;
@@ -249,13 +250,14 @@ export function JobDetailClient({ job }: JobDetailClientProps) {
                         >
                             ✏️ Rediger
                         </button>
-                        <button
+                        <LoadingButton
                             onClick={handleDelete}
-                            disabled={isDeleting}
-                            className="px-5 py-3 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
+                            loading={isDeleting}
+                            variant="danger"
+                            className="shadow-sm hover:shadow"
                         >
-                            {isDeleting ? '⏳ Sletter...' : '🗑️ Slett'}
-                        </button>
+                            {isDeleting ? 'Sletter...' : '🗑️ Slett'}
+                        </LoadingButton>
                     </div>
                 </div>
                 
