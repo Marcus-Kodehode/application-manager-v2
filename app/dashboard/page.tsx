@@ -74,46 +74,73 @@ export default async function DashboardPage() {
             {/* Right Column - Tasks, Documents & Stats (4/12 = 1/3) */}
             <div className="lg:col-span-4 space-y-6">
               {/* Upcoming Tasks */}
-              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-xl shadow-sm border border-blue-200 dark:border-blue-800 p-6 hover:shadow-md transition-all">
                 <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                  <span>📅</span>
-                  Neste oppgaver
+                  <span className="text-2xl">📅</span>
+                  <span>Neste oppgaver</span>
                 </h3>
                 {upcomingTasks.length === 0 ? (
-                  <p className="text-muted-foreground text-sm">Ingen kommende oppgaver</p>
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-3xl">✨</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">Ingen kommende oppgaver</p>
+                    <p className="text-xs text-muted-foreground mt-1">Du er helt à jour! 🎉</p>
+                  </div>
                 ) : (
                   <div className="space-y-3">
-                    {upcomingTasks.map((task: any) => (
-                      <div key={task._id} className="p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors">
-                        <p className="font-semibold text-foreground text-sm">{task.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {new Date(task.dueAt).toLocaleDateString('nb-NO', {
-                            weekday: 'short',
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </p>
-                        {task.jobId && (
-                          <Link
-                            href={`/jobs/${task.jobId}`}
-                            className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group"
-                          >
-                            Se jobb
-                            <span className="group-hover:translate-x-1 transition-transform">→</span>
-                          </Link>
-                        )}
-                      </div>
-                    ))}
+                    {upcomingTasks.map((task: any) => {
+                      const dueDate = new Date(task.dueAt);
+                      const today = new Date();
+                      const isOverdue = dueDate < today;
+                      const isDueSoon = !isOverdue && (dueDate.getTime() - today.getTime()) < 3 * 24 * 60 * 60 * 1000;
+                      
+                      return (
+                        <div 
+                          key={task._id} 
+                          className={`p-4 rounded-lg border-l-4 transition-all hover:scale-[1.02] ${
+                            isOverdue 
+                              ? 'bg-red-50 dark:bg-red-950/20 border-red-500 dark:border-red-600' 
+                              : isDueSoon 
+                              ? 'bg-yellow-50 dark:bg-yellow-950/20 border-yellow-500 dark:border-yellow-600'
+                              : 'bg-white dark:bg-gray-800/50 border-blue-500 dark:border-blue-600'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <p className="font-semibold text-foreground text-sm flex-1">{task.title}</p>
+                            {isOverdue && <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full">Forfalt</span>}
+                            {isDueSoon && !isOverdue && <span className="text-xs bg-yellow-500 text-white px-2 py-0.5 rounded-full">Snart</span>}
+                          </div>
+                          <p className="text-xs text-muted-foreground flex items-center gap-1">
+                            <span>🗓️</span>
+                            {dueDate.toLocaleDateString('nb-NO', {
+                              weekday: 'short',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </p>
+                          {task.jobId && (
+                            <Link
+                              href={`/jobs/${task.jobId}`}
+                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium"
+                            >
+                              Se jobb
+                              <span className="group-hover:translate-x-1 transition-transform">→</span>
+                            </Link>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
 
               {/* Recent Documents */}
-              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-xl shadow-sm border border-purple-200 dark:border-purple-800 p-6 hover:shadow-md transition-all">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                    <span>📄</span>
-                    Siste dokumenter
+                    <span className="text-2xl">📄</span>
+                    <span>Siste dokumenter</span>
                   </h3>
                   <Link 
                     href="/documents" 
@@ -124,24 +151,43 @@ export default async function DashboardPage() {
                   </Link>
                 </div>
                 {recentDocuments.length === 0 ? (
-                  <p className="text-muted-foreground text-sm">Ingen dokumenter ennå</p>
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-3xl">📁</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">Ingen dokumenter ennå</p>
+                    <p className="text-xs text-muted-foreground mt-1">Last opp CV og søknader</p>
+                  </div>
                 ) : (
                   <div className="space-y-3">
                     {recentDocuments.map((doc: any) => (
-                      <div key={doc._id} className="p-3 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors">
-                        <p className="font-semibold text-foreground text-sm truncate">{doc.label}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {doc.type === 'CV' ? '📄 CV' : doc.type === 'COVER_LETTER' ? '✉️ Søknad' : '📎 Annet'}
-                        </p>
-                        <a
-                          href={doc.blobUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group"
-                        >
-                          Åpne
-                          <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
+                      <div 
+                        key={doc._id} 
+                        className="p-4 bg-white dark:bg-gray-800/50 rounded-lg hover:scale-[1.02] transition-all border border-purple-100 dark:border-purple-900/50"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 flex items-center justify-center flex-shrink-0">
+                            <span className="text-xl">
+                              {doc.type === 'CV' ? '📄' : doc.type === 'COVER_LETTER' ? '✉️' : '📎'}
+                            </span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-foreground text-sm truncate">{doc.label}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {doc.type === 'CV' ? 'CV' : doc.type === 'COVER_LETTER' ? 'Søknad' : 'Annet'}
+                            </p>
+                            <a
+                              href={doc.blobUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-primary hover:text-primary/80 mt-2 inline-flex items-center gap-1 group font-medium"
+                            >
+                              <span>👁️</span>
+                              Åpne
+                              <span className="group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -149,33 +195,48 @@ export default async function DashboardPage() {
               </div>
 
               {/* Quick Stats */}
-              <div className="bg-card rounded-xl shadow-sm border border-border p-6 hover:shadow-md transition-shadow">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-xl shadow-sm border border-green-200 dark:border-green-800 p-6 hover:shadow-md transition-all">
                 <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                  <span>📊</span>
-                  Statistikk
+                  <span className="text-2xl">📊</span>
+                  <span>Statistikk</span>
                 </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-                    <span className="text-muted-foreground">Totalt søknader</span>
-                    <span className="font-bold text-foreground text-lg">{jobs.length}</span>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-white dark:bg-gray-800/50 hover:scale-[1.02] transition-all border border-green-100 dark:border-green-900/50">
+                    <span className="text-muted-foreground text-sm flex items-center gap-2">
+                      <span>📋</span>
+                      Totalt søknader
+                    </span>
+                    <span className="font-bold text-foreground text-xl">{jobs.length}</span>
                   </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-                    <span className="text-muted-foreground">Aktive prosesser</span>
-                    <span className="font-bold text-primary text-lg">
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 hover:scale-[1.02] transition-all border border-blue-200 dark:border-blue-800">
+                    <span className="text-muted-foreground text-sm flex items-center gap-2">
+                      <span>🔥</span>
+                      Aktive prosesser
+                    </span>
+                    <span className="font-bold text-primary text-xl">
                       {jobs.filter(j => j.status === 'SCREENING' || j.status === 'INTERVIEW').length}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-                    <span className="text-muted-foreground">Kommende oppgaver</span>
-                    <span className="font-bold text-foreground text-lg">{upcomingTasks.length}</span>
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-white dark:bg-gray-800/50 hover:scale-[1.02] transition-all border border-green-100 dark:border-green-900/50">
+                    <span className="text-muted-foreground text-sm flex items-center gap-2">
+                      <span>✅</span>
+                      Kommende oppgaver
+                    </span>
+                    <span className="font-bold text-foreground text-xl">{upcomingTasks.length}</span>
                   </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-                    <span className="text-muted-foreground">Dokumenter</span>
-                    <span className="font-bold text-foreground text-lg">{allDocuments.length}</span>
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-white dark:bg-gray-800/50 hover:scale-[1.02] transition-all border border-green-100 dark:border-green-900/50">
+                    <span className="text-muted-foreground text-sm flex items-center gap-2">
+                      <span>📁</span>
+                      Dokumenter
+                    </span>
+                    <span className="font-bold text-foreground text-xl">{allDocuments.length}</span>
                   </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-                    <span className="text-muted-foreground">CV-er</span>
-                    <span className="font-bold text-foreground text-lg">
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-white dark:bg-gray-800/50 hover:scale-[1.02] transition-all border border-green-100 dark:border-green-900/50">
+                    <span className="text-muted-foreground text-sm flex items-center gap-2">
+                      <span>📄</span>
+                      CV-er
+                    </span>
+                    <span className="font-bold text-foreground text-xl">
                       {allDocuments.filter((d: any) => d.type === 'CV').length}
                     </span>
                   </div>

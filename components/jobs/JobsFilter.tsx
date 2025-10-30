@@ -130,46 +130,68 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
   return (
     <div className="space-y-6">
       {/* Search Bar */}
-      <div className="bg-card rounded-xl shadow-sm border border-border p-4">
+      <div className="bg-card rounded-xl shadow-sm border border-border p-4 transition-colors">
         <div className="relative">
           <input
             type="text"
-            placeholder="Søk etter tittel, firma eller sted..."
+            placeholder="🔍 Søk etter tittel, firma eller sted..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-foreground placeholder:text-muted-foreground transition-colors"
+            className="w-full pl-4 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-foreground placeholder:text-muted transition-all"
           />
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">🔍</span>
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors"
+              title="Tøm søk"
+            >
+              ✕
+            </button>
+          )}
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-card rounded-xl shadow-sm border border-border p-6">
+      <div className="bg-card rounded-xl shadow-sm border border-border p-6 transition-colors">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-bold text-foreground text-lg">Filtre</h3>
+          <h3 className="font-bold text-foreground text-lg flex items-center gap-2">
+            🎯 Filtre
+            {hasActiveFilters && (
+              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                {[searchQuery ? 1 : 0, statusFilter.length, remoteFilter !== 'all' ? 1 : 0, locationFilter.length, selectedTags.length].reduce((a, b) => a + b, 0)}
+              </span>
+            )}
+          </h3>
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+              className="text-sm text-destructive hover:text-destructive/80 transition-colors font-medium px-3 py-1 rounded-lg hover:bg-destructive/10"
             >
-              Nullstill alle
+              ✕ Nullstill alle
             </button>
           )}
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* Status Filter */}
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-3">Status</label>
+            <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+              📊 Status
+              {statusFilter.length > 0 && (
+                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                  {statusFilter.length}
+                </span>
+              )}
+            </label>
             <div className="flex flex-wrap gap-2">
               {STATUS_OPTIONS.map(option => (
                 <button
                   key={option.value}
                   onClick={() => toggleStatus(option.value)}
-                  className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                  className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                     statusFilter.includes(option.value)
-                      ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                      : 'bg-background text-foreground border-border hover:border-primary hover:bg-secondary'
+                      ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                      : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
                   }`}
                 >
                   {option.label}
@@ -180,37 +202,39 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
 
           {/* Remote Filter */}
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-3">Arbeidsform</label>
+            <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+              🏠 Arbeidsform
+            </label>
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setRemoteFilter('all')}
-                className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                   remoteFilter === 'all'
-                    ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-secondary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
                 }`}
               >
                 Alle
               </button>
               <button
                 onClick={() => setRemoteFilter('remote')}
-                className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                   remoteFilter === 'remote'
-                    ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-secondary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
                 }`}
               >
-                Remote
+                🌐 Remote
               </button>
               <button
                 onClick={() => setRemoteFilter('onsite')}
-                className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                   remoteFilter === 'onsite'
-                    ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-secondary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                    : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
                 }`}
               >
-                Kontor
+                🏢 Kontor
               </button>
             </div>
           </div>
@@ -218,16 +242,23 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {/* Location Filter */}
           {allLocations.length > 0 && (
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-3">Sted</label>
+              <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                📍 Sted
+                {locationFilter.length > 0 && (
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                    {locationFilter.length}
+                  </span>
+                )}
+              </label>
               <div className="flex flex-wrap gap-2">
                 {allLocations.map(location => (
                   <button
                     key={location}
                     onClick={() => toggleLocation(location)}
-                    className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                    className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                       locationFilter.includes(location)
-                        ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                        : 'bg-background text-foreground border-border hover:border-primary hover:bg-secondary'
+                        ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                        : 'bg-background text-foreground border-border hover:border-primary hover:bg-accent'
                     }`}
                   >
                     {location}
@@ -240,19 +271,26 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
           {/* Tags Filter */}
           {allTags.length > 0 && (
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-3">Tags</label>
+              <label className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                🏷️ Tags
+                {selectedTags.length > 0 && (
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                    {selectedTags.length}
+                  </span>
+                )}
+              </label>
               <div className="flex flex-wrap gap-2">
                 {allTags.map(tag => (
                   <button
                     key={tag}
                     onClick={() => toggleTag(tag)}
-                    className={`px-4 py-2 text-sm rounded-lg border transition-all ${
+                    className={`px-3 py-1.5 text-sm rounded-lg border transition-all font-medium ${
                       selectedTags.includes(tag)
-                        ? 'bg-accent text-accent-foreground border-accent shadow-sm'
-                        : 'bg-background text-foreground border-border hover:border-accent hover:bg-secondary'
+                        ? 'bg-secondary text-secondary-foreground border-secondary shadow-sm scale-105'
+                        : 'bg-background text-foreground border-border hover:border-secondary hover:bg-accent'
                     }`}
                   >
-                    {tag}
+                    #{tag}
                   </button>
                 ))}
               </div>
@@ -263,29 +301,39 @@ export function JobsFilter({ jobs }: { jobs: Job[] }) {
 
       {/* Results */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-muted-foreground font-medium">
-            Viser <span className="text-foreground font-bold">{filteredJobs.length}</span> av <span className="text-foreground font-bold">{jobs.length}</span> jobber
+        <div className="flex items-center justify-between mb-4 p-4 bg-card rounded-lg border border-border">
+          <p className="text-sm text-muted font-medium flex items-center gap-2">
+            <span className="text-lg">📋</span>
+            Viser <span className="text-foreground font-bold text-lg">{filteredJobs.length}</span> av <span className="text-foreground font-bold text-lg">{jobs.length}</span> jobber
           </p>
           {hasActiveFilters && (
-            <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
-              Filtrert
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-bold">
+                ✓ Filtrert
+              </span>
+              <button
+                onClick={clearFilters}
+                className="text-xs text-muted hover:text-foreground transition-colors"
+                title="Nullstill filtre"
+              >
+                ✕
+              </button>
+            </div>
           )}
         </div>
         {filteredJobs.length === 0 ? (
-          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-16 text-center transition-colors">
             <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🔍</span>
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-5xl">🔍</span>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Ingen resultater</h3>
-              <p className="text-muted-foreground mb-6">Ingen jobber matcher filtrene dine</p>
+              <h3 className="text-xl font-bold text-foreground mb-2">Ingen resultater</h3>
+              <p className="text-muted mb-6">Ingen jobber matcher filtrene dine. Prøv å justere søket eller fjern noen filtre.</p>
               <button
                 onClick={clearFilters}
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all font-medium shadow-sm hover:shadow"
               >
-                Nullstill filtre
+                🔄 Nullstill alle filtre
               </button>
             </div>
           </div>

@@ -116,16 +116,15 @@
 - [✅] ThemeToggle
 - [✅] Footer
 - [✅] Landing page
-- [✅] Dashboard
+- [✅] Dashboard (Oppgradert med gradient bakgrunner og smart prioritering!)
 - [✅] Jobs page
 - [✅] JobsFilter
 - [✅] Job detail page
 - [✅] Documents page
 - [✅] JobForm
 - [✅] KanbanBoard
-- [ ] JobsFilter
-- [ ] CSVManager
-- [ ] All tabs (Timeline, Notes, Tasks, Files, Contacts)
+- [✅] CSVManager (Accordion help system)
+- [✅] All tabs (Timeline, Notes, Tasks, Files, Contacts)
 
 ### Polish
 - [ ] Konsistent spacing (8px grid)
