@@ -21,10 +21,12 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">J</span>
-            </div>
+          <Link href={isSignedIn ? '/dashboard' : '/'} className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg">
+            <img 
+              src="/images/logo.png" 
+              alt="Jobbsøk Assistent Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <span className="text-xl font-bold text-foreground">Jobbsøk Assistent</span>
           </Link>
 

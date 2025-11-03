@@ -15,10 +15,12 @@ export default async function LandingPage() {
       {/* Header */}
       <header className="border-b border-border bg-card/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-primary-foreground font-bold text-lg">J</span>
-            </div>
+          <div className="flex items-center gap-3">
+            <img 
+              src="/images/logo.png" 
+              alt="Jobbsøk Assistent Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <h1 className="text-xl font-bold text-foreground">Jobbsøk Assistent</h1>
           </div>
           <div className="flex items-center gap-4">
@@ -49,6 +51,15 @@ export default async function LandingPage() {
           </div>
 
           <div className="max-w-5xl mx-auto text-center">
+            {/* Logo */}
+            <div className="mb-8 animate-fade-in">
+              <img 
+                src="/images/logo.png" 
+                alt="Jobbsøk Assistent Logo" 
+                className="w-24 h-24 md:w-32 md:h-32 object-contain mx-auto drop-shadow-lg"
+              />
+            </div>
+
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 animate-fade-in">
               <span className="relative flex h-2 w-2">
