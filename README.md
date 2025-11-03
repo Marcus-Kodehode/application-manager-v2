@@ -6,7 +6,7 @@
 
 > A modern job application tracker built with Next.js, MongoDB, and Clerk
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.0-black.svg)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black.svg)](https://nextjs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8.svg)](https://tailwindcss.com)
 [![MongoDB](https://img.shields.io/badge/MongoDB-8.0-00ed64.svg)](https://www.mongodb.com)
 [![Clerk](https://img.shields.io/badge/Clerk-Auth-4B47C7.svg)](https://clerk.com)
