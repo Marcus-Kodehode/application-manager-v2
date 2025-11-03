@@ -1,6 +1,6 @@
 <div align="center">
 
-<p><img src="/public/images/logo.webp" alt="Jobbsøk Assistent Logo" width="150" /></p>
+<p><img src="/public/images/logo.png" alt="Jobbsøk Assistent Logo" width="150" /></p>
 
 # Jobbsøk Assistent
 
