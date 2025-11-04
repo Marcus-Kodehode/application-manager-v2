@@ -247,6 +247,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <!-- Personal logo placeholder -->
 <img src="/public/images/MBlogo.png" alt="Personal Logo" width="50" />
 
-<sub>Created with ❤️ by [Your Name]</sub>
+<sub>Created with ❤️ by Marcus</sub>
 
 </div>
