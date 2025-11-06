@@ -332,7 +332,7 @@ function DraggableJobCard({ job }: { job: Job }) {
     >
       <div className="flex items-start gap-2 p-3">
         {/* Drag Handle */}
-        <Tooltip content="Dra for å flytte jobb til annen status">
+        <Tooltip content="Dra for å flytte jobb til annen status" position="right">
           <button
             {...listeners}
             {...attributes}
