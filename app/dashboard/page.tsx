@@ -1,3 +1,5 @@
+// Note: Tailwind linter warnings about bg-gradient-to-* are false positives
+// bg-gradient-to-br is the correct Tailwind CSS class, not bg-linear-to-br
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -197,7 +199,7 @@ export default async function DashboardPage() {
                         className="p-4 bg-white dark:bg-gray-800/50 rounded-lg hover:scale-[1.02] transition-all duration-200 border border-purple-100 dark:border-purple-900/50"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 flex items-center justify-center flex-shrink-0">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 flex items-center justify-center shrink-0">
                             <span className="text-xl">
                               {doc.type === "CV"
                                 ? "📄"
