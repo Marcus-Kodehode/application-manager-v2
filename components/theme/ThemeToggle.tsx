@@ -25,7 +25,7 @@ function ThemeToggleInner() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Tooltip content={theme === 'dark' ? 'Bytt til lyst tema' : 'Bytt til mørkt tema'}>
+    <Tooltip content={theme === 'dark' ? 'Bytt til lyst tema' : 'Bytt til mørkt tema'} position="bottom">
       <button
         onClick={toggleTheme}
         className="relative w-14 h-7 rounded-full bg-stone-200 dark:bg-stone-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-stone-950"
